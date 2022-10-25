@@ -1,14 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
 import { About } from "./pages/About";
 import { Home } from "./pages/Home";
 import { SettingsPage } from "./pages/Settings";
-import { LandingPage } from "./pages/dashboard/landing";
-import { CheckInPage } from "./pages/dashboard/CheckIn";
-import { TimerPage } from "./pages/dashboard/Timer";
-import { TodoPage } from "./pages/dashboard/Todo";
+import { Dashboard } from "./pages/Dashboard";
 import { Login } from "./pages/Login";
+import { ComponentTests } from "./pages/tests/ComponentTests";
+import { StylesTests } from "./pages/tests/StylesTests";
+import { OurTeam } from "./pages/OurTeam";
 
 function App() {
   return (
@@ -17,12 +16,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/ourTeam" element={<OurTeam />} />
           <Route path="/login" element={<Login />} />
           <Route path="/setting" element={<SettingsPage/>}/>
-          <Route path="/dashboard/landing" element={<LandingPage/>}/>
-          <Route path="/dashboard/CheckIn" element={<CheckInPage/>}/>
-          <Route path="/dashboard/Timer" element={<TimerPage/>}/>
-          <Route path="/dashboard/Todo" element={<TodoPage/>}/>
+          <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/componentTests" element={<ComponentTests/>}/>
+          <Route path="/stylesTests" element={<StylesTests/>}/>
         </Routes> 
       </BrowserRouter>
     </div>
