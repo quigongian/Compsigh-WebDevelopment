@@ -1,5 +1,5 @@
 import React from "react"
 export const Home = () => {
     return (
-        <h1>THis works</h1>
+        <h1>Home works</h1>
     );}

@@ -1,5 +1,5 @@
 import React from "react"
 export const About = () => {
     return (
-        <h1>THis works</h1>
+        <h1>About works</h1>
     );}
