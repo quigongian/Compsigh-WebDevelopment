@@ -32,5 +32,21 @@ Lastly, the application also allows students who are lost, start a educational t
 - Bootstrap
 
 ## Setup
-### Client
-- 
+### General
+- Open folder of your choice.
+- Open your terminal and run this command
+
+git clone *repo link here*
+
+### Client Folder
+- Open your terminal and navigate into the "my-app" folder with the cd command. (../compsigh-webdevelopment/client/my-app)
+- Then, run this command in your terminal.
+
+npm install
+
+- After doing this, anytime you want to start the web application run this command in "my-app".
+
+npm start
+
+## API Folder
+- TBA
