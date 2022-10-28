@@ -37,8 +37,10 @@ export const About = () => {
 const Block = ({ heading, description }: blockProps) => {
   return (
     <div className="block">
-      <Subheading>{heading}</Subheading>
-      <Paragraph className="p">{description}</Paragraph>
+      <Subheading color="#f4f1de">{heading}</Subheading>
+      <Paragraph className="p" color="#f4f1de">
+        {description}
+      </Paragraph>
     </div>
   );
 };
