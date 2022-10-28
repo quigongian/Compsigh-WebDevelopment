@@ -9,7 +9,7 @@ type blockProps = {
 
 export const About = () => {
   return (
-    <div className="wrapper">
+    <div className="about-wrapper">
       <div className="row">
         <Block
           heading="Who We Are"
