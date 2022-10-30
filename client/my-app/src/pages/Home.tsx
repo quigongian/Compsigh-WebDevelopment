@@ -4,6 +4,7 @@ export const Home = () => {
     return (
         <>
         <Header/>
+        <h1>pain</h1>
        <div className="Words">
          <h1>About Us</h1>
          <p>WORDS ABOUT US HERE</p>
