@@ -1,0 +1,12 @@
+.butn-group{
+display: inline-block;
+border-radius: 50%;
+border: 2px gray;
+margin: 4px 2px;
+font-size: 16px;
+}
+
+
+.p{
+    clear: both;
+}
