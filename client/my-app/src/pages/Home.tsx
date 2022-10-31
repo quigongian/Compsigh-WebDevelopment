@@ -1,20 +1,58 @@
-import React from "react"
+import React, { useState } from "react"
 import { Header } from "../components/header"
+import "./home.css";
+
 export const Home = () => {
-    return (
-        <>
-        <Header/>
-        <h1>pain</h1>
-       <div className="Words">
-         <h1>About Us</h1>
-         <p>WORDS ABOUT US HERE</p>
-        <h2>One less thing to worry about</h2> 
-        <div className="butn-group">
-        <button className="button">ll</button>
-        <button className="button"></button>
-        <button className="button"></button>
-        <button className="button"></button>
+
+  const [clickedButton, setClickedButton] = useState('');
+
+  const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    const button: HTMLButtonElement = event.currentTarget;
+    setClickedButton(button.name);
+
+  };
+  return (
+    <>
+      <Header />
+      <div className="All">
+
+        <div className="Sect1">
+          <h1>About Us</h1>
+          <p>
+            {clickedButton !== ""
+              ? ``
+              : "blah blach blach dfusdfi"}
+            {clickedButton === "btn1"
+              ? `blah blach blahcahca`
+              : ""}
+               {clickedButton === "btn2"
+              ? `blah `
+              : ""}
+               {clickedButton === "btn3"
+              ? `blah bleh`
+              : ""}
+               {clickedButton === "btn4"
+              ? `blah bloo`
+              : ""}
+          </p>
+
+          <button className="main-btn">Get Started</button>
+          <div className="btn-group">
+            <button onClick={buttonHandler} className="button" name="btn1"></button>
+            <button onClick={buttonHandler} className="button" name="btn2"></button>
+            <button onClick={buttonHandler} className="button" name="btn3"></button>
+            <button onClick={buttonHandler} className="button" name="btn4"></button>
+          </div>
         </div>
+        <div className="Sect2">
+          <h2>One less thing to worry about</h2>
         </div>
-       </>
-    );}
+
+      </div>
+    </>
+  );
+}
+
+
