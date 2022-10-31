@@ -10,6 +10,7 @@ type cardProps = {
   image: string;
   name: string;
   role: string;
+  desc: string;
 };
 
 export const OurTeam = () => {
@@ -20,26 +21,31 @@ export const OurTeam = () => {
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
+          desc="Pain"
         />
         <Card
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
+          desc=""
+        />
+        <Card
+          image="https://avatars.githubusercontent.com/u/74694864?v=4"
+          name="Giancarlo Padron"
+          role="Project Manager"
+          desc=""
         />
         <Card
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
+          desc=""
         />
         <Card
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
-        />
-        <Card
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
-          name="Name goes here"
-          role="FullStack Developer"
+          desc=""
         />
       </div>
       <div className="team-row">
@@ -47,26 +53,31 @@ export const OurTeam = () => {
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
+          desc=""
         />
         <Card
           image="https://media-exp1.licdn.com/dms/image/D4E03AQEDD9hxnPioBA/profile-displayphoto-shrink_100_100/0/1665355306627?e=1672272000&v=beta&t=BTXqx5Ryu4ZEznJr-qkOdMl37qkoqQ7LqCC-s5YmPzc"
           name="Eva Sennrich"
           role="Front-End Developer"
+          desc=""
         />
         <Card
           image="https://avatars.githubusercontent.com/u/75550025?v=4"
           name="Carlos Chavez"
           role="FullStack Developer"
+          desc=""
         />
         <Card
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
+          desc=""
         />
         <Card
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
+          desc=""
         />
       </div>
       <div className="team-row">
@@ -74,26 +85,31 @@ export const OurTeam = () => {
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
+          desc=""
         />
         <Card
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
+          desc=""
         />
         <Card
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
+          desc=""
         />
         <Card
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
+          desc=""
         />
         <Card
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
           name="Name goes here"
           role="FullStack Developer"
+          desc=""
         />
       </div>
 
