@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import topWave from "../image_content/topWave.svg";
+import bottomWave from "../image_content/bottomWave.svg";
 import { Header } from "../components/header"
 import "./home.css";
 
