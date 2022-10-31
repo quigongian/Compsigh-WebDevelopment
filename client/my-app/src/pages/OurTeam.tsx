@@ -42,9 +42,9 @@ export const OurTeam = () => {
           desc=""
         />
         <Card
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
-          name="Name goes here"
-          role="FullStack Developer"
+          image="https://avatars.githubusercontent.com/u/97458102?v=4"
+          name="Edwin Villarroel"
+          role="Front-End Developer"
           desc=""
         />
       </div>
