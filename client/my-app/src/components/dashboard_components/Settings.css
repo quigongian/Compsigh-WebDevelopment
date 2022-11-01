@@ -55,3 +55,19 @@ code {
   flex-direction: column;
   width: 78%;
 }
+.Hr{
+  height: 2px;
+  width: 78%;
+  border-width: 0;
+  color: gray;
+
+}
+
+.Button{
+  width: 8%;
+  height: 20%;
+  border-radius: 12px;
+  border: none; 
+  color: white; 
+  background-color: #e07a5f;  
+}

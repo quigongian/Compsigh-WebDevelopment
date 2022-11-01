@@ -1,9 +1,9 @@
 import { width } from "@mui/system";
 import React from "react"
 import { createContext } from "react";
-import { Footer } from "../../components/footer";
-import { Header } from "../../components/header"
-import { ComponentTests } from "../tests/ComponentTests";
+import { Footer } from "../footer";
+import { Header } from "../header"
+import { ComponentTests } from "../../pages/tests/ComponentTests";
 import './Settings.css'
 export const SettingsPage = () => {
     return (
@@ -23,6 +23,13 @@ export const SettingsPage = () => {
             </div>
             <div className="Content">
                 <h3 id = "content-name">Security</h3>
+                <h4>Password</h4>
+                <button className="Button">Change</button>
+                <hr className = "Hr"/>
+                <h4>2 Factor Authentication</h4>
+                <button className="Button">Enable</button>
+                <h4>Delete Account</h4>
+                <button className="Button">Delete</button>
         </div>
         </div>
         <Footer/>
