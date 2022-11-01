@@ -1,4 +1,12 @@
-import React from "react";
+import { Todo } from "../../components/dashboard_components/to-do";
+import { Footer } from "../../components/footer";
+import { Header } from "../../components/header";
+
 export const ComponentTests = () => {
-  return <h1>Component Tests works</h1>;
+  return (
+  <>
+  <Header/>
+  <Todo/>
+  </>  
+  );
 };
