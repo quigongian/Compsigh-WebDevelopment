@@ -8,9 +8,11 @@ import { Login } from "./pages/Login";
 import { ComponentTests } from "./pages/tests/ComponentTests";
 import { StylesTests } from "./pages/tests/StylesTests";
 import { OurTeam } from "./pages/OurTeam";
+import { Header } from "./components/header";
 
 function App() {
   return (
+    <>
     <div className="App">
       <BrowserRouter>
         <Routes>
@@ -25,6 +27,7 @@ function App() {
         </Routes> 
       </BrowserRouter>
     </div>
+    </>
   );
 }
 
