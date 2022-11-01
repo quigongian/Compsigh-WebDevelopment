@@ -1,19 +1,24 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
+import SignIn from "../image_content/signIn.png"
 
 export const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const switchLogin = () => {
     setIsLogin((prevState) => !prevState);
   };
 
+  const showDialog = () => {dialogRef.current?.showModal()}
+
   return (
     <>
     <Header />
       {isLogin ? (
-        <section>
+        <section style={{display:"flex", flexDirection: "row"}}>
+        <section style={{marginLeft: "100px", }}>
           <h1>Welcome Back!</h1>
           <form action="">
             <div>
@@ -31,7 +36,7 @@ export const Login = () => {
 
             <input type="checkbox" name="rememberMe" id="rememberMe" />
             <label htmlFor="rememberMe">Remember me</label>
-            <a href="forgotpassword.html">Forgot password?</a>
+            <h2 onClick={showDialog}>Forgot password?</h2>
 
             <div>
               <button>Sign in</button>
@@ -44,6 +49,11 @@ export const Login = () => {
             </div>
           </form>
         </section>
+       <section>
+        <img src={SignIn} alt="" />
+       </section>
+       </section>
+
       ) : (
         <section>
           <h1>Welcome!</h1>
@@ -97,7 +107,10 @@ export const Login = () => {
             <input type="checkbox" id="t&c" name="terms&conditions" />
             <label htmlFor="t&c" id="t&c">
               I read and agree to the{" "}
-              <a href="terms&conditions.html">Terms & Conditions</a>
+              {/* <h4 > 
+                Terms & Conditions
+              </h4>
+                <a href="terms&conditions.html">Terms & Conditions</a> change */}
             </label>
             <br />
 
@@ -110,17 +123,15 @@ export const Login = () => {
         </section>
       )}
 
-      <section>
-        <h1>Terms & Conditions</h1>
-      </section>
+    
 
       {/* make this a pop up screen with an 'x' to close it  */}
-      <section>
+      <dialog ref={dialogRef}>
         <h2>Reset Your Password</h2>
         {/* how do i add closeput 'x' */}
 
         <p>
-          Enter you Compsigh email and we'll send you a link to r eset your
+          Enter you Compsigh email and we'll send you a link to reset your
           password.
         </p>
         <form action="">
@@ -136,7 +147,7 @@ export const Login = () => {
           {/* how do i make this close the popup */}
           <button>Cancel</button>
         </form>
-      </section>
+      </dialog>
       <div>{/* Graphics content for the page */}</div>
     <Footer />
     </>
