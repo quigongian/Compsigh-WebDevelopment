@@ -30,21 +30,21 @@
 }
 
 .Sect1 {
-    margin-top: 5px;
+    color: white;
     padding-top: 100px;
     text-align: left;
     padding-left: 20%;
     padding-bottom: 15%; 
-    background-image: url("../image_content/WaveHome.png");
-    background-repeat:no-repeat; 
-    background-size: 100% 100%;
-}
-.temp{
    
 }
+.All{
+ background-image: url("../image_content/BlobHom.png");
+    background-repeat:no-repeat; 
+    background-size: 100% 100%;
 
+}
 .Sect2 {
-    margin: 100px 50px;
+    margin: 100px 20px;
     text-align: center;
     clear: both;
 }
