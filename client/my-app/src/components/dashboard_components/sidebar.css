@@ -1,0 +1,33 @@
+img:hover {
+  width: 70px;
+  height: auto;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.home {
+  height: 58px;
+  width: 59px;
+}
+
+.toDo {
+  height: 69px;
+  width: 56px;
+}
+
+.watch {
+  height: 62px;
+  width: 55px;
+}
+
+.checkIn {
+  height: 57px;
+  width: 80px;
+}
+
+.checkIn:hover {
+  width: 90px;
+  height: auto;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
