@@ -12,7 +12,8 @@ export const Home = () => {
     setClickedButton(button.name);
   };
   return (
-    <>
+    <div className="temp" >
+      
       <Header />
       <div className="All">
         <div className="Sect1">
@@ -24,11 +25,7 @@ export const Home = () => {
             {clickedButton === "btn3" ? `blah bleh` : ""}
             {clickedButton === "btn4" ? `blah bloo` : ""}
           </p>
-          {/* 'CMD + /' = comments
-        <div className="Imgs">
-        <img className="top wave" src={topWave} alt="" width={"100%"} />
-        </div>
-*/}
+    
           <button className="main-btn">Get Started</button>
           <div className="btn-group">
             <button onClick={buttonHandler} className="button" name="btn1"></button>
@@ -42,6 +39,6 @@ export const Home = () => {
           <h2>One less thing to worry about</h2>
         </div>
       </div>
-    </>
+    </div>
   );
 };

@@ -126,7 +126,7 @@ export const Login = () => {
     
 
       {/* make this a pop up screen with an 'x' to close it  */}
-      <dialog ref={dialogRef}>
+      <section>
         <h2>Reset Your Password</h2>
         {/* how do i add closeput 'x' */}
 
