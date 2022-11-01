@@ -1,9 +1,9 @@
 import { width } from "@mui/system";
 import React from "react"
 import { createContext } from "react";
-import { Footer } from "../components/footer";
-import { Header } from "../components/header"
-import { ComponentTests } from "./tests/ComponentTests";
+import { Footer } from "../../components/footer";
+import { Header } from "../../components/header"
+import { ComponentTests } from "../tests/ComponentTests";
 import './Settings.css'
 export const SettingsPage = () => {
     return (
