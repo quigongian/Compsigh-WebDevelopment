@@ -13,7 +13,7 @@ export const Login = () => {
     <>
     <Header />
       {isLogin ? (
-        <section>
+        <section style = {{minHeight: '40vh'}}>
           <h1>Welcome Back!</h1>
           <form action="">
             <div>
@@ -115,7 +115,7 @@ export const Login = () => {
       </section>
 
       {/* make this a pop up screen with an 'x' to close it  */}
-      <section>
+      <section style = {{minHeight: '20vh'}}>
         <h2>Reset Your Password</h2>
         {/* how do i add closeput 'x' */}
 
