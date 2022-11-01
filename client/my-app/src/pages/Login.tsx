@@ -11,7 +11,7 @@ export const Login = () => {
 
   return (
     <>
-      <Header />
+    <Header />
       {isLogin ? (
         <section>
           <h1>Welcome Back!</h1>
@@ -138,7 +138,7 @@ export const Login = () => {
         </form>
       </section>
       <div>{/* Graphics content for the page */}</div>
-      <Footer />
+    <Footer />
     </>
   );
 };

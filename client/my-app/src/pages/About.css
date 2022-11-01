@@ -1,0 +1,23 @@
+.about-wrapper {
+  background: url(../image_content/aboutBG.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 200vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.block {
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.p {
+  width: 300px;
+}
