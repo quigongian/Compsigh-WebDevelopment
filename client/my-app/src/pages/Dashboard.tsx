@@ -1,5 +1,9 @@
-import React from "react"
+import Sidebar from "../components/dashboard_components/sidebar";
+
 export const Dashboard = () => {
-    return (
-        <h1>Dashboard works</h1>
-    );}
+  return (
+    <>
+      <Sidebar />
+    </>
+  );
+};
