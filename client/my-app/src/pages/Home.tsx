@@ -12,33 +12,34 @@ export const Home = () => {
     setClickedButton(button.name);
   };
   return (
-    <div className="temp" >
-      
+    <>
       <Header />
-      <div className="All">
-        <div className="Sect1">
-          <h1>About Us</h1>
-          <p>
-            {clickedButton !== "" ? `` : "blah blach blach dfusdfi"}
-            {clickedButton === "btn1" ? `blah blach blahcahca` : ""}
-            {clickedButton === "btn2" ? `blah ` : ""}
-            {clickedButton === "btn3" ? `blah bleh` : ""}
-            {clickedButton === "btn4" ? `blah bloo` : ""}
-          </p>
-    
-          <button className="main-btn">Get Started</button>
-          <div className="btn-group">
-            <button onClick={buttonHandler} className="button" name="btn1"></button>
-            <button onClick={buttonHandler} className="button" name="btn2"></button>
-            <button onClick={buttonHandler} className="button" name="btn3"></button>
-            <button onClick={buttonHandler} className="button" name="btn4"></button>
+      <div className="temp">
+        <div className="All">
+          <div className="Sect1">
+            <h1>About Us</h1>
+            <p>
+              {clickedButton !== "" ? `` : "blah blach blach dfusdfi"}
+              {clickedButton === "btn1" ? `blah blach blahcahca` : ""}
+              {clickedButton === "btn2" ? `blah ` : ""}
+              {clickedButton === "btn3" ? `blah bleh` : ""}
+              {clickedButton === "btn4" ? `blah bloo` : ""}
+            </p>
+
+            <button className="main-btn">Get Started</button>
+            <div className="btn-group">
+              <button onClick={buttonHandler} className="button" name="btn1"></button>
+              <button onClick={buttonHandler} className="button" name="btn2"></button>
+              <button onClick={buttonHandler} className="button" name="btn3"></button>
+              <button onClick={buttonHandler} className="button" name="btn4"></button>
+            </div>
+          </div>
+
+          <div className="Sect2">
+            <h2>One less thing to worry about</h2>
           </div>
         </div>
-
-        <div className="Sect2">
-          <h2>One less thing to worry about</h2>
-        </div>
       </div>
-    </div>
+    </>
   );
 };

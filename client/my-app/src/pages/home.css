@@ -34,12 +34,13 @@
     padding-top: 100px;
     text-align: left;
     padding-left: 20%;
-    padding-bottom: 60px; 
+    padding-bottom: 15%; 
+    background-image: url("../image_content/WaveHome.png");
+    background-repeat:no-repeat; 
+    background-size: 100% 100%;
 }
 .temp{
-   background-image: url("../image_content/HomeWave.svg");
-    background-repeat:no-repeat; 
-    width: 100vw;
+   
 }
 
 .Sect2 {
