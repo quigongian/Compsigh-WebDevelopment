@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
-import SignIn from "../image_content/signIn.png"
+import SignIn from "../image_content/signIn.png";
 
 export const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -11,7 +11,7 @@ export const Login = () => {
     setIsLogin((prevState) => !prevState);
   };
 
-  const showDialog = () => {dialogRef.current?.showModal()}
+  const showDialog = () => {dialogRef.current?.showModal()} 
 
   return (
     <>
@@ -123,8 +123,6 @@ export const Login = () => {
         </section>
       )}
 
-    
-
       {/* make this a pop up screen with an 'x' to close it  */}
       <section>
         <h2>Reset Your Password</h2>
@@ -147,9 +145,9 @@ export const Login = () => {
           {/* how do i make this close the popup */}
           <button>Cancel</button>
         </form>
-      </dialog>
+        </section>
       <div>{/* Graphics content for the page */}</div>
     <Footer />
-    </>
-  );
+</>
+);
 };
