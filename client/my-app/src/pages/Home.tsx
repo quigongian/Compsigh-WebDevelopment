@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-
-export const Home = () => {
-  return <h1>Home works </h1>;
-=======
 import React, { useState } from "react";
 import { Header } from "../components/header";
 import "./home.css";
@@ -50,5 +44,4 @@ export const Home = () => {
       </div>
     </>
   );
->>>>>>> 7d5fb4457c3fbce5d3246f37ec1c384eeae22cd0
 };
