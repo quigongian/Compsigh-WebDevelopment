@@ -5,6 +5,7 @@ import midWave from "../image_content/midWave.svg";
 import secondWave from "../image_content/secondWave.svg";
 import topWave from "../image_content/topWave.svg";
 import { Paragraph } from "../globalStyles";
+import { Header } from "../components/header";
 
 type cardProps = {
   image: string;
@@ -15,6 +16,8 @@ type cardProps = {
 
 export const OurTeam = () => {
   return (
+    <>
+    <Header/>
     <div className="team-wrapper">
       <div className="team-row">
         <Card
@@ -36,8 +39,8 @@ export const OurTeam = () => {
           desc=""
         />
         <Card
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
-          name="Name goes here"
+          image="https://avatars.githubusercontent.com/u/63821353?v=4"
+          name="Erick Rivera"
           role="FullStack Developer"
           desc=""
         />
@@ -112,12 +115,12 @@ export const OurTeam = () => {
           desc=""
         />
       </div>
-
       <img className="wave one" src={bottomWave} alt="" width={"100%"} />
       <img className="wave two" src={midWave} alt="" width={"100%"} />
       <img className="wave three" src={secondWave} alt="" width={"100%"} />
       <img className="wave four" src={topWave} alt="" width={"100%"} />
     </div>
+    </>
   );
 };
 

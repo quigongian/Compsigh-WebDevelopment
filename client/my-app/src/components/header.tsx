@@ -59,7 +59,7 @@ const wordAbout={
 }
 
 
-const wordSetting={
+const wordOurTeam={
     color: 'white',
     marginRight: '75px',
     fontWeight: '600',
@@ -106,7 +106,7 @@ export const Header = () => {
 
         <div style={Right}>
         
-            <p style={wordSetting}><Link to = "/setting" style={{ textDecoration: 'none', color: 'white' }}>Settings</Link ></p>
+            <p style={wordOurTeam}><Link to = "/ourTeam" style={{ textDecoration: 'none', color: 'white' }}>Our Team</Link ></p>
             <p style={wordAbout}><Link to = "/about" style={{ textDecoration: 'none', color: 'white' }}>About</Link ></p>
             <p style={{marginRight:'20px',color: 'white', fontWeight: '600', fontSize: '15px',cursor:'pointer'}}><Link to = "/" style={{ textDecoration: 'none', color: 'white' }}>Home</Link ></p>
             

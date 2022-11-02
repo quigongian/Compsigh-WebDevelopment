@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Subheading, Heading, Paragraph } from "../../globalStyles";
+import ping from "../../services/pingRequest";
 
 export const StylesTests = () => {
   return (
@@ -10,7 +11,7 @@ export const StylesTests = () => {
       </Heading>
       <Subheading>Default Subheading</Subheading>
       <Paragraph color="green">Paragraph only changing color</Paragraph>
-      <Button color="white" background="#81B29A" width={200} height={70} fontSize={24} borderRadius={50}>
+      <Button color="white" background="#81B29A" width={200} height={70} fontSize={24} borderRadius={50} onClick={ping}>
         submit
       </Button>
       <Button>default</Button>

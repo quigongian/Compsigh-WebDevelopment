@@ -1,4 +1,6 @@
 import React from "react";
+import { Footer } from "../components/footer";
+import { Header } from "../components/header";
 import { Subheading, Paragraph } from "../globalStyles";
 import "./About.css";
 
@@ -9,6 +11,8 @@ type blockProps = {
 
 export const About = () => {
   return (
+    <>
+    <Header/>
     <div className="about-wrapper">
       <div className="row">
         <Block
@@ -31,6 +35,8 @@ export const About = () => {
         />
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 
