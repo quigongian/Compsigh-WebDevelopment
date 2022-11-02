@@ -39,8 +39,8 @@ export const OurTeam = () => {
           desc=""
         />
         <Card
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
-          name="Name goes here"
+          image="https://avatars.githubusercontent.com/u/63821353?v=4"
+          name="Erick Rivera"
           role="FullStack Developer"
           desc=""
         />

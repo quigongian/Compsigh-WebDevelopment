@@ -38,7 +38,6 @@ const Appearance = () => {
     )
 }
 
-
 /*|------------------------------------------------------------------------------------Settings Page Render------------------------------------------------------------------------------------|*/
 export const SettingsPage = () => {
     const [state, setState] = React.useState("Profile"); //originaly false
@@ -66,41 +65,9 @@ export const SettingsPage = () => {
                 {state === "Profile" && <Profile/>} 
                 {state === "Security" && <Security/>}
                 {state === "Appearance" && <Appearance/>}
-            {/* <button className="Sidebar-Button" onClick={() => setState(!state)}>Security</button> */}
-            {/* {state? <Security/> : <Profile/>} */}
         </div>
         </div>
         <Footer/>
         </>
         
     );}
-
-
-
-
-    /*
-    export const SettingsPage = () => {
-    return (
-        <>
-        <Header/>
-        <div className="Settings">
-            <div className="Sidebar">
-                <h3 id = "sidebar-title">Settings</h3>
-                <div className="Sidebar-List">
-                    <div className="Sidebar-Item">
-                        <h4>Profile</h4>
-                        <h4>Security</h4>
-                        <h4>Appearance</h4>
-                        <h4>Music Player</h4>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="Content">
-                        <Security/>
-                </div>
-                </div>
-                <Footer/>
-                </>
-                
-            );}
-        */
