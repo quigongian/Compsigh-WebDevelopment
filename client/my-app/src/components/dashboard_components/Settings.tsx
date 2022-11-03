@@ -10,7 +10,29 @@ import './Settings.css'
 const Profile = () => {
     return (
         <>
-        <h1>This is the Profile Page!</h1>
+        <h3 id = "content-title">Profile</h3>
+        <div id="user-profile">
+            <div className="pimage-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSRCv5FR_Cwd5cBZ3-BF95ZX00tNZcEJt5Xi9D065i-g&s" id="user-image" alt="Avatar"></img>
+            </div>
+            <div className="pinfo-container">
+                <ul>
+                    <li><h4>Frank Beans (name)</h4></li>
+                    <li><h4>frank@lovesbeans.com (email)</h4></li>
+                    <li><h4>Data Engineer (career path)</h4></li>
+                    <li><h4>Expert (experience lvl)</h4></li>
+                </ul>
+            </div>
+        </div>
+        <div className="notification-container">
+            <h3>Notifications</h3>
+            <div className="n-email">
+                <h4>Email</h4>
+            </div>
+            <div className="n-push">
+                <h4>Push</h4>
+            </div>
+        </div>
         </>
     )
 }
@@ -18,12 +40,13 @@ const Profile = () => {
 const Security = () =>{
     return (
         <>
-            <h3 id = "content-name">Security</h3>
+            <h3 id = "content-title">Security</h3>
             <h4>Password</h4>
             <button className="Button">Change</button>
             <hr className = "Hr"/>
             <h4>2 Factor Authentication</h4>
             <button className="Button">Enable</button>
+            <hr className = "Hr"/>
             <h4>Delete Account</h4>
             <button className="Button">Delete</button>
         </>
@@ -33,7 +56,7 @@ const Security = () =>{
 const Appearance = () => {
     return (
         <>
-        <h1>This is the Appearance Page!</h1>
+        <h3 id = "content-title">Appearance</h3>
         </>
     )
 }
@@ -58,13 +81,10 @@ export const SettingsPage = () => {
                 <div className="Sidebar-List">
                     <div className="Sidebar-Item">
                         <nav>
-                            {/* <button onClick={() => setState("Profile")}>Profile</button>
-                            <button onClick={() => setState("Security")}>Security</button>
-                            <button onClick={() => setState("Appearance")}>Appearance</button> <-- Incase the a tag doesn't work*/}
                             <ul>
-                                <li><a href="#" onClick={() => setState("Profile")}>Profile</a> </li>
-                                <li><a href="#" onClick={() => setState("Security")}>Security</a> </li>
-                                <li><a href="#" onClick={() => setState("Appearance")}>Appearance</a> </li>
+                                <li><button onClick={() => setState("Profile")}>Profile</button></li>
+                                <li><button onClick={() => setState("Security")}>Security</button></li>
+                                <li><button onClick={() => setState("Appearance")}>Appearance</button></li>
                             </ul>
                         </nav>
                     </div>
