@@ -26,7 +26,28 @@
 }
 
 .checkIn:hover {
-  width: 90px;
+  width: 85px;
+  height: auto;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.watch:hover {
+  width: 65px;
+  height: auto;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.toDo:hover {
+  width: 65px;
+  height: auto;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.home:hover {
+  width: 65px;
   height: auto;
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
