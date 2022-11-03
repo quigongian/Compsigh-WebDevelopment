@@ -1,0 +1,703 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: Swagger CompSigh
+  description: |-
+    API for [CompSigh](http://localhost:3000)
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Consectetur libero id faucibus nisl tincidunt eget nullam non nisi. Hendrerit dolor magna eget est lorem ipsum. 
+    Sed tempus urna et pharetra pharetra massa. Convallis tellus id interdum velit laoreet id donec. In eu mi bibendum neque egestas congue. 
+    Dolor sit amet consectetur adipiscing elit ut aliquam purus sit. Lacinia quis vel eros donec ac odio tempor. 
+    Cras adipiscing enim eu turpis egestas pretium. Scelerisque eleifend donec pretium vulputate sapien.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+host: localhost:8080
+basePath: /api
+schemes:
+  - http
+securityDefinitions:
+  JWT:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: 'Authorization header: "Bearer [token]"'
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
+tags:
+  - name: auth
+  - name: user
+  - name: task
+  - name: category
+  - name: xplevel
+  - name: healthcheck
+paths:
+  /ping:
+    get:
+      tags:
+        - healthcheck
+      summary: Ping the server
+      produces:
+        - text/plain
+        - application/json
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: string
+            example: pong
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /category:
+    get:
+      tags:
+        - category
+      summary: Get all categories
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Category"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /xplevel:
+    get:
+      tags:
+        - xplevel
+      summary: Get all xplevels
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/XpLevel"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /auth/signin:
+    post:
+      tags:
+        - auth
+      summary: Sign in
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: body
+          description: Sign in request
+          required: true
+          schema:
+            $ref: "#/definitions/SignInRequest"
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: "#/definitions/AuthResponse"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /auth/signup:
+    post:
+      tags:
+        - auth
+      summary: Sign up
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: body
+          description: Sign up request
+          required: true
+          schema:
+            $ref: "#/definitions/SignUpRequest"
+      responses:
+        201:
+          description: "Created"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /auth/verifyemail:
+    post:
+      tags:
+        - auth
+      summary: Verify email
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: body
+          description: Verify email request
+          required: true
+          schema:
+            $ref: "#/definitions/VerifyEmailRequest"
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: "#/definitions/AuthResponse"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /auth/forgotpassword:
+    post:
+      tags:
+        - auth
+      summary: Forgot password
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: body
+          description: Forgot password request
+          required: true
+          schema:
+            $ref: "#/definitions/ForgotPasswordRequest"
+      responses:
+        204:
+          description: Ok
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /auth/resetpassword:
+    post:
+      tags:
+        - auth
+      summary: Reset password
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: body
+          description: Reset password request
+          required: true
+          schema:
+            $ref: "#/definitions/ResetPasswordRequest"
+      responses:
+        204:
+          description: Ok
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /auth/refreshtoken:
+    post:
+      tags:
+        - auth
+      summary: Refresh token
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: body
+          name: body
+          description: Refresh token request
+          required: true
+          schema:
+            $ref: "#/definitions/RefreshTokenRequest"
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: "#/definitions/RefreshTokenResponse"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /user/me:
+    get:
+      tags:
+        - user
+      summary: Get current user
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: "#/definitions/UserDTO"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Not Found
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /task:
+    get:
+      tags:
+        - task
+      summary: Get all tasks by completed status
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: query
+          name: completed
+          schema:
+            type: boolean
+          required: false
+          description: Completed status
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/TaskDTO"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+    post:
+      tags:
+        - task
+      summary: Create task
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: body
+          name: body
+          description: Create task request
+          required: true
+          schema:
+            $ref: "#/definitions/CreateTaskRequest"
+      responses:
+        201:
+          description: Ok
+          schema:
+            $ref: "#/definitions/TaskDTO"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /task/{taskId}:
+    get:
+      tags:
+        - task
+      summary: Get task by id
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: path
+          name: taskId
+          schema:
+            type: number
+            format: int64
+          required: true
+          description: Task id
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: "#/definitions/TaskDTO"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Not Found
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+    put:
+      tags:
+        - task
+      summary: Update task
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: path
+          name: taskId
+          schema:
+            type: number
+            format: int64
+          required: true
+          description: Task id
+        - in: body
+          name: body
+          description: Update task request
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateTaskRequest"
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: "#/definitions/TaskDTO"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Not Found
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+    delete:
+      tags:
+        - task
+      summary: Delete task
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: path
+          name: taskId
+          schema:
+            type: number
+            format: int64
+          required: true
+          description: Task id
+      responses:
+        204:
+          description: Ok
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Not Found
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /task/{taskId}/complete:
+    put:
+      tags:
+        - task
+      summary: Complete task
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: path
+          name: taskId
+          schema:
+            type: number
+            format: int64
+          required: true
+          description: Task id
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: "#/definitions/TaskDTO"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Not Found
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+definitions:
+  UserDTO:
+    type: object
+    required:
+      - userId
+      - userName
+      - firstName
+      - lastName
+      - email
+      - categoryId
+      - categoryName
+      - xpLevelId
+      - xpLevelName
+    properties:
+      userId:
+        type: integer
+        format: int64
+      userName:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      categoryId:
+        type: integer
+        format: int64
+      categoryName:
+        type: string
+      xpLevelId:
+        type: integer
+        format: int64
+      xpLevelName:
+        type: string
+  TaskDTO:
+    type: object
+    required:
+      - taskId
+      - taskName
+      - taskDescription
+      - completed
+    properties:
+      taskId:
+        type: integer
+        format: int64
+      taskName:
+        type: string
+      taskDescription:
+        type: string
+      completed:
+        type: boolean
+  Category:
+    type: object
+    required:
+      - categoryId
+      - name
+    properties:
+      categoryId:
+        type: integer
+        format: int64
+      name:
+        type: string
+  XpLevel:
+    type: object
+    required:
+      - xpLevelId
+      - name
+    properties:
+      xpLevelId:
+        type: integer
+        format: int64
+      name:
+        type: string
+  SignInRequest:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  SignUpRequest:
+    type: object
+    required:
+      - firstName
+      - lastName
+      - userName
+      - email
+      - password
+      - categoryId
+      - xpLevelId
+    properties:
+      userName:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      categoryId:
+        type: integer
+        format: int64
+      xpLevelId:
+        type: integer
+        format: int64
+  VerifyEmailRequest:
+    type: object
+    required:
+      - email
+      - code
+    properties:
+      email:
+        type: string
+      code:
+        type: string
+  ForgotPasswordRequest:
+    type: object
+    required:
+      - email
+    properties:
+      email:
+        type: string
+  ResetPasswordRequest:
+    type: object
+    required:
+      - email
+      - password
+      - repeatPassword
+      - code
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      repeatPassword:
+        type: string
+      code:
+        type: string
+  RefreshTokenRequest:
+    type: object
+    required:
+      - refreshToken
+    properties:
+      refreshToken:
+        type: string
+  CreateTaskRequest:
+    type: object
+    required:
+      - name
+      - description
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+  UpdateTaskRequest:
+    type: object
+    required:
+      - name
+      - description
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+  AuthResponse:
+    type: object
+    required:
+      - accessToken
+      - refreshToken
+    properties:
+      accessToken:
+        type: string
+      refreshToken:
+        type: string
+  RefreshTokenResponse:
+    type: object
+    required:
+      - accessToken
+    properties:
+      accessToken:
+        type: string
+  Error:
+    type: object
+    required:
+      - error
+    properties:
+      error:
+        type: string

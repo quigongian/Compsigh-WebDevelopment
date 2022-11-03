@@ -14,7 +14,7 @@ code {
 .Settings {
   display: flex;
 }
-
+/*|------------------------------------------------------------------------Sidebar------------------------------------------------------------------------|*/
 .Sidebar {
   border: solid 1px blue;
   height: 90%;
@@ -41,6 +41,21 @@ code {
   text-align: left;
   flex-grow: 1;
 }
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+
+}
+
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+/*|------------------------------------------------------------------------Sidebar------------------------------------------------------------------------|*/
 
 #security {
   height: 90%;

@@ -6,7 +6,7 @@ import { Header } from "../header"
 import { ComponentTests } from "../../pages/tests/ComponentTests";
 import './Settings.css'
 
-/*|-------------------------------------------------------------------------------------Contents Component-------------------------------------------------------------------------------------|*/
+/*|---------------------------------------------------------------------------------Contents Component---------------------------------------------------------------------------------|*/
 const Profile = () => {
     return (
         <>
@@ -38,7 +38,15 @@ const Appearance = () => {
     )
 }
 
-/*|------------------------------------------------------------------------------------Settings Page Render------------------------------------------------------------------------------------|*/
+const Sidebar = () => {
+    return (
+        <>
+
+        </>
+    )
+}
+
+/*|--------------------------------------------------------------------------------Settings Page Render--------------------------------------------------------------------------------|*/
 export const SettingsPage = () => {
     const [state, setState] = React.useState("Profile"); //originaly false
     return (
@@ -50,14 +58,15 @@ export const SettingsPage = () => {
                 <div className="Sidebar-List">
                     <div className="Sidebar-Item">
                         <nav>
-                            <button onClick={() => setState("Profile")}>Profile</button>
+                            {/* <button onClick={() => setState("Profile")}>Profile</button>
                             <button onClick={() => setState("Security")}>Security</button>
-                            <button onClick={() => setState("Appearance")}>Appearance</button>
+                            <button onClick={() => setState("Appearance")}>Appearance</button> <-- Incase the a tag doesn't work*/}
+                            <ul>
+                                <li><a href="#" onClick={() => setState("Profile")}>Profile</a> </li>
+                                <li><a href="#" onClick={() => setState("Security")}>Security</a> </li>
+                                <li><a href="#" onClick={() => setState("Appearance")}>Appearance</a> </li>
+                            </ul>
                         </nav>
-                        <h4>Profile</h4>
-                        <h4>Security</h4>
-                        <h4>Appearance</h4>
-                        <h4>Music Player</h4>
                     </div>
                 </div>
             </div>

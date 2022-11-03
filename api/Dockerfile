@@ -1,0 +1,15 @@
+FROM node:lts
+
+WORKDIR /usr/src/app
+
+COPY src ./src
+COPY prisma ./prisma
+COPY static ./static
+COPY *.json ./
+COPY .env ./
+
+RUN npm install
+
+RUN npx prisma generate
+
+CMD npm run dev:migrate

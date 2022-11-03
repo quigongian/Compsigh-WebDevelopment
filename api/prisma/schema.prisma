@@ -7,56 +7,64 @@ generator client {
     provider = "prisma-client-js"
 }
 
+model User {
+    userId            Int                @id @default(autoincrement())
+    firstName         String
+    lastName          String
+    userName          String             @unique
+    email             String             @unique
+    password          String
+    category          Category           @relation(fields: [categoryId], references: [categoryId])
+    categoryId        Int
+    xpLevel           XpLevel            @relation(fields: [xpLevelId], references: [xpLevelId])
+    xpLevelId         Int
+    createdAt         DateTime           @default(now())
+    lastSignIn        DateTime?
+    lastCheckIn       DateTime?
+    emailVerified     Boolean            @default(false)
+    tasks             Task[]
+    emailVerification EmailVerification?
+}
+
+model Task {
+    taskId          Int       @id @default(autoincrement())
+    taskName        String
+    taskDescription String
+    user            User      @relation(fields: [userId], references: [userId])
+    userId          Int
+    completed       Boolean   @default(false)
+    createdAt       DateTime  @default(now())
+    completedAt     DateTime?
+}
+
+model GeneratedTask {
+    generatedtaskId          Int        @id @default(autoincrement())
+    generatedTaskName        String
+    generatedTaskDescription String
+    categories               Category[]
+    xpLevel                  XpLevel    @relation(fields: [xpLevelId], references: [xpLevelId])
+    xpLevelId                Int
+}
+
 model Category {
-    category_id    Int             @id @default(autoincrement())
-    category_name  String          @unique
+    categoryId     Int             @id @default(autoincrement())
+    categoryName   String          @unique
     generatedTasks GeneratedTask[]
     users          User[]
 }
 
 model XpLevel {
-    xpLevel_id     Int             @id @default(autoincrement())
-    xpLevel_name   String          @unique
+    xpLevelId      Int             @id @default(autoincrement())
+    xpLevelName    String          @unique
     generatedTasks GeneratedTask[]
     users          User[]
 }
 
-model GeneratedTask {
-    generatedtask_id          Int      @id @default(autoincrement())
-    generatedtask_name        String
-    generatedtask_description String
-    category                  Category @relation(fields: [category_id], references: [category_id])
-    category_id               Int
-    xpLevel                   XpLevel  @relation(fields: [xpLevel_id], references: [xpLevel_id])
-    xpLevel_id                Int
-}
+model EmailVerification {
+    user      User     @relation(fields: [userId], references: [userId])
+    userId    Int
+    code      String
+    expiresAt DateTime
 
-model User {
-    user_id      Int      @id @default(autoincrement())
-    firstName    String
-    lastName     String
-    userName     String   @unique
-    email        String   @unique
-    password     String
-    category     Category @relation(fields: [category_id], references: [category_id])
-    category_id  Int
-    xpLevel      XpLevel  @relation(fields: [xpLevel_id], references: [xpLevel_id])
-    xpLevel_id   Int
-    tasks        Task[]
-    date_created DateTime @default(now())
+    @@id(userId)
 }
-
-model Task {
-    task_id          Int       @id @default(autoincrement())
-    task_name        String
-    task_description String
-    user             User      @relation(fields: [user_id], references: [user_id])
-    user_id          Int
-    completed        Boolean   @default(false)
-    date_created     DateTime  @default(now())
-    date_completed   DateTime?
-}
-
-// npx prisma migrate dev
-// npx prisma migrate reset
-// npx prisma db seed

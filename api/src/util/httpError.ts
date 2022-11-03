@@ -1,11 +1,10 @@
-class HttpError extends Error {
-    public readonly status: number;
+import { HttpStatus } from "./HttpStatus";
 
-    constructor(status: number, message: string) {
+export class HttpError extends Error {
+    public readonly statusCode: HttpStatus;
+
+    constructor(statusCode: HttpStatus, message: string) {
         super(message);
-        this.status = status;
-        this.message = message;
+        this.statusCode = statusCode;
     }
 }
-
-export default HttpError;
