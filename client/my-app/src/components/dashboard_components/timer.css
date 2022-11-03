@@ -1,0 +1,6 @@
+.timer-wrapper{
+    background-image: url(../../image_content/dashBlob2.svg);
+    background-image: url(../../image_content/dashBlob1.svg);
+    background-repeat:no-repeat; 
+    background-size: 100% 100%;
+}

@@ -8,6 +8,7 @@ import { Login } from "./pages/Login";
 import { ComponentTests } from "./pages/tests/ComponentTests";
 import { StylesTests } from "./pages/tests/StylesTests";
 import { OurTeam } from "./pages/OurTeam";
+import {Timer} from "./components/dashboard_components/timer";
 // import { Header } from "./components/header";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/setting" element={<SettingsPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/timmer" element={<Timer />} />
             <Route path="/componentTests" element={<ComponentTests />} />
             <Route path="/stylesTests" element={<StylesTests />} />
           </Routes>
