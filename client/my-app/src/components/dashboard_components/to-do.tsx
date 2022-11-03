@@ -1,6 +1,5 @@
 import React from "react"
 
-
 const Container={
     border: "1px solid red",
 
@@ -49,11 +48,15 @@ export const Todo = () => {
     return (
         <>
         <div style ={Container}>
+        
             <div style ={Wrapper}>
+                
             <div style={Sidebar}></div>
                 <div style ={rightContainer}>
 
                 <div style={toDoList}>
+                
+
                     <div style ={textBox}>
                         <p>To-Do List</p>
                         <p>Filter</p>
