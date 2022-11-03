@@ -37,6 +37,19 @@ export const Home = () => {
 
           <div className="Sect2">
             <h2>One less thing to worry about</h2>
+
+            <div className="row">
+              <p className="column">
+              Breaking down complex tasks into smaller ones by using Pomodoro
+              </p>
+              <p className="column">
+              Guiding you through your goals so that you can have peace of mind
+              </p>
+              <p className="column">
+              All your goals put into one productive website
+              </p>
+
+            </div>
           </div>
         </div>
       </div>
