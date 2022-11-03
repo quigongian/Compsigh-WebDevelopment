@@ -15,12 +15,11 @@ code {
 
 .Settings {
   display: flex;
-  margin-bottom: 10%;
 }
 /*|------------------------------------------------------------------------Sidebar------------------------------------------------------------------------|*/
 .Sidebar {
-  /* border: solid 1px blue; <-- Change this back for reference*/
-  height: 90%;
+  border-right: solid 1px #ccc;
+  height: 80vh;
   width: 12%;
   float: left;
   display: flex;
@@ -35,7 +34,6 @@ code {
 .Sidebar-List {
   padding: 0.5em;
   text-align: center;
-  /* border: solid 1px red; */
   flex-grow: 1;
 }
 
@@ -68,12 +66,12 @@ li button {
 }
 
 .Content {
-  margin-top: 50px;
+  margin-top: 1%;
   padding-left: 2%;
-  /* border: solid 1px red; */
   display: flex;
   flex-direction: column;
   width: 78%;
+  margin-bottom: 3%;
 }
 
 .Hr{
