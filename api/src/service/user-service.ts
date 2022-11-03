@@ -82,7 +82,7 @@ async function createGeneratedTasksForUser(user: User): Promise<void> {
             user.xpLevelId
         );
     for (const generatedTask of generatedTasks) {
-        await taskService.create(
+        await taskService.createTaskDTO(
             user.userId,
             generatedTask.generatedTaskName,
             generatedTask.generatedTaskDescription

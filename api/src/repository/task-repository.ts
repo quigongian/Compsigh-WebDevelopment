@@ -4,6 +4,7 @@ import { prisma } from "../util/prisma";
 async function getAllByUserId(userId: number): Promise<Task[]> {
     return await prisma.task.findMany({ where: { userId } });
 }
+
 async function getAllByUserIdAndCompleted(
     userId: number,
     completed: boolean
@@ -36,7 +37,7 @@ async function update(
     });
 }
 
-async function updateCompletedAt(
+async function updateCompleted(
     taskId: number,
     completed: boolean
 ): Promise<Task> {
@@ -56,6 +57,6 @@ export const taskRepository = {
     getById,
     create,
     update,
-    updateCompletedAt,
+    updateCompleted,
     deleteById,
 };

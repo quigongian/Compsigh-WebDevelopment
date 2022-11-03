@@ -32,6 +32,7 @@ externalDocs:
 tags:
   - name: auth
   - name: user
+  - name: checkin
   - name: task
   - name: category
   - name: xplevel
@@ -275,6 +276,103 @@ paths:
           description: Ok
           schema:
             $ref: "#/definitions/UserDTO"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Not Found
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /checkin:
+    get:
+      tags:
+        - checkin
+      summary: Get all checkIns
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: query
+          name: page
+          type: integer
+          required: false
+          description: Page number
+          comments: if not specified, all checkIns will be returned
+        - in: query
+          name: size
+          type: integer
+          required: false
+          default: 31
+          description: Page size
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/CheckinDTO"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+    post:
+      tags:
+        - checkin
+      summary: Create checkIn
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: body
+          name: body
+          description: CheckIn request
+          required: true
+          schema:
+            $ref: "#/definitions/CreateCheckInRequest"
+      responses:
+        201:
+          description: "Created"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /checkin/{checkInId}:
+    get:
+      tags:
+        - checkin
+      summary: Get checkIn by id
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: path
+          name: checkInId
+          description: CheckIn id
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: "#/definitions/CheckinDTO"
         401:
           description: Unauthorized
           schema:
@@ -541,6 +639,31 @@ definitions:
         format: int64
       xpLevelName:
         type: string
+  CheckInDTO:
+    type: object
+    required:
+      - checkInId
+      - answer1
+      - answer2
+      - answer3
+      - answer4
+      - checkInStatus
+    properties:
+      checkInId:
+        type: integer
+        format: int64
+      answer1:
+        type: string
+      answer2:
+        type: string
+      answer3:
+        type: string
+      answer4:
+        type: string
+      comments:
+        type: string
+      checkInStatus:
+        type: string
   TaskDTO:
     type: object
     required:
@@ -656,6 +779,26 @@ definitions:
       - refreshToken
     properties:
       refreshToken:
+        type: string
+  CreateCheckInRequest:
+    type: object
+    required:
+      - answer1
+      - answer2
+      - answer3
+      - answer4
+    properties:
+      answer1:
+        type: string
+      answer2:
+        type: string
+      answer3:
+        type: string
+      answer4:
+        type: string
+      comments:
+        type: string
+      checkInStatus:
         type: string
   CreateTaskRequest:
     type: object
