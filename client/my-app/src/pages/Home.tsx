@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Header } from "../components/header";
+import women from "../image_content/women.svg";
+import idea_search from "../image_content/idea_search.svg";
+import clock_calender from "../image_content/clock_calender.svg";
 import "./home.css";
 
 export const Home = () => {
@@ -37,15 +40,20 @@ export const Home = () => {
 
           <div className="Sect2">
             <h2>One less thing to worry about</h2>
-
             <div className="row">
               <p className="column">
+                <img src={women} alt="woman thinking" />
+                <br />
               Breaking down complex tasks into smaller ones by using Pomodoro
               </p>
               <p className="column">
+              <img src={idea_search} alt="ladder up the books" />
+              <br />
               Guiding you through your goals so that you can have peace of mind
               </p>
               <p className="column">
+              <img src={clock_calender} alt="clock and calender" />
+                <br />
               All your goals put into one productive website
               </p>
 
