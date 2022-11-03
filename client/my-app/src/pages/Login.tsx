@@ -11,75 +11,57 @@ export const Login = () => {
     setIsLogin((prevState) => !prevState);
   };
 
-  const showDialog = () => {dialogRef.current?.showModal()} 
+  // const showDialog = () => {dialogRef.current?.showModal()}
+
+  const [display, setDisplay] = useState("signIn");
 
   return (
     <>
-    <Header />
-      {isLogin ? (
-        <section style={{display:"flex", flexDirection: "row"}}>
-        <section style={{marginLeft: "100px", }}>
-          <h1>Welcome Back!</h1>
-          <form action="">
-            <div>
-              <input type="email" name="email" placeholder="E-Mail" required />
-            </div>
+      <Header />
+      {display === "signIn" && (
+        <section style={{ display: "flex", flexDirection: "row" }}>
+          <section style={{ marginLeft: "100px" }}>
+            <h1>Welcome Back!</h1>
+            <form action="">
+              <div>
+                <input type="email" name="email" placeholder="E-Mail" required />
+              </div>
 
-            <div>
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-              />
-            </div>
+              <div>
+                <input type="password" name="password" placeholder="Password" required />
+              </div>
 
-            <input type="checkbox" name="rememberMe" id="rememberMe" />
-            <label htmlFor="rememberMe">Remember me</label>
-            <h2 onClick={showDialog}>Forgot password?</h2>
+              <input type="checkbox" name="rememberMe" id="rememberMe" />
+              <label htmlFor="rememberMe">Remember me</label>
+              <h2 onClick={() => setDisplay("forgotPassword")}>Forgot password?</h2>
 
-            <div>
-              <button>Sign in</button>
-            </div>
+              <div>
+                <button>Sign in</button>
+              </div>
 
-            <div>
-              <h4 onClick={switchLogin} style={{ textDecoration: "underline" }}>
-                Don't have an account? Sign Up
-              </h4>
-            </div>
-          </form>
+              <div>
+                <h4 onClick={() => setDisplay("signUp")} style={{ textDecoration: "underline" }}>
+                  Don't have an account? Sign Up
+                </h4>
+              </div>
+            </form>
+          </section>
+          <section>
+            <img src={SignIn} alt="" />
+          </section>
         </section>
-       <section>
-        <img src={SignIn} alt="" />
-       </section>
-       </section>
-
-      ) : (
+      )}
+      {display === "signUp" && (
         <section>
           <h1>Welcome!</h1>
           <form action="">
-            <input
-              type="text"
-              name="firstname"
-              placeholder="First Name"
-              required
-            />
+            <input type="text" name="firstname" placeholder="First Name" required />
             <br />
-            <input
-              type="text"
-              name="lastname"
-              placeholder="Last Name"
-              required
-            />
+            <input type="text" name="lastname" placeholder="Last Name" required />
             <br />
             <input type="email" name="email" placeholder="E-Mail" required />
             <br />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              required
-            />
+            <input type="password" name="password" placeholder="Password" required />
             <br />
 
             <select name="experiencelevel" id="explevel">
@@ -116,7 +98,7 @@ export const Login = () => {
 
             <button>Sign Up</button>
             <br />
-            <h4 onClick={switchLogin} style={{ textDecoration: "underline" }}>
+            <h4 onClick={() => setDisplay("signIn")} style={{ textDecoration: "underline" }}>
               Already have an account? Sign in
             </h4>
           </form>
@@ -124,30 +106,24 @@ export const Login = () => {
       )}
 
       {/* make this a pop up screen with an 'x' to close it  */}
-      <section>
-        <h2>Reset Your Password</h2>
-        {/* how do i add closeput 'x' */}
+      {display === "forgotPassword" && (
+        <section>
+          <h2>Reset Your Password</h2>
+          {/* how do i add closeput 'x' */}
 
-        <p>
-          Enter you Compsigh email and we'll send you a link to reset your
-          password.
-        </p>
-        <form action="">
-          <input
-            type="email"
-            name="resetpassword"
-            placeholder="E-Mail"
-            required
-          />
-          <br />
+          <p>Enter you Compsigh email and we'll send you a link to reset your password.</p>
+          <form action="">
+            <input type="email" name="resetpassword" placeholder="E-Mail" required />
+            <br />
 
-          <button>Reset Password</button>
-          {/* how do i make this close the popup */}
-          <button>Cancel</button>
-        </form>
+            <button>Reset Password</button>
+            {/* how do i make this close the popup */}
+            <button>Cancel</button>
+          </form>
         </section>
+      )}
       <div>{/* Graphics content for the page */}</div>
-    <Footer />
-</>
-);
+      <Footer />
+    </>
+  );
 };
