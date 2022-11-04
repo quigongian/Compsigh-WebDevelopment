@@ -50,44 +50,48 @@ async function getByEmail(email: string): Promise<User> {
     return user;
 }
 
-async function create(
-    firstName: string,
-    lastName: string,
-    userName: string,
-    email: string,
-    password: string,
-    categoryId: number,
-    xpLevelId: number
-): Promise<User> {
-    if (!firstName || !lastName || !userName || !email || !password) {
+async function createAndReturnUserDTO(
+    req: CreateUserRequest
+): Promise<UserDTO> {
+    if (await userRepository.existsByEmail(req.email)) {
+        throw new HttpError(
+            HttpStatus.BAD_REQUEST,
+            "Email already exists, sign in instead"
+        );
+    }
+    if (
+        !req.firstName ||
+        !req.lastName ||
+        !req.userName ||
+        !req.email ||
+        !req.password
+    ) {
         throw new HttpError(HttpStatus.BAD_REQUEST, "Missing required fields");
     }
-    password = await cryptUtil.hash(password);
-    return await userRepository.create(
-        firstName,
-        lastName,
-        userName,
-        email,
-        password,
-        categoryId,
-        xpLevelId,
-        false
+    const strongPasswordRegEx = new RegExp(
+        "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"
     );
-}
-
-async function createGeneratedTasksForUser(user: User): Promise<void> {
-    const generatedTasks =
-        await generatedTaskRepository.getAllByCategoryIdAndXpLevelId(
-            user.categoryId,
-            user.xpLevelId
-        );
-    for (const generatedTask of generatedTasks) {
-        await taskService.createTaskDTO(
-            user.userId,
-            generatedTask.generatedTaskName,
-            generatedTask.generatedTaskDescription
+    if (!strongPasswordRegEx.test(req.password)) {
+        throw new HttpError(
+            HttpStatus.BAD_REQUEST,
+            "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
         );
     }
+    req.password = await cryptUtil.hash(req.password);
+    const user = await userRepository.create(
+        req.firstName,
+        req.lastName,
+        req.userName,
+        req.email,
+        req.password,
+        req.categoryId,
+        req.xpLevelId,
+        false
+    );
+    await createGeneratedTasksForUser(user);
+    const category = await categoryService.getById(req.categoryId);
+    const xpLevel = await xpLevelService.getById(req.xpLevelId);
+    return createUserDTO(user, category, xpLevel);
 }
 
 async function updatePassword(userId: number, password: string): Promise<void> {
@@ -111,6 +115,31 @@ async function deleteUser(userId: number): Promise<void> {
     await userRepository.deleteById(userId);
 }
 
+async function createGeneratedTasksForUser(user: User): Promise<void> {
+    const generatedTasks =
+        await generatedTaskRepository.getAllByCategoryIdAndXpLevelId(
+            user.categoryId,
+            user.xpLevelId
+        );
+    for (const generatedTask of generatedTasks) {
+        await taskService.createAndReturnTaskDTO({
+            userId: user.userId,
+            taskName: generatedTask.generatedTaskName,
+            taskDescription: generatedTask.generatedTaskDescription,
+        });
+    }
+}
+
+export interface CreateUserRequest {
+    firstName: string;
+    lastName: string;
+    userName: string;
+    email: string;
+    password: string;
+    categoryId: number;
+    xpLevelId: number;
+}
+
 export const userService = {
     getAllUnverifiedUsers,
     getAllPastDueUnverifiedUsers,
@@ -118,8 +147,7 @@ export const userService = {
     getById,
     getUserDTOById,
     getByEmail,
-    create,
-    createGeneratedTasksForUser,
+    createAndReturnUserDTO,
     updatePassword,
     verifyEmail,
     updateLastSignIn,

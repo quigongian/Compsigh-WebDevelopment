@@ -2,7 +2,7 @@ import { jwtUtil } from "../util/jwt-util";
 import { cryptUtil } from "../util/crypt-util";
 import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
-import { userService } from "./user-service";
+import { userService, CreateUserRequest } from "./user-service";
 import {
     emailVerificationService,
     EmailVerificationType,
@@ -28,19 +28,12 @@ async function signIn(req: SignInRequest): Promise<AuthResponse> {
 }
 
 async function signUp(req: SignUpRequest): Promise<void> {
-    const user = await userService.create(
-        req.firstName,
-        req.lastName,
-        req.userName,
-        req.email,
-        req.password,
-        req.xpLevelId,
-        req.categoryId
+    const userDTO = await userService.createAndReturnUserDTO(
+        req as CreateUserRequest
     );
-    await userService.createGeneratedTasksForUser(user);
     await emailVerificationService.setupEmailVerification(
-        user.userId,
-        user.email,
+        userDTO.userId,
+        userDTO.email,
         EmailVerificationType.VERIFY_EMAIL
     );
 }

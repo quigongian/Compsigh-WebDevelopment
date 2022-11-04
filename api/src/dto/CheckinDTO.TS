@@ -8,6 +8,7 @@ export interface CheckInDTO {
     answer4: string;
     comments: string | null;
     checkInStatus: string;
+    createdAt: Date;
 }
 
 export function createCheckinDTO(checkIn: CheckIn): CheckInDTO {
@@ -18,6 +19,7 @@ export function createCheckinDTO(checkIn: CheckIn): CheckInDTO {
         answer3: checkIn.answer3,
         answer4: checkIn.answer4,
         comments: checkIn.comments,
-        checkInStatus: checkIn.checkInstatus,
+        checkInStatus: checkIn.checkInStatus,
+        createdAt: checkIn.createdAt,
     };
 }

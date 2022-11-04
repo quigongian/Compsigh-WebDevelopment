@@ -1,4 +1,5 @@
 import express, { Router } from "express";
+import path from "path";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import { authController } from "./controller/auth-controller";
@@ -13,8 +14,8 @@ import { notFoundHandler } from "./handler/not-found-handler";
 import { defaultErrorHandler } from "./handler/error-handler";
 import { loggerMiddleware } from "./middleware/logger-middleware";
 import { AUTH } from "./middleware/auth-middleware";
-import scheduleTasks from "./tasks/schedule-tasks";
 import { envVars } from "./util/env-vars";
+import scheduleTasks from "./tasks/schedule-tasks";
 
 const app = express();
 const api = Router();
@@ -22,7 +23,6 @@ const PORT = Number(envVars.PORT);
 
 api.use(cors());
 api.use(express.json());
-
 api.use("/docs", swaggerUi.serve);
 api.get("/docs", swaggerHandler);
 api.get("/ping", pingHandler);
@@ -46,6 +46,7 @@ api.put("/task/:taskId/complete", AUTH(taskController.completeTask));
 api.delete("/task/:taskId", AUTH(taskController.deleteTask));
 
 app.use(loggerMiddleware);
+app.use("/static", express.static(path.join(__dirname, "..", "static")));
 app.use("/api", api);
 app.use("*", notFoundHandler);
 app.use(defaultErrorHandler);
