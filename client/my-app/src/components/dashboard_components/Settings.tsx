@@ -24,6 +24,13 @@ const Profile = () => {
                 </ul>
             </div>
         </div>
+        <div className="SPACER">
+        </div>
+        <hr className="Hr"/>
+        <div className="pedit-container">
+        <ProfileEdit />
+        </div>
+        <hr className="Hr"/>
         <div className="notification-container">
             <h3>Notifications</h3>
             <div className="n-email">
@@ -33,6 +40,14 @@ const Profile = () => {
                 <h4>Push</h4>
             </div>
         </div>
+        </>
+    )
+}
+
+const ProfileEdit = () => {
+    return (
+        <>
+        
         </>
     )
 }
@@ -56,7 +71,13 @@ const Security = () =>{
 const Appearance = () => {
     return (
         <>
-        <h3 id = "content-title">Appearance</h3>
+            <h1>Appearance</h1>
+            <p>Display Mode</p>
+            <div className = "ButtonGroup">
+                <button className = "LightButton">comsigh light</button>
+                <button className = "DarkButton">comsigh dark</button>
+            </div>
+            <p>Accessibility</p>
         </>
     )
 }
@@ -71,7 +92,8 @@ const Sidebar = () => {
 
 /*|--------------------------------------------------------------------------------Settings Page Render--------------------------------------------------------------------------------|*/
 export const SettingsPage = () => {
-    const [state, setState] = React.useState("Profile"); //originaly false
+    const [state, setState] = React.useState("Profile"); //default state is profile
+    const [Open, setOpen] = React.useState(false);
     return (
         <>
         <Header/>
