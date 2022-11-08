@@ -1,12 +1,123 @@
-.timer-wrapper {
-    background-image: url(../../image_content/dashBlob2.svg);
-    background-repeat:no-repeat; 
-} 
-
-.content {
-    margin-left: 13%;
+.dashBlob2{
+    position: absolute;
+    top: 0%;
+    left:0%;
 }
 
-h1 {
-    text-align: center;
+.dashBlob1{
+    position: absolute;
+    right: 0%;
+    bottom: 0%;
+}
+
+/* timer option buttons */
+.timeOptionBar {
+    font-family: Inter;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.pomodoroButton {
+    color: white;
+    background: #3D405B;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    height: 51px;
+    width: 247px;
+    cursor: pointer;
+    border: none;
+}
+
+.pomodoroButton:hover {
+    background: #81B29A;
+}
+
+.shortBreakButton {
+    color: white;
+    background: #3D405B;
+    height: 51px;
+    width: 247px;
+    cursor: pointer;
+    border: none;
+}
+
+.shortBreakButton:hover{
+    background: #81B29A;
+}
+
+.longBreakButton {
+    color: white;
+    background: #3D405B;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 51px;
+    width: 247px;
+    cursor: pointer;
+    border: none;
+}
+
+.longBreakButton:hover{
+    background: #81B29A;
+}
+
+/* timer buttons */
+.timerButtons{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.setting {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.play {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.replay {
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+.play:hover {
+    width: 57px;
+    height: auto;
+    /* -webkit-transition: 0.3s ease-in-out; */
+    /* transition: 0.3s ease-in-out; */
+    background-color: #e07a5f;
+    padding: 12px;
+    border-radius: 20px;
+}
+
+.setting:hover {
+    width: 57px;
+    height: auto;
+    /* -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out; */
+    background-color: #e07a5f;
+    padding: 12px;
+    border-radius: 20px;
+}
+
+.replay:hover {
+    width: 57px;
+    height: auto;
+    /* -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out; */
+    background-color: #e07a5f;
+    padding: 12px;
+    border-radius: 20px;
 }
