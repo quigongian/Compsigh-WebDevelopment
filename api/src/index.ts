@@ -3,6 +3,7 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import { authController } from "./controller/auth-controller";
 import { userController } from "./controller/user-controller";
+import { checkInController } from "./controller/check-in-controller";
 import { taskController } from "./controller/task-controller";
 import { categoryController } from "./controller/category-controller";
 import { xpLevelController } from "./controller/xp-level-controller";
@@ -21,6 +22,7 @@ const PORT = Number(envVars.PORT);
 
 api.use(cors());
 api.use(express.json());
+
 api.use("/docs", swaggerUi.serve);
 api.get("/docs", swaggerHandler);
 api.get("/ping", pingHandler);
@@ -33,6 +35,9 @@ api.post("/auth/resetpassword", authController.resetPassword);
 api.post("/auth/verifyemail", authController.verifyEmail);
 api.post("/auth/refreshtoken", AUTH(authController.refreshAccessToken));
 api.get("/user/me", AUTH(userController.getUser));
+api.get("/checkin", AUTH(checkInController.getPaginatedCheckIns));
+api.get("/checkin/:checkInId", AUTH(checkInController.getCheckIn));
+api.post("/checkin", AUTH(checkInController.makeCheckIn));
 api.get("/task", AUTH(taskController.getAllTasks));
 api.get("/task/:taskId", AUTH(taskController.getTask));
 api.post("/task", AUTH(taskController.createTask));

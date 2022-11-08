@@ -24,6 +24,20 @@ model User {
     emailVerified     Boolean            @default(false)
     tasks             Task[]
     emailVerification EmailVerification?
+    checkIns          CheckIn[]
+}
+
+model CheckIn {
+    checkInId     Int           @id @default(autoincrement())
+    user          User          @relation(fields: [userId], references: [userId])
+    userId        Int
+    answer1       String
+    answer2       String
+    answer3       String
+    answer4       String
+    comments      String?
+    checkInstatus CheckInStatus
+    createdAt     DateTime      @default(now())
 }
 
 model Task {
@@ -67,4 +81,10 @@ model EmailVerification {
     expiresAt DateTime
 
     @@id(userId)
+}
+
+enum CheckInStatus {
+    GOOD
+    NEUTRAL
+    BAD
 }

@@ -1,7 +1,5 @@
-import { PrismaClient, Task } from "@prisma/client";
+import { prisma } from "../src/util/prisma";
 import { cryptUtil } from "../src/util/crypt-util";
-
-const prisma = new PrismaClient();
 
 async function init() {
     // Categories

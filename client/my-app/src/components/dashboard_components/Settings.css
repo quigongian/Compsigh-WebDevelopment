@@ -5,19 +5,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #EFECEC;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 .Settings {
   display: flex;
 }
 /*|------------------------------------------------------------------------Sidebar------------------------------------------------------------------------|*/
 .Sidebar {
-  border: solid 1px blue;
-  height: 90%;
+  border-right: solid 1px #ccc;
+  height: 80vh;
   width: 12%;
   float: left;
   display: flex;
@@ -32,7 +34,6 @@ code {
 .Sidebar-List {
   padding: 0.5em;
   text-align: center;
-  border: solid 1px red;
   flex-grow: 1;
 }
 
@@ -45,37 +46,41 @@ ul{
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 200px;
+  /* width: 200px; */
 
 }
 
-li a {
+li button {
   display: block;
-  color: #000;
-  padding: 8px 16px;
+  font-weight: bold;
+  font-size: medium;
+  padding: 20px 16px;
   text-decoration: none;
+  background-color: transparent;
+  border: none;
 }
 /*|------------------------------------------------------------------------Sidebar------------------------------------------------------------------------|*/
 
-#security {
-  height: 90%;
-  width: 88%;
-  float: right;
+#content-title {
+  font-size: 1.5em;
 }
 
 .Content {
-  margin-top: 50px;
-  border: solid 1px red;
+  margin-top: 4%;
+  padding-left: 4%;
   display: flex;
   flex-direction: column;
   width: 78%;
+  margin-bottom: 3%;
 }
-.Hr{
-  height: 2px;
-  width: 78%;
-  border-width: 0;
-  color: gray;
 
+.Hr{
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
 }
 
 .Button{
@@ -85,4 +90,80 @@ li a {
   border: none; 
   color: white; 
   background-color: #e07a5f;  
+}
+
+.Button:hover {
+  background: #81B29A;
+  text-decoration: none;
+}
+/*|------------------------------------------------------------------------Profile------------------------------------------------------------------------|*/
+.user-profile {
+  border: solid 1px blue;
+  width: 12%;
+  float: left;
+  display: flex;
+  flex-direction: column;
+}
+
+#user-image {
+  width: 12%;
+  height: auto;
+  border-radius: 50%;
+  float: left;
+}
+.pinfo-title{
+  padding-left: 20%;
+}
+.pinfo-container {
+  width: 78%;
+  float: right;
+  display: flex;
+  flex-direction: column;
+
+
+}.n-email{
+  width: 30%;
+  float: left;
+  display: flex;
+  flex-direction: column;
+}
+.n-push{
+  width: 60%;
+  float: right;
+  display: flex;
+  flex-direction: column;
+}
+.SPACER{
+  margin-top: 2%;
+}
+
+/*|------------------------------------------------------------------------Appearance------------------------------------------------------------------------|*/
+.ButtonGroup .LightButton{
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 4px 2px;
+  border: none;
+  font-size: 24px;
+  display: inline-block;
+  text-align: center;
+  width: 15%;
+  height: 100%;
+  padding: 15px 32px;
+  border-radius: 12px;
+  color: #3D405B; 
+  background-color: #EFECEC;  
+}
+
+.ButtonGroup .DarkButton{ 
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 4px 8px;
+  border: none;
+  font-size: 24px;
+  display: inline-block;
+  text-align: center;
+  width: 15%;
+  height: 100%;
+  padding: 15px 32px;
+  border-radius: 12px;
+  color: #F4F1DE; 
+  background-color: #232323;  
 }

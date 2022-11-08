@@ -17,44 +17,50 @@ export const Home = () => {
   return (
     <>
       <Header />
+
       <div className="temp">
         <div className="All">
           <div className="Sect1">
-            <h1>About Us</h1>
-            <p>
-              {clickedButton !== "" ? `` : "blah blach blach dfusdfi"}
-              {clickedButton === "btn1" ? `blah blach blahcahca` : ""}
+            <h1 className="header"> About Us</h1>
+            <p className="mainpg">
+              {clickedButton !== "" ? `` : "We are a team of computer science students that want to help other students manage their time."}
+              {clickedButton === "btn1" ? `We are a team of computer science students that want to help other students manage their time.` : ""}
               {clickedButton === "btn2" ? `blah ` : ""}
               {clickedButton === "btn3" ? `blah bleh` : ""}
               {clickedButton === "btn4" ? `blah bloo` : ""}
             </p>
 
-            <button className="main-btn">Get Started</button>
             <div className="btn-group">
               <button onClick={buttonHandler} className="button" name="btn1"></button>
               <button onClick={buttonHandler} className="button" name="btn2"></button>
               <button onClick={buttonHandler} className="button" name="btn3"></button>
               <button onClick={buttonHandler} className="button" name="btn4"></button>
             </div>
+            <button className="main-btn">Get Started</button>
+
+
           </div>
 
           <div className="Sect2">
             <h2>One less thing to worry about</h2>
             <div className="row">
+
               <p className="column">
                 <img src={women} alt="woman thinking" />
                 <br />
-              Breaking down complex tasks into smaller ones by using Pomodoro
+                Breaking down complex tasks <br />into smaller ones by using Pomodoro
               </p>
+
               <p className="column">
-              <img src={idea_search} alt="ladder up the books" />
-              <br />
-              Guiding you through your goals so that you can have peace of mind
-              </p>
-              <p className="column">
-              <img src={clock_calender} alt="clock and calender" />
+                <img src={idea_search} alt="ladder up the books" height={"203px"} width={"219px"} />
                 <br />
-              All your goals put into one productive website
+                Guiding you through your goals <br />so that you can have peace of mind
+              </p>
+
+              <p className="column">
+                <img src={clock_calender} alt="clock and calender" />
+                <br />
+                All your goals put into one <br /> productive website
               </p>
 
             </div>
