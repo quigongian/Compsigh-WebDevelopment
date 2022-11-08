@@ -9,11 +9,11 @@ async function getPaginatedCheckIns(
     next: NextFunction
 ) {
     try {
-        const checkInDTOs = await checkInService.getPaginatedCheckInDTOs({
-            userId: req.userId,
-            page: req.query.page as string | null,
-            size: req.query.size as string | null,
-        });
+        const checkInDTOs = await checkInService.getPaginatedCheckInDTOs(
+            req.userId,
+            req.query.page as string | undefined,
+            req.query.size as string | undefined
+        );
         res.json(checkInDTOs);
     } catch (error) {
         next(error);
@@ -33,15 +33,15 @@ async function getCheckIn(req: Request, res: Response, next: NextFunction) {
 
 async function makeCheckIn(req: Request, res: Response, next: NextFunction) {
     try {
-        const checkIn = await checkInService.createAndReturnCheckInDTO({
-            userId: req.userId,
-            answer1: req.body.answer1,
-            answer2: req.body.answer2,
-            answer3: req.body.answer3,
-            answer4: req.body.answer4,
-            comments: req.body.comments,
-            checkInStatus: req.body.checkInStatus,
-        });
+        const checkIn = await checkInService.createAndReturnCheckInDTO(
+            req.userId,
+            req.body.answer1,
+            req.body.answer2,
+            req.body.answer3,
+            req.body.answer4,
+            req.body.comments,
+            req.body.status
+        );
         await userService.updateLastCheckIn(req.userId);
         res.status(HttpStatus.CREATED).json(checkIn);
     } catch (error) {

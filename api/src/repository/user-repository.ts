@@ -25,10 +25,6 @@ async function getByEmail(email: string): Promise<User | null> {
     return await prisma.user.findUnique({ where: { email } });
 }
 
-async function existsByEmail(email: string): Promise<boolean> {
-    return (await prisma.user.count({ where: { email } })) > 0;
-}
-
 async function create(
     firstName: string,
     lastName: string,
@@ -100,7 +96,6 @@ export const userRepository = {
     getAllLastChecInBeforeDate,
     getById,
     getByEmail,
-    existsByEmail,
     create,
     updatePassword,
     updateEmailVerified,

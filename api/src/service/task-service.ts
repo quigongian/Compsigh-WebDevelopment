@@ -2,11 +2,10 @@ import { TaskDTO, createTaskdDTO } from "../dto/TaskDTO";
 import { taskRepository } from "../repository/task-repository";
 import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
-import { Task } from "@prisma/client";
 
 async function getAllTaskDTOsByCompletedStatus(
     userId: number,
-    completed: string | null
+    completed: string | undefined
 ): Promise<TaskDTO[]> {
     let tasks;
     if (completed === "true") {
@@ -44,32 +43,28 @@ async function getTaskDTOIfBelongsToUser(
     return task;
 }
 
-async function createAndReturnTaskDTO(
-    req: CreateTaskRequest
+async function createTaskDTO(
+    userId: number,
+    taskName: string,
+    taskDescription: string
 ): Promise<TaskDTO> {
-    if (!req.taskName) {
+    if (!taskName) {
         throw new HttpError(HttpStatus.BAD_REQUEST, "Missing required fields");
     }
-    const task = await taskRepository.create(
-        req.userId,
-        req.taskName,
-        req.taskDescription
-    );
+    const task = await taskRepository.create(userId, taskName, taskDescription);
     return createTaskdDTO(task);
 }
 
-async function updateAndReturnTaskDTO(
-    req: UpdateTaskRequest
+async function updateTaskDTO(
+    taskId: number,
+    taskName: string,
+    taskDescription: string
 ): Promise<TaskDTO> {
-    const task = await taskRepository.update(
-        req.taskId,
-        req.taskName,
-        req.taskDescription
-    );
+    const task = await taskRepository.update(taskId, taskName, taskDescription);
     return createTaskdDTO(task);
 }
 
-async function completeTask(taskId: number): Promise<void> {
+async function complete(taskId: number): Promise<void> {
     await taskRepository.updateCompleted(taskId, true);
 }
 
@@ -77,24 +72,12 @@ async function deleteById(taskId: number): Promise<void> {
     await taskRepository.deleteById(taskId);
 }
 
-export interface CreateTaskRequest {
-    userId: number;
-    taskName: string;
-    taskDescription: string;
-}
-
-export interface UpdateTaskRequest {
-    taskId: number;
-    taskName: string;
-    taskDescription: string;
-}
-
 export const taskService = {
     getAllTaskDTOsByCompletedStatus,
     getTaskDTOById,
     getTaskDTOIfBelongsToUser,
-    createAndReturnTaskDTO,
-    updateAndReturnTaskDTO,
-    completeTask,
+    createTaskDTO,
+    updateTaskDTO,
+    complete,
     deleteById,
 };

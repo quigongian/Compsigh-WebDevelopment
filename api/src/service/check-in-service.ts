@@ -5,21 +5,18 @@ import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
 
 async function getPaginatedCheckInDTOs(
-    req: GetPaginatedCheckInRequest
+    userId: number,
+    page: string | undefined,
+    size: string | undefined
 ): Promise<CheckInDTO[]> {
     let checkIns;
-    if (!req.page) {
-        checkIns = await checkInRepository.getAllByUserId(req.userId);
+    if (!page) {
+        checkIns = await checkInRepository.getAllByUserId(userId);
     } else {
-        const defaultPageSize = 31;
-        const pageNumber = Math.max(Number(req.page), 1);
-        const pageSize = req.size
-            ? Math.max(Number(req.size), 1)
-            : defaultPageSize;
         checkIns = await checkInRepository.getPaginatedCheckIns(
-            req.userId,
-            pageNumber,
-            pageSize
+            userId,
+            Math.min(Number(page), 1),
+            size ? Number(size) : 31
         );
     }
     return checkIns.map((checkIn) => createCheckinDTO(checkIn));
@@ -34,41 +31,41 @@ async function getCheckInDTOById(checkInId: string): Promise<CheckInDTO> {
 }
 
 async function createAndReturnCheckInDTO(
-    req: CreateCheckInRequest
+    userId: number,
+    answer1: string,
+    answer2: string,
+    answer3: string,
+    answer4: string,
+    comments: string | null,
+    checkInStatusStr: string
 ): Promise<CheckInDTO> {
-    if (
-        !Object.values(CheckInStatus).includes(
-            req.checkInStatus as CheckInStatus
-        )
-    ) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Invalid check in status");
+    let checkInStatus: CheckInStatus;
+    switch (checkInStatusStr) {
+        case CheckInStatus.GOOD:
+            checkInStatus = CheckInStatus.GOOD;
+            break;
+        case CheckInStatus.NEUTRAL:
+            checkInStatus = CheckInStatus.NEUTRAL;
+            break;
+        case CheckInStatus.BAD:
+            checkInStatus = CheckInStatus.BAD;
+            break;
+        default:
+            throw new HttpError(
+                HttpStatus.BAD_REQUEST,
+                "Invalid check in status"
+            );
     }
     const checkIn = await checkInRepository.create(
-        req.userId,
-        req.answer1,
-        req.answer2,
-        req.answer3,
-        req.answer4,
-        req.comments,
-        req.checkInStatus as CheckInStatus
+        userId,
+        answer1,
+        answer2,
+        answer3,
+        answer4,
+        comments,
+        checkInStatus
     );
     return createCheckinDTO(checkIn);
-}
-
-export interface GetPaginatedCheckInRequest {
-    userId: number;
-    page: string | null;
-    size: string | null;
-}
-
-export interface CreateCheckInRequest {
-    userId: number;
-    answer1: string;
-    answer2: string;
-    answer3: string;
-    answer4: string;
-    comments: string | null;
-    checkInStatus: string;
 }
 
 export const checkInService = {

@@ -5,7 +5,6 @@ export interface TaskDTO {
     taskName: string;
     taskDescription: string;
     completed: boolean;
-    createdAt: Date;
 }
 
 export function createTaskdDTO(task: Task): TaskDTO {
@@ -14,6 +13,5 @@ export function createTaskdDTO(task: Task): TaskDTO {
         taskName: task.taskName,
         taskDescription: task.taskDescription,
         completed: task.completed,
-        createdAt: task.createdAt,
     };
 }

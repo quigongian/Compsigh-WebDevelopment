@@ -308,14 +308,15 @@ paths:
           name: size
           type: integer
           required: false
-          description: Page size, defaults to 31
+          default: 31
+          description: Page size
       responses:
         200:
           description: Ok
           schema:
             type: array
             items:
-              $ref: "#/definitions/CheckInDTO"
+              $ref: "#/definitions/CheckinDTO"
         401:
           description: Unauthorized
           schema:
@@ -371,7 +372,7 @@ paths:
         200:
           description: Ok
           schema:
-            $ref: "#/definitions/CheckInDTO"
+            $ref: "#/definitions/CheckinDTO"
         401:
           description: Unauthorized
           schema:
@@ -663,10 +664,6 @@ definitions:
         type: string
       checkInStatus:
         type: string
-        enum:
-          - GOOD
-          - NEUTRAL
-          - BAD
   TaskDTO:
     type: object
     required:
@@ -688,23 +685,23 @@ definitions:
     type: object
     required:
       - categoryId
-      - categoryName
+      - name
     properties:
       categoryId:
         type: integer
         format: int64
-      categoryName:
+      name:
         type: string
   XpLevel:
     type: object
     required:
       - xpLevelId
-      - xpLevelname
+      - name
     properties:
       xpLevelId:
         type: integer
         format: int64
-      xpLevelname:
+      name:
         type: string
   SignInRequest:
     type: object
@@ -806,22 +803,22 @@ definitions:
   CreateTaskRequest:
     type: object
     required:
-      - taskName
-      - taskDescription
+      - name
+      - description
     properties:
-      taskName:
+      name:
         type: string
-      taskDescription:
+      description:
         type: string
   UpdateTaskRequest:
     type: object
     required:
-      - taskName
-      - taskDescription
+      - name
+      - description
     properties:
-      taskName:
+      name:
         type: string
-      taskDescription:
+      description:
         type: string
   AuthResponse:
     type: object
