@@ -10,7 +10,7 @@ export const Timer = () => {
     <Sidebar/>
       <div className="content">
         <h1>
-          hello bitch
+          hello bitch this should work
         </h1>
       </div>
     </body>
