@@ -23,8 +23,8 @@ export const Home = () => {
           <div className="Sect1">
             <h1 className="header"> About Us</h1>
             <p className="mainpg">
-              {clickedButton !== "" ? `` : "We are a team of undergrad computer science students that want to help future and current students of the same major to better manage their time."}
-              {clickedButton === "btn1" ? `We are a team of undergrad computer science students that want to help future and current students of the same major to better manage their time.` : ""}
+              {clickedButton !== "" ? `` : "We are a team of computer science students that want to help other students manage their time."}
+              {clickedButton === "btn1" ? `We are a team of computer science students that want to help other students manage their time.` : ""}
               {clickedButton === "btn2" ? `blah ` : ""}
               {clickedButton === "btn3" ? `blah bleh` : ""}
               {clickedButton === "btn4" ? `blah bloo` : ""}
