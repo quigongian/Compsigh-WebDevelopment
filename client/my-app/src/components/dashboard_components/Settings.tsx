@@ -5,7 +5,19 @@ import { Footer } from "../footer";
 import { Header } from "../header"
 import { ComponentTests } from "../../pages/tests/ComponentTests";
 import './Settings.css'
-
+import { Avatar } from "@mui/material";
+import { 
+    Accordion, 
+    AccordionSummary, 
+    AccordionDetails, 
+    Typography,
+    Stack,
+    TextField,
+    MenuItem,
+    Box,
+} from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useState } from "react";
 /*|---------------------------------------------------------------------------------Contents Component---------------------------------------------------------------------------------|*/
 const Profile = () => {
     return (
@@ -44,10 +56,83 @@ const Profile = () => {
     )
 }
 
+const MuiSelect = () => {
+    const [careerPath, setCareerPath] = useState('');
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCareerPath(event.target.value as string);
+    }
+    return (
+        <>
+            <Box width='400px'></Box>
+                <TextField label="Career Path" 
+                select 
+                value={careerPath}
+                onChange={handleChange}
+                >
+                <MenuItem value="Data Engineer">Data Engineer</MenuItem>
+                <MenuItem value="Data Scientist">Data Scientist</MenuItem>
+                <MenuItem value="Data Analyst">Data Analyst</MenuItem>
+                <MenuItem value="Data Architect">Data Architect</MenuItem>
+                <MenuItem value="Software Manager">Data Manager</MenuItem>
+            </TextField>
+        </>
+  )
+}
+
 const ProfileEdit = () => {
     return (
         <>
-        
+        <Accordion elevation={0} sx={{bgcolor: '#81B29A'}}>
+            <AccordionSummary 
+            id='panel-header'
+            aria-controls='panel-content'
+            expandIcon={<ExpandMoreIcon />}>
+                <Typography>Edit Profile</Typography>
+            </AccordionSummary>
+            <AccordionDetails> 
+                <div className="pedit-avatar">
+                    <div className="pedit-avatar-left">
+                        <Avatar alt="Cat" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSRCv5FR_Cwd5cBZ3-BF95ZX00tNZcEJt5Xi9D065i-g&s" sx={{width: 160, height: 160}}/>
+                    </div>
+                    <div className="pedit-avatar-right">
+
+                    </div>
+                </div>
+                <Typography variant="h5" component="h2" color="white" fontWeight={'bold'} >
+                    Upload an Avatar
+                </Typography>
+                
+                <Typography sx={{ mb: 1.5 }} color="white" mt={2}>
+                    Photo should be no more than 300x300px
+                </Typography>
+                <Typography sx={{ mb: 1.5 }} color="white">
+                    Select a premade avatar below instead!
+                </Typography>
+                <Stack direction="row" spacing={2}>
+                    <Avatar alt="Cat" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSRCv5FR_Cwd5cBZ3-BF95ZX00tNZcEJt5Xi9D065i-g&s" sx={{width: 40, height: 40}}/>
+                    <Avatar alt="Cat" src="https://i.ebayimg.com/images/g/BV4AAOSwkDFf4vAU/s-l500.jpg" sx={{width: 40, height: 40}}/>
+                    <Avatar alt="Cat" src="https://i.ytimg.com/vi/KmuLmvbdVZA/maxresdefault.jpg" sx={{width: 40, height: 40}}/>
+                </Stack>
+                <div className="pedit-bottom">
+                    <Typography sx={{ mb: 1.5 }} color="white" mt={6} ml={20}>
+                        Name: 
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="white" mt={4} ml={20}>
+                        Email:
+                        <input type="email" placeholder="Enter Email" />
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="white" mt={4} ml={20}>
+                        Career Path:
+                        <MuiSelect />
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="white" mt={4} ml={20}>
+                        Experience Level:
+                        <MuiSelect />
+                    </Typography>
+
+                </div>
+            </AccordionDetails>
+        </Accordion>
         </>
     )
 }
@@ -122,3 +207,5 @@ export const SettingsPage = () => {
         </>
         
     );}
+
+    
