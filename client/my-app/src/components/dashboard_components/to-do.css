@@ -1,20 +1,26 @@
 .taskBg{
-    background-color: rgb(122, 122, 230);
+    background-color: rgb(67, 131, 170);
     border-radius: 6px;
     margin-bottom: 20px;
     padding: 10px 140px 10px 15px;
-    width: 100%;
+    width: 50%;
     text-align: left;
     font-style: 22px;
     position: relative;
-
+    border: 1px red solid;
+    
 }
 
 .taskBg div{
+   
     display: flex;
     align-items: center;
 }
 
+.row{
+    
+    display: flex;
+}
 
 .taskNumber{
     color: rgb(0, 0, 0);
