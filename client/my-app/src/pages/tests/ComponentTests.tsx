@@ -9,6 +9,7 @@ export const ComponentTests = () => {
   <>
   <Header/>
   <Todo/>
+  <CheckIn/>
   <Footer/>
   
   </>  
