@@ -1,21 +1,26 @@
-import React from "react";
-import quotesWaves from "../../image_content/quotesWaves.svg";
+import quotationMarks from "../../image_content/quotationMarks.svg";
+import quotesBG from "../../image_content/quotesBG.svg";
 import "./landing.css";
 
 export const Landing = () => {
   return (
-    <div style={{ marginLeft: "25%" }}>
+    <div>
       <Quotes />
     </div>
   );
 };
 
-const Quotes = () => {
+export const Quotes = () => {
   return (
     <div className="quotes">
-      <div className="bigQuotentionMarks">{"HELLOOOOOOOO"}</div>
-      <div className="rndQuotes"></div>
-      <img className="quotesWaves" src={quotesWaves} alt="quotesBGx" />
+      <img className="quotationMarks" src={quotationMarks} alt="quotationMarks" />
+      <img className="quotesBG" src={quotesBG} alt="quotationMarks" />
+      <div className="rndQuotes">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <div className="creditsContainer">
+          <span className="quotesCredits">-Lorem Ipsum</span>
+        </div>
+      </div>
     </div>
   );
 };

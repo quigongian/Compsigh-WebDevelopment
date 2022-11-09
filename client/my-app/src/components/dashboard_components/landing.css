@@ -1,43 +1,44 @@
 .quotesBG {
-  position: absolute;
   width: 786px;
-  height: 165px;
-  left: 195px;
-  top: 40px;
-}
-
-.quotes {
+  height: 175px;
+  margin-left: 185px;
+  margin-top: 40px;
   overflow: hidden;
-  margin-top: 50px;
-  background-color: #3e4059;
-  width: 786px;
-  height: 165px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 23px;
 }
 
 .quotesWaves {
-  position: relative;
-  top: -50px;
-  right: 70px;
+  position: fixed;
+  top: 10px;
+  left: 120px;
 }
 
-.bigQuotentionMarks {
-  background-color: aquamarine;
+.quotationMarks {
   position: absolute;
-  width: 500px;
+  width: 600px;
   height: 123px;
-  left: 809px;
-  top: 146px;
+  left: 265px;
+  top: 40px;
+}
 
-  /* font-family: "Salsa";
+.rndQuotes {
+  margin-left: 365px;
+  margin-top: -135px;
+  width: 400px;
+  color: #f4f1de;
+
+  text-align: center;
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  font-size: 100px;
-  line-height: 123px; */
+  font-size: 18px;
+}
 
-  display: flex;
-  align-items: center;
+.quotesCredits {
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 300;
+}
 
-  color: #f4f1de;
+.creditsContainer {
+  margin-top: 20px;
 }
