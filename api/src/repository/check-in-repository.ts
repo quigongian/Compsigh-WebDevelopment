@@ -23,35 +23,33 @@ async function getLastCheckInByUserId(userId: number): Promise<CheckIn | null> {
 
 async function getPaginatedCheckIns(
     userId: number,
-    page: number,
-    size: number
+    pageNumber: number,
+    pageSize: number
 ): Promise<CheckIn[]> {
     return await prisma.checkIn.findMany({
         where: { userId },
-        skip: (page - 1) * size,
-        take: size,
+        skip: (pageNumber - 1) * pageSize,
+        take: pageSize,
         orderBy: { createdAt: "desc" },
     });
 }
 
 async function create(
     userId: number,
-    answer1: string,
     answer2: string,
     answer3: string,
     answer4: string,
     comments: string | null,
-    checkInstatus: CheckInStatus
+    checkInStatus: CheckInStatus
 ): Promise<CheckIn> {
     return await prisma.checkIn.create({
         data: {
             userId,
-            answer1,
             answer2,
             answer3,
             answer4,
             comments,
-            checkInstatus,
+            checkInStatus,
         },
     });
 }

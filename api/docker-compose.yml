@@ -6,7 +6,7 @@ services:
     container_name: server
     build: .
     depends_on:
-      - db
+      - postgres_db
     ports:
       - "${PORT}:${PORT}"
     env_file:
@@ -14,8 +14,8 @@ services:
     volumes:
       - .:/usr/src/app
   
-  db:
-    container_name: db
+  postgres_db:
+    container_name: postgres_db
     image: "postgres"
     ports:
       - "${DB_PORT}:${DB_PORT}"
