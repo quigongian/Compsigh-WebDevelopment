@@ -2,8 +2,8 @@
     background-color: rgb(67, 131, 170);
     border-radius: 6px;
     margin-bottom: 20px;
-    padding: 10px 140px 10px 15px;
-    width: 50%;
+    padding: 10px 10px 10px 30px;
+    width: 95%;
     text-align: left;
     font-style: 22px;
     position: relative;
@@ -62,4 +62,19 @@
 
   .taskBg .iconWrapper span:hover {
     color: yellow;
+  }
+
+  .form-control {
+    border: none;
+    width: 300px;
+    padding: 10px;
+    border-radius: 20px;
+    
+  }
+  .btn{
+    background: #B9DFFF;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #eee;
   }

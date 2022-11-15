@@ -2,7 +2,7 @@ import { jwtUtil } from "../util/jwt-util";
 import { cryptUtil } from "../util/crypt-util";
 import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
-import { userService } from "./user-service";
+import { userService, CreateUserRequest } from "./user-service";
 import {
     emailVerificationService,
     EmailVerificationType,
@@ -18,7 +18,7 @@ async function signIn(req: SignInRequest): Promise<AuthResponse> {
         );
         throw new HttpError(HttpStatus.UNAUTHORIZED, "Please verify email");
     }
-    if (!cryptUtil.compare(req.password, user.password)) {
+    if (!(await cryptUtil.compare(req.password, user.password))) {
         throw new HttpError(HttpStatus.UNAUTHORIZED, "Wrong email or password");
     }
     await userService.updateLastSignIn(user.userId);
@@ -28,19 +28,12 @@ async function signIn(req: SignInRequest): Promise<AuthResponse> {
 }
 
 async function signUp(req: SignUpRequest): Promise<void> {
-    const user = await userService.create(
-        req.firstName,
-        req.lastName,
-        req.userName,
-        req.email,
-        req.password,
-        req.xpLevelId,
-        req.categoryId
+    const userDTO = await userService.createAndReturnUserDTO(
+        req as CreateUserRequest
     );
-    await userService.createGeneratedTasksForUser(user);
     await emailVerificationService.setupEmailVerification(
-        user.userId,
-        user.email,
+        userDTO.userId,
+        userDTO.email,
         EmailVerificationType.VERIFY_EMAIL
     );
 }
@@ -81,9 +74,6 @@ async function forgotPassword(email: string): Promise<void> {
 }
 
 async function resetPassword(req: ResetPasswordRequest): Promise<void> {
-    if (req.password !== req.repeatPassword) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Passwords do not match");
-    }
     const user = await userService.getByEmail(req.email);
     const emailVerification = await emailVerificationService.getByUserId(
         user.userId
@@ -97,7 +87,11 @@ async function resetPassword(req: ResetPasswordRequest): Promise<void> {
     if (emailVerification.expiresAt < new Date()) {
         throw new HttpError(HttpStatus.BAD_REQUEST, "Code expired");
     }
-    await userService.updatePassword(user.userId, req.password);
+    await userService.updatePassword(
+        user.userId,
+        req.password,
+        req.repeatPassword
+    );
 }
 
 async function refreshAccessToken(

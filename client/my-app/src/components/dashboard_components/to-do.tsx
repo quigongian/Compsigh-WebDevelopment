@@ -5,20 +5,18 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Container = {
-  border: "1px solid red",
+  border: "1px solid pink",
+  marginLeft: "9%",
+  height: "99.5vh"
 };
 const Wrapper = {
   display: "flex",
   height: "90vh",
   width: "100%",
 };
-const Sidebar = {
-  border: "2px solid black",
-  height: "100%",
-  width: "125px",
-};
+
 const rightContainer = {
-  border: "1px solid blue",
+  border: "1px solid transparent",
   height: "100%",
   width: "100%",
   display: "flex",
@@ -34,17 +32,11 @@ const toDoList = {
   alignItems: 'center',
   overflow: 'auto'
 };
-const textBox = {
-  alignItems: "center",
-  justifyContent: "center",
-  width: "70%",
-  border: "1px solid green",
-  display: "flex",
-};
+
 
 export const Todo = () => {
     const[toDo, setToDo]=useState([
-        {id: 1, title: "", "status": false }
+        {id: 1, title: "Write your first task!", "status": false }
         ]);
 
     //Temp States
@@ -118,13 +110,12 @@ export const Todo = () => {
         <>
         <div style ={Container}>
             <div style ={Wrapper}>
-                <div style={Sidebar}></div>
                     <div style ={rightContainer}>
                        
 <div style={toDoList}>
-        <br/><br/>
-        <h2 ref={ref}>To Do List App (ReactJs)</h2>
-        <br/><br/>
+        
+        <h2 ref={ref}>To Do List App</h2>
+        
         
             {/* Update Task */}
             {active === "Second" &&

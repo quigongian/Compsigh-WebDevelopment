@@ -1,5 +1,5 @@
 import { prisma } from "../src/util/prisma";
-import { cryptUtil } from "../src/util/crypt-util";
+import { authService, SignUpRequest } from "../src/service/auth-service";
 
 async function init() {
     // Categories
@@ -125,85 +125,22 @@ async function init() {
             xpLevelId: 1,
         },
     });
-    // Users and Tasks
-    const users: DummyUser[] = [
-        {
-            firstName: "Alice",
-            lastName: "Smith",
-            userName: "alice",
-            email: "alice@example.com",
-            password: "password",
-            categoryId: 1,
-            xpLevelId: 1,
-            tasks: [
-                {
-                    taskName: "Study for midterms",
-                    taskDescription:
-                        "Study for midterms in the next week. Make sure to study for all the subjects.",
-                },
-                {
-                    taskName: "Watch intro to Git and Github",
-                    taskDescription: "Watch the intro to Git and Github video.",
-                },
-                {
-                    taskName: "Enroll in Spring classes",
-                    taskDescription:
-                        "Enroll in Spring classes on the university website.",
-                },
-            ],
-        },
-        {
-            firstName: "Bob",
-            lastName: "Smith",
-            userName: "bob",
-            email: "bob@exmaple.com",
-            password: "password",
-            categoryId: 2,
-            xpLevelId: 1,
-            tasks: [],
-        },
-        {
-            firstName: "Charlie",
-            lastName: "Smith",
-            userName: "charlie",
-            email: "charlie@example.com",
-            password: "password",
-            categoryId: 3,
-            xpLevelId: 1,
-            tasks: [],
-        },
-    ];
-    for (const user of users) {
-        const hashedPassword = await cryptUtil.hash(user.password);
-        await prisma.user.create({
-            data: {
-                ...user,
-                password: hashedPassword,
-                tasks: {
-                    createMany: {
-                        data: user.tasks,
-                    },
-                },
-            },
-        });
-    }
+    // Users
+    const dummyUser: SignUpRequest = {
+        firstName: "Dummy",
+        lastName: "User",
+        userName: "dummyuser",
+        email: "dummyuser@example.com",
+        password: "Password123!",
+        categoryId: 1,
+        xpLevelId: 1,
+    };
+    await authService.signUp(dummyUser);
+    await prisma.user.update({
+        where: { email: dummyUser.email },
+        data: { emailVerified: true },
+    });
 }
-
-type DummyTask = {
-    taskName: string;
-    taskDescription: string;
-};
-
-type DummyUser = {
-    firstName: string;
-    lastName: string;
-    userName: string;
-    email: string;
-    password: string;
-    categoryId: number;
-    xpLevelId: number;
-    tasks: DummyTask[];
-};
 
 init()
     .catch(console.error)

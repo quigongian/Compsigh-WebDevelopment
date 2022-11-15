@@ -29,14 +29,13 @@ model User {
 
 model CheckIn {
     checkInId     Int           @id @default(autoincrement())
-    user          User          @relation(fields: [userId], references: [userId])
+    user          User          @relation(fields: [userId], references: [userId], onDelete: Cascade)
     userId        Int
-    answer1       String
     answer2       String
     answer3       String
     answer4       String
     comments      String?
-    checkInstatus CheckInStatus
+    checkInStatus CheckInStatus
     createdAt     DateTime      @default(now())
 }
 
@@ -44,7 +43,7 @@ model Task {
     taskId          Int       @id @default(autoincrement())
     taskName        String
     taskDescription String
-    user            User      @relation(fields: [userId], references: [userId])
+    user            User      @relation(fields: [userId], references: [userId], onDelete: Cascade)
     userId          Int
     completed       Boolean   @default(false)
     createdAt       DateTime  @default(now())
@@ -75,7 +74,7 @@ model XpLevel {
 }
 
 model EmailVerification {
-    user      User     @relation(fields: [userId], references: [userId])
+    user      User     @relation(fields: [userId], references: [userId], onDelete: Cascade)
     userId    Int
     code      String
     expiresAt DateTime
