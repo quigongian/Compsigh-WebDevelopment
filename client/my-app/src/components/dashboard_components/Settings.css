@@ -149,6 +149,7 @@ li button {
 .pedit-avatar-left{
   padding-left: 2%;
   padding-bottom: 2%;
+  padding-right: 4%;
   width: 12%;
   float: left;
   display: flex;

@@ -5,7 +5,7 @@ import { Footer } from "../footer";
 import { Header } from "../header"
 import { ComponentTests } from "../../pages/tests/ComponentTests";
 import './Settings.css'
-import { Avatar } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import { 
     Accordion, 
     AccordionSummary, 
@@ -15,9 +15,23 @@ import {
     TextField,
     MenuItem,
     Box,
+    FormGroup,
+    FormControlLabel,
 } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from "react";
+import { createTheme} from '@mui/material/styles';
+import Switch, { SwitchProps } from '@mui/material/Switch';
+import { styled } from '@mui/material/styles';
+
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#e07a5f',
+        }
+    },
+});
 /*|---------------------------------------------------------------------------------Contents Component---------------------------------------------------------------------------------|*/
 const Profile = () => {
     return (
@@ -47,27 +61,31 @@ const Profile = () => {
             <h3>Notifications</h3>
             <div className="n-email">
                 <h4>Email</h4>
+                <SwitchEmail />
             </div>
             <div className="n-push">
                 <h4>Push</h4>
+                <SwitchNotifaction />
             </div>
         </div>
         </>
     )
 }
 
-const MuiSelect = () => {
+
+const CareerPathSelect = () => {
     const [careerPath, setCareerPath] = useState('');
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCareerPath(event.target.value as string);
     }
     return (
         <>
-            <Box width='400px'></Box>
+            <Box sx={{ maxWidth: 'md' }}></Box>
                 <TextField label="Career Path" 
                 select 
                 value={careerPath}
                 onChange={handleChange}
+                helperText="Please select your career path"
                 >
                 <MenuItem value="Data Engineer">Data Engineer</MenuItem>
                 <MenuItem value="Data Scientist">Data Scientist</MenuItem>
@@ -79,7 +97,44 @@ const MuiSelect = () => {
   )
 }
 
+const ExperienceLevelSelect = () => {
+    const [careerPath, setCareerPath] = useState('');
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCareerPath(event.target.value as string);
+    }
+    return (
+        <>
+            <Box>
+                <TextField label="Experience Level" 
+                select 
+                value={careerPath}
+                onChange={handleChange}
+                helperText="Please select your experience level"
+                >
+                <MenuItem value="Data Engineer">Noob</MenuItem>
+                <MenuItem value="Data Scientist">Just out of Noob</MenuItem>
+                <MenuItem value="Data Analyst">Regular</MenuItem>
+                <MenuItem value="Data Architect">Pro</MenuItem>
+                <MenuItem value="Software Manager">Leetcode God</MenuItem>
+            </TextField>
+            </Box>
+        </>
+  )
+}
+
 const ProfileEdit = () => {
+    const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState(false);
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setEmailError(false);
+        if (!email  || !email.includes('@')) {
+            // Fix this in the future/shouldnt allow email to submit without @
+            setEmailError(true);
+        }else  {
+            console.log(email);
+        }
+    }
     return (
         <>
         <Accordion elevation={0} sx={{bgcolor: '#81B29A'}}>
@@ -113,29 +168,71 @@ const ProfileEdit = () => {
                     <Avatar alt="Cat" src="https://i.ebayimg.com/images/g/BV4AAOSwkDFf4vAU/s-l500.jpg" sx={{width: 40, height: 40}}/>
                     <Avatar alt="Cat" src="https://i.ytimg.com/vi/KmuLmvbdVZA/maxresdefault.jpg" sx={{width: 40, height: 40}}/>
                 </Stack>
-                <div className="pedit-bottom">
-                    <Typography sx={{ mb: 1.5 }} color="white" mt={6} ml={20}>
-                        Name: 
+                <Box className="pedit-bottom"
+                    component="form"
+                    noValidate
+                    autoComplete="off"
+                    pt={10}
+                    pl={20}
+                    onSubmit={handleSubmit}
+                >
+                    <TextField
+                        label = "Name"
+                        variant="outlined"
+                        defaultValue="Frank"
+                        InputProps={{
+                            readOnly: true,
+                          }}
+                        sx={{mb: 4.5}}
+                    >
+                    </TextField>
+                    <div className="pedit-name/email">
+                        <TextField 
+                        onChange={(e) => setEmail(e.target.value)}
+                        error={emailError}
+                        id="outlined-basic" 
+                        label="Email" 
+                        defaultValue="frank@lovesbeans.com"
+                        helperText="Please enter a valid email"
+                        variant="outlined" 
+                        required
+                        />
+                    </div>
+                    <Typography sx={{ mb: 1.5 }} color="white" mt={4}>
+                        <CareerPathSelect />
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="white" mt={4} ml={20}>
-                        Email:
-                        <input type="email" placeholder="Enter Email" />
+                    <Typography sx={{ mb: 1.5 }} color="white" mt={4}>
+                        <ExperienceLevelSelect />
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="white" mt={4} ml={20}>
-                        Career Path:
-                        <MuiSelect />
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="white" mt={4} ml={20}>
-                        Experience Level:
-                        <MuiSelect />
-                    </Typography>
-
-                </div>
+                <Button className="Button"
+                    type="submit"
+                    variant="contained"
+                >
+                    Submit
+                </Button>
+                </Box>
             </AccordionDetails>
         </Accordion>
         </>
     )
 }
+export function SwitchEmail() {
+    return (
+      <FormGroup>
+        <FormControlLabel control={<Switch defaultChecked />} label="Label" />
+        <FormControlLabel disabled control={<Switch />} label="Disabled" />
+      </FormGroup>
+    );
+  }
+
+  export function SwitchNotifaction() {
+    return (
+      <FormGroup>
+        <FormControlLabel control={<Switch defaultChecked />} label="Label" />
+        <FormControlLabel disabled control={<Switch />} label="Disabled" />
+      </FormGroup>
+    );
+  }
 
 const Security = () =>{
     return (
