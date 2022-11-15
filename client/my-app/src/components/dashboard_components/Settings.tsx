@@ -10,9 +10,14 @@ import {
     Accordion, 
     AccordionSummary, 
     AccordionDetails, 
+    Dialog,
     Typography,
     Stack,
     TextField,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
     MenuItem,
     Box,
     FormGroup,
@@ -234,12 +239,65 @@ export function SwitchEmail() {
     );
   }
 
+
 const Security = () =>{
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
+
     return (
         <>
             <h3 id = "content-title">Security</h3>
             <h4>Password</h4>
-            <button className="Button">Change</button>
+            <button className="Button" onClick={handleClickOpen}>Change</button>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Change Password</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        To change your password, please enter your old password followed by
+                        your new password. 
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Old Password"
+                        type="password"
+                        fullWidth
+                        variant="standard"
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="New Password"
+                        type="password"
+                        fullWidth
+                        variant="standard"
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Confirm New Password"
+                        type="password"
+                        fullWidth
+                        variant="standard"
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleClose}>Submit</Button>
+                </DialogActions>
+            </Dialog>
             <hr className = "Hr"/>
             <h4>2 Factor Authentication</h4>
             <button className="Button">Enable</button>
