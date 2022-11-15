@@ -25,11 +25,4 @@ export default function scheduleTasks(): void {
         frequency: TaskFrequency.EVERY_DAY,
         execute: userTasks.deletePastDueUnverifiedUsers,
     });
-    // TaskScheduler.schedule({
-    //     name: "LOG_DATE",
-    //     frequency: TaskFrequency.EVERY_MINUTE,
-    //     execute: async () => {
-    //         console.log(`LOG_DATE ${new Date().toLocaleString()}`);
-    //     },
-    // });
 }
