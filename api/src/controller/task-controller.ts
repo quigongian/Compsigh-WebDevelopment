@@ -6,7 +6,7 @@ async function getAllTasks(req: Request, res: Response, next: NextFunction) {
     try {
         const tasksDTOs = await taskService.getAllTaskDTOsByCompletedStatus(
             req.userId,
-            req.query.completed as string | undefined
+            req.query.completed as string | null
         );
         res.json(tasksDTOs);
     } catch (error) {
@@ -28,11 +28,11 @@ async function getTask(req: Request, res: Response, next: NextFunction) {
 
 async function createTask(req: Request, res: Response, next: NextFunction) {
     try {
-        const createdTaskDTO = await taskService.createTaskDTO(
-            req.userId,
-            req.body.name,
-            req.body.description
-        );
+        const createdTaskDTO = await taskService.createAndReturnTaskDTO({
+            userId: req.userId,
+            taskName: req.body.taskName,
+            taskDescription: req.body.taskDescription,
+        });
         res.status(HttpStatus.CREATED).json(createdTaskDTO);
     } catch (error) {
         next(error);
@@ -45,11 +45,11 @@ async function updateTask(req: Request, res: Response, next: NextFunction) {
             req.params.taskId,
             req.userId
         );
-        const updatedTaskDTO = await taskService.updateTaskDTO(
-            taskDTO.taskId,
-            req.body.name,
-            req.body.description
-        );
+        const updatedTaskDTO = await taskService.updateAndReturnTaskDTO({
+            taskId: taskDTO.taskId,
+            taskName: req.body.taskName,
+            taskDescription: req.body.taskDescription,
+        });
         res.json(updatedTaskDTO);
     } catch (error) {
         next(error);
@@ -62,7 +62,7 @@ async function completeTask(req: Request, res: Response, next: NextFunction) {
             req.params.taskId,
             req.userId
         );
-        const completedTaskDTO = await taskService.complete(taskDTO.taskId);
+        const completedTaskDTO = await taskService.completeTask(taskDTO.taskId);
         res.json(completedTaskDTO);
     } catch (error) {
         next(error);

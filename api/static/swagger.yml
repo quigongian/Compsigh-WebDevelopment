@@ -262,7 +262,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/Error"
-  /user/me:
+  /user:
     get:
       tags:
         - user
@@ -276,6 +276,71 @@ paths:
           description: Ok
           schema:
             $ref: "#/definitions/UserDTO"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Not Found
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+    delete:
+      tags:
+        - user
+      summary: Delete current user account
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: body
+          name: body
+          description: Delete user request
+          required: true
+          schema:
+            $ref: "#/definitions/DeleteUserRequest"
+      responses:
+        204:
+          description: Ok
+        400:
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: Not Found
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Error
+          schema:
+            $ref: "#/definitions/Error"
+  /user/password:
+    put:
+      tags:
+        - user
+      summary: Change password
+      produces:
+        - "application/json"
+      security:
+        - JWT: []
+      parameters:
+        - in: body
+          name: body
+          description: Change password request
+          required: true
+          schema:
+            $ref: "#/definitions/ChangePasswordRequest"
+      responses:
+        204:
+          description: Ok
         401:
           description: Unauthorized
           schema:
@@ -308,15 +373,14 @@ paths:
           name: size
           type: integer
           required: false
-          default: 31
-          description: Page size
+          description: Page size, defaults to 31
       responses:
         200:
           description: Ok
           schema:
             type: array
             items:
-              $ref: "#/definitions/CheckinDTO"
+              $ref: "#/definitions/CheckInDTO"
         401:
           description: Unauthorized
           schema:
@@ -372,7 +436,7 @@ paths:
         200:
           description: Ok
           schema:
-            $ref: "#/definitions/CheckinDTO"
+            $ref: "#/definitions/CheckInDTO"
         401:
           description: Unauthorized
           schema:
@@ -643,7 +707,6 @@ definitions:
     type: object
     required:
       - checkInId
-      - answer1
       - answer2
       - answer3
       - answer4
@@ -652,8 +715,6 @@ definitions:
       checkInId:
         type: integer
         format: int64
-      answer1:
-        type: string
       answer2:
         type: string
       answer3:
@@ -664,6 +725,10 @@ definitions:
         type: string
       checkInStatus:
         type: string
+        enum:
+          - GOOD
+          - NEUTRAL
+          - BAD
   TaskDTO:
     type: object
     required:
@@ -685,23 +750,23 @@ definitions:
     type: object
     required:
       - categoryId
-      - name
+      - categoryName
     properties:
       categoryId:
         type: integer
         format: int64
-      name:
+      categoryName:
         type: string
   XpLevel:
     type: object
     required:
       - xpLevelId
-      - name
+      - xpLevelname
     properties:
       xpLevelId:
         type: integer
         format: int64
-      name:
+      xpLevelname:
         type: string
   SignInRequest:
     type: object
@@ -780,16 +845,36 @@ definitions:
     properties:
       refreshToken:
         type: string
+  DeleteUserRequest:
+    type: object
+    required:
+      - userName
+    properties:
+      userName:
+        type: string
+  ChangePasswordRequest:
+    type: object
+    required:
+      - email
+      - oldPassword
+      - password
+      - repeatPassword
+    properties:
+      email:
+        type: string
+      oldPassword:
+        type: string
+      password:
+        type: string
+      repeatPassword:
+        type: string
   CreateCheckInRequest:
     type: object
     required:
-      - answer1
       - answer2
       - answer3
       - answer4
     properties:
-      answer1:
-        type: string
       answer2:
         type: string
       answer3:
@@ -803,22 +888,22 @@ definitions:
   CreateTaskRequest:
     type: object
     required:
-      - name
-      - description
+      - taskName
+      - taskDescription
     properties:
-      name:
+      taskName:
         type: string
-      description:
+      taskDescription:
         type: string
   UpdateTaskRequest:
     type: object
     required:
-      - name
-      - description
+      - taskName
+      - taskDescription
     properties:
-      name:
+      taskName:
         type: string
-      description:
+      taskDescription:
         type: string
   AuthResponse:
     type: object

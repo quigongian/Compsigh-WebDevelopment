@@ -1,4 +1,5 @@
 import express, { Router } from "express";
+import path from "path";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import { authController } from "./controller/auth-controller";
@@ -13,8 +14,9 @@ import { notFoundHandler } from "./handler/not-found-handler";
 import { defaultErrorHandler } from "./handler/error-handler";
 import { loggerMiddleware } from "./middleware/logger-middleware";
 import { AUTH } from "./middleware/auth-middleware";
-import scheduleTasks from "./tasks/schedule-tasks";
 import { envVars } from "./util/env-vars";
+import scheduleTasks from "./tasks/schedule-tasks";
+import { cryptUtil } from "./util/crypt-util";
 
 const app = express();
 const api = Router();
@@ -22,7 +24,6 @@ const PORT = Number(envVars.PORT);
 
 api.use(cors());
 api.use(express.json());
-
 api.use("/docs", swaggerUi.serve);
 api.get("/docs", swaggerHandler);
 api.get("/ping", pingHandler);
@@ -34,7 +35,9 @@ api.post("/auth/forgotpassword", authController.forgotPassword);
 api.post("/auth/resetpassword", authController.resetPassword);
 api.post("/auth/verifyemail", authController.verifyEmail);
 api.post("/auth/refreshtoken", AUTH(authController.refreshAccessToken));
-api.get("/user/me", AUTH(userController.getUser));
+api.get("/user/", AUTH(userController.getUser));
+api.delete("/user", AUTH(userController.deleteAccount));
+api.put("/user/password", AUTH(userController.changePassword));
 api.get("/checkin", AUTH(checkInController.getPaginatedCheckIns));
 api.get("/checkin/:checkInId", AUTH(checkInController.getCheckIn));
 api.post("/checkin", AUTH(checkInController.makeCheckIn));
@@ -46,11 +49,13 @@ api.put("/task/:taskId/complete", AUTH(taskController.completeTask));
 api.delete("/task/:taskId", AUTH(taskController.deleteTask));
 
 app.use(loggerMiddleware);
+app.use("/static", express.static(path.join(__dirname, "..", "static")));
 app.use("/api", api);
 app.use("*", notFoundHandler);
 app.use(defaultErrorHandler);
 
 app.listen(PORT, () => {
-    console.log(`server started at http://localhost:${PORT}`);
+    console.log(`Server started at http://localhost:${PORT}`);
+    console.log(`Swagger-UI available at http://localhost:${PORT}/api/docs`);
     scheduleTasks();
 });
