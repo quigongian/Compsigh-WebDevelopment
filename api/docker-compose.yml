@@ -31,5 +31,5 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}
+      device: ${PWD}/src
   postgres_data:

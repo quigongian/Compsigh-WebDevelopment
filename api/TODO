@@ -1,1 +1,2 @@
 Check email/userName already in use when signup or update user info
+Check docker compose volume only syncs src folder

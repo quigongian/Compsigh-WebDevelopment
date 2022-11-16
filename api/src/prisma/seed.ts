@@ -1,5 +1,5 @@
-import { prisma } from "../src/util/prisma";
-import { authService, SignUpRequest } from "../src/service/auth-service";
+import { prisma } from "../util/prisma";
+import { authService, SignUpRequest } from "../service/auth-service";
 
 async function init() {
     // Categories

@@ -3,10 +3,8 @@ FROM node:lts
 WORKDIR /usr/src/app
 
 COPY src ./src
-COPY prisma ./prisma
-COPY static ./static
-COPY *.json ./
-COPY .env ./
+COPY *.json .
+COPY .env .
 
 RUN npm install
 
