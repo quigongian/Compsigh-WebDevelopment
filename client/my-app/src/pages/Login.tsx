@@ -3,7 +3,9 @@ import { CenterFocusStrong } from "@mui/icons-material";
 import { useState } from "react";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
-import SignIn from "../image_content/signIn.png";
+import  NewSignIn from "../image_content/newSignIn.png";
+import  SignIn from "../image_content/signIn.png";
+import "./Login.css";
 
 
 export const Login = () => {
@@ -16,25 +18,29 @@ export const Login = () => {
       {display === "signIn" && (
         <div style={{}}>
         <section style={{ display: "flex", flexDirection: "row", justifyContent: "space-between"}} >
-          <section style={{margin: "auto", textAlign: "center"}}>
-            <h1 style={{fontSize: "50px"}}>Welcome Back!</h1>
+          <section style={{margin: "auto", marginTop: "100px", textAlign: "center"}}>
+            <h1 style={{fontSize: "50px", marginBottom: "80px"}}>Welcome Back!</h1>
             <form action="">
           
               <div>
-                <input type="email" name="email" placeholder="E-Mail" required style={{fontSize: "18px", backgroundColor: "#D9D9D9", marginBottom: "15px", borderRadius: "8px", border: "none", padding: "2px 150px 2px 10px"}}/>
+                <input type="email" name="email" placeholder="E-Mail *" required style={{fontSize: "18px", backgroundColor: "#D9D9D9", marginBottom: "30px", borderRadius: "8px", border: "none", padding: "11px 210px 11px 25px"}}/>
               </div>
 
               <div>
-                <input type="password" name="password" placeholder="Password" required style={{fontSize: "18px", backgroundColor: "#D9D9D9", marginBottom: "15px", borderRadius: "8px", border: "none"}}/>
+                <input type="password" name="password" placeholder="Password *" required style={{fontSize: "18px", backgroundColor: "#D9D9D9", marginBottom: "13px", borderRadius: "8px", border: "none", padding: "11px 210px 11px 25px"}}/>
               </div>
             
-
-              <input type="checkbox" name="rememberMe" id="rememberMe" />
-              <label htmlFor="rememberMe">Remember me</label>
-              <h2 onClick={() => setDisplay("forgotPassword")} style={{fontSize: "16px"}}>Forgot password?</h2>
-
+            <span style={{ display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
               <div>
-                <button>Sign in</button>
+              <input type="checkbox" name="rememberMe" id="rememberMe"/>
+              <label htmlFor="rememberMe">Remember me</label>
+              </div>
+              <div></div>
+              <button onClick={() => setDisplay("forgotPassword")} style={{fontSize: "16px", textDecoration: "underline", border: "none", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"}}>Forgot password?
+              </button>
+            </span>
+              <div style={{marginTop: "50px"}}>
+                <button style={{borderRadius: "12px", border: "none", backgroundColor: "#81B29A", padding: "5px 15px", fontSize: "18px", color: "white", fontWeight: "bold"}}>Sign in</button>
               </div>
 
               <div>
@@ -44,8 +50,8 @@ export const Login = () => {
               </div>
             </form>
           </section>
-          <section style={{height:"920px"}}>
-            <img src={SignIn} alt="" style= {{width: "600px", height: "920px"}} />
+          <section style={{height: "920px"}}>
+            <img src={NewSignIn} alt="" style= {{width: "700px", height: "920px"}} />
           </section>
         </section>
         </div>
