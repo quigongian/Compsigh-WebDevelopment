@@ -6,10 +6,7 @@ info:
     API for [CompSigh](http://localhost:3000)
 
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Consectetur libero id faucibus nisl tincidunt eget nullam non nisi. Hendrerit dolor magna eget est lorem ipsum. 
-    Sed tempus urna et pharetra pharetra massa. Convallis tellus id interdum velit laoreet id donec. In eu mi bibendum neque egestas congue. 
-    Dolor sit amet consectetur adipiscing elit ut aliquam purus sit. Lacinia quis vel eros donec ac odio tempor. 
-    Cras adipiscing enim eu turpis egestas pretium. Scelerisque eleifend donec pretium vulputate sapien.
+    Consectetur libero id faucibus nisl tincidunt eget nullam non nisi. Hendrerit dolor magna eget est lorem ipsum.
   termsOfService: http://swagger.io/terms/
   contact:
     email: apiteam@swagger.io
@@ -322,7 +319,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
   /user/password:
-    put:
+    patch:
       tags:
         - user
       summary: Change current user password
@@ -569,7 +566,7 @@ paths:
           description: taskId
         - in: body
           name: body
-          description: Update task request
+          description: UpdateTaskRequest
           required: true
           schema:
             $ref: "#/definitions/UpdateTaskRequest"
@@ -630,10 +627,10 @@ paths:
           schema:
             $ref: "#/definitions/Error"
   /task/{taskId}/complete:
-    put:
+    patch:
       tags:
         - task
-      summary: Complete task
+      summary: Update task completed status
       consumes:
         - "application/json"
       produces:
@@ -648,6 +645,12 @@ paths:
             format: int64
           required: true
           description: taskId
+        - in: body
+          name: body
+          description: UpdateTaskCompletedStatusRequest
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateTaskCompletedStatusRequest"
       responses:
         200:
           description: Success - Returns TaskDTO
@@ -747,6 +750,7 @@ definitions:
         type: string
       completed:
         type: boolean
+        default: false
   Category:
     type: object
     required:
@@ -922,11 +926,23 @@ definitions:
     required:
       - taskName
       - taskDescription
+      - completed
     properties:
       taskName:
         type: string
       taskDescription:
         type: string
+      completed:
+        type: boolean
+        default: false
+  UpdateTaskCompletedStatusRequest:
+    type: object
+    required:
+      - completed
+    properties:
+      completed:
+        type: boolean
+        default: false
   Error:
     type: object
     required:

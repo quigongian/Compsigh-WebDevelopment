@@ -48,6 +48,7 @@ async function updateTask(req: Request, res: Response, next: NextFunction) {
         const updatedTaskDTO = await taskService.updateAndReturnTaskDTO({
             taskId: taskDTO.taskId,
             taskName: req.body.taskName,
+            completed: req.body.completed,
             taskDescription: req.body.taskDescription,
         });
         res.status(HttpStatus.OK).json(updatedTaskDTO);
@@ -56,13 +57,20 @@ async function updateTask(req: Request, res: Response, next: NextFunction) {
     }
 }
 
-async function completeTask(req: Request, res: Response, next: NextFunction) {
+async function updateTaskCompletedStatus(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
     try {
         const taskDTO = await taskService.getTaskDTOIfBelongsToUser(
             req.params.taskId,
             req.userId
         );
-        const completedTaskDTO = await taskService.completeTask(taskDTO.taskId);
+        const completedTaskDTO = await taskService.updateTaskCompletedStatus(
+            taskDTO.taskId,
+            req.body.completed
+        );
         res.status(HttpStatus.OK).json(completedTaskDTO);
     } catch (error) {
         next(error);
@@ -87,6 +95,6 @@ export const taskController = {
     getTask,
     createTask,
     updateTask,
-    completeTask,
+    completeTask: updateTaskCompletedStatus,
     deleteTask,
 };

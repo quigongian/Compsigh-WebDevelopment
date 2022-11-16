@@ -35,11 +35,17 @@ async function create(
 async function update(
     taskId: number,
     taskName: string,
-    taskDescription: string
+    taskDescription: string,
+    completed: boolean
 ): Promise<Task> {
     return await prisma.task.update({
-        where: { taskId: taskId },
-        data: { taskName, taskDescription },
+        where: { taskId },
+        data: {
+            taskName,
+            taskDescription,
+            completed,
+            completedAt: completed ? new Date() : null,
+        },
     });
 }
 
@@ -49,7 +55,7 @@ async function updateCompleted(
 ): Promise<Task> {
     return await prisma.task.update({
         where: { taskId },
-        data: { completed, completedAt: new Date() },
+        data: { completed, completedAt: completed ? new Date() : null },
     });
 }
 

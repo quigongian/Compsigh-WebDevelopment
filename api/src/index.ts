@@ -36,7 +36,7 @@ api.post("/auth/email/verify", authController.verifyEmail);
 api.post("/auth/refresh", AUTH(authController.refreshAccessToken));
 api.get("/user/", AUTH(userController.getUser));
 api.delete("/user", AUTH(userController.deleteAccount));
-api.put("/user/password", AUTH(userController.changePassword));
+api.patch("/user/password", AUTH(userController.changePassword));
 api.get("/checkin", AUTH(checkInController.getPaginatedCheckIns));
 api.get("/checkin/:checkInId", AUTH(checkInController.getCheckIn));
 api.post("/checkin", AUTH(checkInController.makeCheckIn));
@@ -44,7 +44,7 @@ api.get("/task", AUTH(taskController.getAllTasks));
 api.get("/task/:taskId", AUTH(taskController.getTask));
 api.post("/task", AUTH(taskController.createTask));
 api.put("/task/:taskId", taskController.updateTask);
-api.put("/task/:taskId/complete", AUTH(taskController.completeTask));
+api.patch("/task/:taskId/complete", AUTH(taskController.completeTask));
 api.delete("/task/:taskId", AUTH(taskController.deleteTask));
 
 app.use(loggerMiddleware);
