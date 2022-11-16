@@ -242,23 +242,33 @@ export function SwitchEmail() {
 
 const Security = () =>{
 
-    const [open, setOpen] = React.useState(false);
+    const [passOpen, setPassOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
-      setOpen(true);
+    const [delOpen, setDelOpen] = React.useState(false);
+
+    const passwordOpen = () => {
+      setPassOpen(true);
     };
   
-    const handleClose = () => {
-      setOpen(false);
+    const passwordClose = () => {
+      setPassOpen(false);
     };
+
+    const deleteOpen = () => {
+        setDelOpen(true);
+      };
+    
+      const deleteClose = () => {
+        setDelOpen(false);
+      };
   
 
     return (
         <>
             <h3 id = "content-title">Security</h3>
             <h4>Password</h4>
-            <button className="Button" onClick={handleClickOpen}>Change</button>
-            <Dialog open={open} onClose={handleClose}>
+            <button className="Button" onClick={passwordOpen}>Change</button>
+            <Dialog open={passOpen} onClose={passwordClose}>
                 <DialogTitle>Change Password</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
@@ -294,8 +304,8 @@ const Security = () =>{
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Submit</Button>
+                    <Button onClick={passwordClose}>Cancel</Button>
+                    <Button onClick={passwordClose}>Submit</Button>
                 </DialogActions>
             </Dialog>
             <hr className = "Hr"/>
@@ -303,7 +313,29 @@ const Security = () =>{
             <button className="Button">Enable</button>
             <hr className = "Hr"/>
             <h4>Delete Account</h4>
-            <button className="Button">Delete</button>
+            <button className="Button" onClick={deleteOpen}>Delete</button>
+            <Dialog open={delOpen} onClose={deleteClose}>
+                <DialogTitle>Delete Account</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        To delete your account, please enter your email. 
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Enter email"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                    />
+
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={deleteClose}>Cancel</Button>
+                    <Button onClick={deleteClose}>Delete</Button>
+                </DialogActions>
+            </Dialog>
         </>
     )
 }
