@@ -53,7 +53,7 @@ export const OurTeam = () => {
       </div>
       <div className="team-row">
         <Card
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
+          image="https://avatars.githubusercontent.com/u/112722640?v=4"
           name="Stephanie Hernandez"
           role="Front-End Developer"
           desc=""
