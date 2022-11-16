@@ -54,8 +54,8 @@ export const OurTeam = () => {
       <div className="team-row">
         <Card
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
-          name="Name goes here"
-          role="FullStack Developer"
+          name="Stephanie Hernandez"
+          role="Front-End Developer"
           desc=""
         />
         <Card
