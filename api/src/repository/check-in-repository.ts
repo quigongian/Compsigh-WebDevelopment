@@ -2,7 +2,10 @@ import { CheckIn, CheckInStatus } from "@prisma/client";
 import { prisma } from "../util/prisma";
 
 async function getAllByUserId(userId: number): Promise<CheckIn[]> {
-    return await prisma.checkIn.findMany({ where: { userId } });
+    return await prisma.checkIn.findMany({
+        where: { userId },
+        orderBy: { createdAt: "desc" },
+    });
 }
 
 async function getById(checkInId: number): Promise<CheckIn | null> {

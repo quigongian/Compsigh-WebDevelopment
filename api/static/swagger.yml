@@ -47,12 +47,12 @@ paths:
         - text/plain
       responses:
         200:
-          description: Ok
+          description: Success - Server is up and running
           schema:
             type: string
             example: pong
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
   /category:
@@ -64,13 +64,13 @@ paths:
         - "application/json"
       responses:
         200:
-          description: Ok
+          description: Success - Returns Category[]
           schema:
             type: "array"
             items:
               $ref: "#/definitions/Category"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
   /xplevel:
@@ -82,13 +82,13 @@ paths:
         - "application/json"
       responses:
         200:
-          description: Ok
+          description: Success - Returns XpLevel[]
           schema:
             type: array
             items:
               $ref: "#/definitions/XpLevel"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
   /auth/signin:
@@ -103,13 +103,13 @@ paths:
       parameters:
         - in: body
           name: body
-          description: Sign in request
+          description: SignInRequest
           required: true
           schema:
             $ref: "#/definitions/SignInRequest"
       responses:
         200:
-          description: Ok
+          description: Success - Returns AuthResponse
           schema:
             $ref: "#/definitions/AuthResponse"
         401:
@@ -117,7 +117,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
   /auth/signup:
@@ -132,105 +132,22 @@ paths:
       parameters:
         - in: body
           name: body
-          description: Sign up request
+          description: SignUpRequest
           required: true
           schema:
             $ref: "#/definitions/SignUpRequest"
       responses:
         201:
-          description: "Created"
+          description: Success - No Response Data
         401:
           description: Unauthorized
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
-  /auth/verifyemail:
-    post:
-      tags:
-        - auth
-      summary: Verify email
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: body
-          name: body
-          description: Verify email request
-          required: true
-          schema:
-            $ref: "#/definitions/VerifyEmailRequest"
-      responses:
-        200:
-          description: Ok
-          schema:
-            $ref: "#/definitions/AuthResponse"
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/Error"
-        5xx:
-          description: Error
-          schema:
-            $ref: "#/definitions/Error"
-  /auth/forgotpassword:
-    post:
-      tags:
-        - auth
-      summary: Forgot password
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: body
-          name: body
-          description: Forgot password request
-          required: true
-          schema:
-            $ref: "#/definitions/ForgotPasswordRequest"
-      responses:
-        204:
-          description: Ok
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/Error"
-        5xx:
-          description: Error
-          schema:
-            $ref: "#/definitions/Error"
-  /auth/resetpassword:
-    post:
-      tags:
-        - auth
-      summary: Reset password
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: body
-          name: body
-          description: Reset password request
-          required: true
-          schema:
-            $ref: "#/definitions/ResetPasswordRequest"
-      responses:
-        204:
-          description: Ok
-        401:
-          description: Unauthorized
-          schema:
-            $ref: "#/definitions/Error"
-        5xx:
-          description: Error
-          schema:
-            $ref: "#/definitions/Error"
-  /auth/refreshtoken:
+  /auth/refresh:
     post:
       tags:
         - auth
@@ -244,13 +161,13 @@ paths:
       parameters:
         - in: body
           name: body
-          description: Refresh token request
+          description: RefreshTokenRequest
           required: true
           schema:
             $ref: "#/definitions/RefreshTokenRequest"
       responses:
         200:
-          description: Ok
+          description: Success - Returns RefreshTokenResponse
           schema:
             $ref: "#/definitions/RefreshTokenResponse"
         401:
@@ -258,7 +175,90 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
+          schema:
+            $ref: "#/definitions/Error"
+  /auth/email/verify:
+    post:
+      tags:
+        - auth
+      summary: Verify email
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: body
+          description: VerifyEmailRequest
+          required: true
+          schema:
+            $ref: "#/definitions/VerifyEmailRequest"
+      responses:
+        200:
+          description: Success - Returns AuthResponse
+          schema:
+            $ref: "#/definitions/AuthResponse"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Unknown Error
+          schema:
+            $ref: "#/definitions/Error"
+  /auth/password/forgot:
+    post:
+      tags:
+        - auth
+      summary: Forgot password
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: body
+          description: ForgotPasswordRequest
+          required: true
+          schema:
+            $ref: "#/definitions/ForgotPasswordRequest"
+      responses:
+        204:
+          description: Success - No Response Data
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Unknown Error
+          schema:
+            $ref: "#/definitions/Error"
+  /auth/password/reset:
+    post:
+      tags:
+        - auth
+      summary: Reset password
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: body
+          description: ResetPasswordRequest
+          required: true
+          schema:
+            $ref: "#/definitions/ResetPasswordRequest"
+      responses:
+        204:
+          description: Success - No Response Data
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Error"
+        5xx:
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
   /user:
@@ -272,7 +272,7 @@ paths:
         - JWT: []
       responses:
         200:
-          description: Ok
+          description: Success - Returns UserDTO
           schema:
             $ref: "#/definitions/UserDTO"
         401:
@@ -284,7 +284,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
     delete:
@@ -298,13 +298,13 @@ paths:
       parameters:
         - in: body
           name: body
-          description: Delete user request
+          description: DeleteUserRequest
           required: true
           schema:
             $ref: "#/definitions/DeleteUserRequest"
       responses:
         204:
-          description: Ok
+          description: Success - No Response Data
         400:
           description: Bad Request
           schema:
@@ -318,14 +318,14 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
   /user/password:
     put:
       tags:
         - user
-      summary: Change password
+      summary: Change current user password
       produces:
         - "application/json"
       security:
@@ -333,13 +333,13 @@ paths:
       parameters:
         - in: body
           name: body
-          description: Change password request
+          description: ChangePasswordRequest
           required: true
           schema:
             $ref: "#/definitions/ChangePasswordRequest"
       responses:
         204:
-          description: Ok
+          description: Success - No Response Data
         401:
           description: Unauthorized
           schema:
@@ -349,14 +349,14 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
   /checkin:
     get:
       tags:
         - checkin
-      summary: Get all checkIns
+      summary: Get paginated checkIns
       produces:
         - "application/json"
       security:
@@ -366,16 +366,17 @@ paths:
           name: page
           type: integer
           required: false
-          description: Page number
-          comments: if not specified, all checkIns will be returned
+          description: Page number (starting at 1), if not specified, ALL checkIns will be returned
+          default: 1
         - in: query
           name: size
           type: integer
           required: false
           description: Page size, defaults to 31
+          default: 31
       responses:
         200:
-          description: Ok
+          description: Success - Returns CheckInDTO[]
           schema:
             type: array
             items:
@@ -385,7 +386,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
     post:
@@ -401,19 +402,21 @@ paths:
       parameters:
         - in: body
           name: body
-          description: CheckIn request
+          description: CreateCheckInRequest
           required: true
           schema:
             $ref: "#/definitions/CreateCheckInRequest"
       responses:
         201:
-          description: "Created"
+          description: Success - Returns CheckInDTO
+          schema:
+            $ref: "#/definitions/CheckInDTO"
         401:
           description: Unauthorized
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
   /checkin/{checkInId}:
@@ -428,12 +431,12 @@ paths:
       parameters:
         - in: path
           name: checkInId
-          description: CheckIn id
+          description: checkInId
           required: true
           type: string
       responses:
         200:
-          description: Ok
+          description: Success - Returns CheckInDTO
           schema:
             $ref: "#/definitions/CheckInDTO"
         401:
@@ -445,14 +448,14 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
   /task:
     get:
       tags:
         - task
-      summary: Get all tasks by completed status
+      summary: Get tasks by completed status
       produces:
         - "application/json"
       security:
@@ -460,13 +463,12 @@ paths:
       parameters:
         - in: query
           name: completed
-          schema:
-            type: boolean
+          type: boolean
           required: false
-          description: Completed status
+          description: Completed status, if not specified, ALL tasks will be returned
       responses:
         200:
-          description: Ok
+          description: Success - Returns TaskDTO[]
           schema:
             type: array
             items:
@@ -476,7 +478,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
     post:
@@ -492,13 +494,13 @@ paths:
       parameters:
         - in: body
           name: body
-          description: Create task request
+          description: CreateTaskRequest
           required: true
           schema:
             $ref: "#/definitions/CreateTaskRequest"
       responses:
         201:
-          description: Ok
+          description: Success - Returns TaskDTO
           schema:
             $ref: "#/definitions/TaskDTO"
         401:
@@ -506,7 +508,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
   /task/{taskId}:
@@ -525,10 +527,10 @@ paths:
             type: number
             format: int64
           required: true
-          description: Task id
+          description: taskId
       responses:
         200:
-          description: Ok
+          description: Success - Returns TaskDTO
           schema:
             $ref: "#/definitions/TaskDTO"
         401:
@@ -544,7 +546,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
     put:
@@ -564,7 +566,7 @@ paths:
             type: number
             format: int64
           required: true
-          description: Task id
+          description: taskId
         - in: body
           name: body
           description: Update task request
@@ -573,7 +575,7 @@ paths:
             $ref: "#/definitions/UpdateTaskRequest"
       responses:
         200:
-          description: Ok
+          description: Success - Returns TaskDTO
           schema:
             $ref: "#/definitions/TaskDTO"
         401:
@@ -589,7 +591,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
     delete:
@@ -607,10 +609,10 @@ paths:
             type: number
             format: int64
           required: true
-          description: Task id
+          description: taskId
       responses:
         204:
-          description: Ok
+          description: Success - No Response Data
         401:
           description: Unauthorized
           schema:
@@ -624,7 +626,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
   /task/{taskId}/complete:
@@ -645,10 +647,10 @@ paths:
             type: number
             format: int64
           required: true
-          description: Task id
+          description: taskId
       responses:
         200:
-          description: Ok
+          description: Success - Returns TaskDTO
           schema:
             $ref: "#/definitions/TaskDTO"
         401:
@@ -664,7 +666,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
         5xx:
-          description: Error
+          description: Unknown Error
           schema:
             $ref: "#/definitions/Error"
 definitions:
@@ -804,6 +806,30 @@ definitions:
       xpLevelId:
         type: integer
         format: int64
+  RefreshTokenRequest:
+    type: object
+    required:
+      - refreshToken
+    properties:
+      refreshToken:
+        type: string
+  AuthResponse:
+    type: object
+    required:
+      - accessToken
+      - refreshToken
+    properties:
+      accessToken:
+        type: string
+      refreshToken:
+        type: string
+  RefreshTokenResponse:
+    type: object
+    required:
+      - accessToken
+    properties:
+      accessToken:
+        type: string
   VerifyEmailRequest:
     type: object
     required:
@@ -836,13 +862,6 @@ definitions:
       repeatPassword:
         type: string
       code:
-        type: string
-  RefreshTokenRequest:
-    type: object
-    required:
-      - refreshToken
-    properties:
-      refreshToken:
         type: string
   DeleteUserRequest:
     type: object
@@ -884,6 +903,10 @@ definitions:
         type: string
       checkInStatus:
         type: string
+        enum:
+          - GOOD
+          - NEUTRAL
+          - BAD
   CreateTaskRequest:
     type: object
     required:
@@ -903,23 +926,6 @@ definitions:
       taskName:
         type: string
       taskDescription:
-        type: string
-  AuthResponse:
-    type: object
-    required:
-      - accessToken
-      - refreshToken
-    properties:
-      accessToken:
-        type: string
-      refreshToken:
-        type: string
-  RefreshTokenResponse:
-    type: object
-    required:
-      - accessToken
-    properties:
-      accessToken:
         type: string
   Error:
     type: object

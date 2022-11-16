@@ -2,14 +2,20 @@ import { Task } from "@prisma/client";
 import { prisma } from "../util/prisma";
 
 async function getAllByUserId(userId: number): Promise<Task[]> {
-    return await prisma.task.findMany({ where: { userId } });
+    return await prisma.task.findMany({
+        where: { userId },
+        orderBy: { createdAt: "desc" },
+    });
 }
 
 async function getAllByUserIdAndCompleted(
     userId: number,
     completed: boolean
 ): Promise<Task[]> {
-    return await prisma.task.findMany({ where: { userId, completed } });
+    return await prisma.task.findMany({
+        where: { userId, completed },
+        orderBy: { createdAt: "desc" },
+    });
 }
 
 async function getById(taskId: number): Promise<Task | null> {

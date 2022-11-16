@@ -43,7 +43,15 @@ async function createAndReturnCheckInDTO(
     ) {
         throw new HttpError(HttpStatus.BAD_REQUEST, "Invalid check in status");
     }
-    const checkIn = await checkInRepository.create(
+    let checkIn;
+    checkIn = await checkInRepository.getLastCheckInByUserId(req.userId);
+    if (checkIn && checkIn.createdAt.getDay() === new Date().getDay()) {
+        throw new HttpError(
+            HttpStatus.BAD_REQUEST,
+            "User has already checked in today"
+        );
+    }
+    checkIn = await checkInRepository.create(
         req.userId,
         req.answer2,
         req.answer3,
