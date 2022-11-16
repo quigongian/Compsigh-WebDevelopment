@@ -8,7 +8,7 @@ async function signIn(req: Request, res: Response, next: NextFunction) {
             email: req.body.email,
             password: req.body.password,
         });
-        res.json(authResponse);
+        res.status(HttpStatus.OK).json(authResponse);
     } catch (error) {
         next(error);
     }
@@ -37,7 +37,7 @@ async function verifyEmail(req: Request, res: Response, next: NextFunction) {
             email: req.body.email,
             code: req.body.code,
         });
-        res.json(authResponse);
+        res.status(HttpStatus.OK).json(authResponse);
     } catch (error) {
         next(error);
     }
@@ -75,7 +75,7 @@ async function refreshAccessToken(
         const refreshAccessTokenResponse = await authService.refreshAccessToken(
             req.body.refreshToken
         );
-        res.json(refreshAccessTokenResponse);
+        res.status(HttpStatus.OK).json(refreshAccessTokenResponse);
     } catch (error) {
         next(error);
     }

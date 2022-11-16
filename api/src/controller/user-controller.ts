@@ -5,7 +5,7 @@ import { HttpStatus } from "../util/HttpStatus";
 async function getUser(req: Request, res: Response, next: NextFunction) {
     try {
         const userDTO = await userService.getUserDTOById(req.userId);
-        res.json(userDTO);
+        res.status(HttpStatus.OK).json(userDTO);
     } catch (error) {
         next(error);
     }

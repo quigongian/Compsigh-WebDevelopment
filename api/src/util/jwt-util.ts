@@ -1,29 +1,49 @@
 import jwt from "jsonwebtoken";
 import { envVars } from "./env-vars";
+import { cryptUtil } from "./crypt-util";
 import { HttpError } from "./HttpError";
 import { HttpStatus } from "./HttpStatus";
 
-function generateAccessJWT(userId: number): string {
-    return jwt.sign(
-        { userId, dateSigned: new Date().toLocaleString() },
-        envVars.JWT_ACCESS_SECRET,
-        { expiresIn: envVars.JWT_ACCESS_TOKEN_EXPIRATION }
-    );
+async function generateAccessJWT(userId: number): Promise<string> {
+    const payload: AccessTokenPayload = {
+        userId,
+        dateSigned: new Date().toLocaleString(),
+    };
+    const jwtData: JwtData = {
+        data: await cryptUtil.encrypt(JSON.stringify(payload)),
+    };
+    return jwt.sign(jwtData, envVars.JWT_ACCESS_SECRET, {
+        expiresIn: envVars.JWT_ACCESS_TOKEN_EXPIRATION,
+    });
 }
 
-function generateRefreshJWT(userId: number, accessToken: string): string {
-    return jwt.sign(
-        { userId, accessToken, dateSigned: new Date().toLocaleString() },
-        envVars.JWT_REFRESH_SECRET,
-        { expiresIn: envVars.JWT_REFRESH_TOKEN_EXPIRATION }
-    );
+async function generateRefreshJWT(
+    userId: number,
+    accessToken: string
+): Promise<string> {
+    const payload: RefreshTokenPayload = {
+        userId,
+        accessToken,
+        dateSigned: new Date().toLocaleString(),
+    };
+    const jwtData: JwtData = {
+        data: await cryptUtil.encrypt(JSON.stringify(payload)),
+    };
+    return jwt.sign(jwtData, envVars.JWT_REFRESH_SECRET, {
+        expiresIn: envVars.JWT_REFRESH_TOKEN_EXPIRATION,
+    });
 }
 
-function verifyAccessToken(accessToken: string): AccessTokenPayload {
+async function verifyAccessToken(
+    accessToken: string
+): Promise<AccessTokenPayload> {
     try {
-        const accessTokenPayload = jwt.verify(
+        const jwtData = jwt.verify(
             accessToken,
             envVars.JWT_ACCESS_SECRET
+        ) as JwtData;
+        const accessTokenPayload = JSON.parse(
+            await cryptUtil.decrypt(jwtData.data)
         ) as AccessTokenPayload;
         return accessTokenPayload;
     } catch (error) {
@@ -31,17 +51,26 @@ function verifyAccessToken(accessToken: string): AccessTokenPayload {
     }
 }
 
-function verifyRefreshToken(refreshToken: string): RefreshTokenPayload {
+async function verifyRefreshToken(
+    refreshToken: string
+): Promise<RefreshTokenPayload> {
     try {
-        const refreshTokenPayload = jwt.verify(
+        let jwtData;
+        jwtData = jwt.verify(
             refreshToken,
             envVars.JWT_REFRESH_SECRET
+        ) as JwtData;
+        const refreshTokenPayload = JSON.parse(
+            await cryptUtil.decrypt(jwtData.data)
         ) as RefreshTokenPayload;
-        const accessTokenPayload = jwt.verify(
+        jwtData = jwt.verify(
             refreshTokenPayload.accessToken,
             envVars.JWT_ACCESS_SECRET
+        ) as JwtData;
+        const accessTokenPayload = JSON.parse(
+            await cryptUtil.decrypt(jwtData.data)
         ) as AccessTokenPayload;
-        if (refreshTokenPayload.userId !== accessTokenPayload.userId) {
+        if (accessTokenPayload.userId !== refreshTokenPayload.userId) {
             throw new HttpError(
                 HttpStatus.UNAUTHORIZED,
                 "Invalid refresh token"
@@ -51,6 +80,10 @@ function verifyRefreshToken(refreshToken: string): RefreshTokenPayload {
     } catch (error) {
         throw new HttpError(HttpStatus.UNAUTHORIZED, "Invalid refresh token");
     }
+}
+
+export interface JwtData {
+    data: string;
 }
 
 export interface AccessTokenPayload {

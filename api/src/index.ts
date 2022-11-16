@@ -16,7 +16,6 @@ import { loggerMiddleware } from "./middleware/logger-middleware";
 import { AUTH } from "./middleware/auth-middleware";
 import { envVars } from "./util/env-vars";
 import scheduleTasks from "./tasks/schedule-tasks";
-import { cryptUtil } from "./util/crypt-util";
 
 const app = express();
 const api = Router();

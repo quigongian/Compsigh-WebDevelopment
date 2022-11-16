@@ -14,7 +14,7 @@ async function getPaginatedCheckIns(
             page: req.query.page as string | null,
             size: req.query.size as string | null,
         });
-        res.json(checkInDTOs);
+        res.status(HttpStatus.OK).json(checkInDTOs);
     } catch (error) {
         next(error);
     }
@@ -25,7 +25,7 @@ async function getCheckIn(req: Request, res: Response, next: NextFunction) {
         const checkInDTO = await checkInService.getCheckInDTOById(
             req.params.checkInId
         );
-        res.json(checkInDTO);
+        res.status(HttpStatus.OK).json(checkInDTO);
     } catch (error) {
         next(error);
     }

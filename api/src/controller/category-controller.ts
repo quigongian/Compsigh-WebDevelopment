@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { categoryService } from "../service/category-service";
+import { HttpStatus } from "../util/HttpStatus";
 
 async function getAllCategories(
     req: Request,
@@ -8,7 +9,7 @@ async function getAllCategories(
 ) {
     try {
         const categories = await categoryService.getAll();
-        res.json(categories);
+        res.status(HttpStatus.OK).json(categories);
     } catch (error) {
         next(error);
     }

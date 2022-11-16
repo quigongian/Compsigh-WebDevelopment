@@ -45,7 +45,6 @@ paths:
       summary: Ping the server
       produces:
         - text/plain
-        - application/json
       responses:
         200:
           description: Ok

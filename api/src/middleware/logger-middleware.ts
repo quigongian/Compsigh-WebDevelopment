@@ -5,10 +5,24 @@ export function loggerMiddleware(
     res: Response,
     next: NextFunction
 ) {
+    const date = new Date();
     console.log(
-        `${new Date().toLocaleString()} ${
-            req.method + " ".repeat(7 - req.method.length)
-        } /api${req.path} ${req.ip}`
+        date.toLocaleString(),
+        req.method,
+        req.method.padEnd(7, " "),
+        req.originalUrl
     );
+    res.on("finish", () => {
+        console.log(
+            new Date().toLocaleString(),
+            req.method,
+            req.method.padEnd(7, " "),
+            req.originalUrl,
+            "->",
+            res.statusCode,
+            res.statusMessage,
+            `${new Date().getTime() - date.getTime()}ms`
+        );
+    });
     next();
 }

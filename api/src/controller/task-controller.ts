@@ -8,7 +8,7 @@ async function getAllTasks(req: Request, res: Response, next: NextFunction) {
             req.userId,
             req.query.completed as string | null
         );
-        res.json(tasksDTOs);
+        res.status(HttpStatus.OK).json(tasksDTOs);
     } catch (error) {
         next(error);
     }
@@ -20,7 +20,7 @@ async function getTask(req: Request, res: Response, next: NextFunction) {
             req.params.taskId,
             req.userId
         );
-        res.json(taskDTO);
+        res.status(HttpStatus.OK).json(taskDTO);
     } catch (error) {
         next(error);
     }
@@ -50,7 +50,7 @@ async function updateTask(req: Request, res: Response, next: NextFunction) {
             taskName: req.body.taskName,
             taskDescription: req.body.taskDescription,
         });
-        res.json(updatedTaskDTO);
+        res.status(HttpStatus.OK).json(updatedTaskDTO);
     } catch (error) {
         next(error);
     }
@@ -63,7 +63,7 @@ async function completeTask(req: Request, res: Response, next: NextFunction) {
             req.userId
         );
         const completedTaskDTO = await taskService.completeTask(taskDTO.taskId);
-        res.json(completedTaskDTO);
+        res.status(HttpStatus.OK).json(completedTaskDTO);
     } catch (error) {
         next(error);
     }
