@@ -10,9 +10,14 @@ import {
     Accordion, 
     AccordionSummary, 
     AccordionDetails, 
+    Dialog,
     Typography,
     Stack,
     TextField,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
     MenuItem,
     Box,
     FormGroup,
@@ -234,18 +239,103 @@ export function SwitchEmail() {
     );
   }
 
+
 const Security = () =>{
+
+    const [passOpen, setPassOpen] = React.useState(false);
+
+    const [delOpen, setDelOpen] = React.useState(false);
+
+    const passwordOpen = () => {
+      setPassOpen(true);
+    };
+  
+    const passwordClose = () => {
+      setPassOpen(false);
+    };
+
+    const deleteOpen = () => {
+        setDelOpen(true);
+      };
+    
+      const deleteClose = () => {
+        setDelOpen(false);
+      };
+  
+
     return (
         <>
             <h3 id = "content-title">Security</h3>
             <h4>Password</h4>
-            <button className="Button">Change</button>
+            <button className="Button" onClick={passwordOpen}>Change</button>
+            <Dialog open={passOpen} onClose={passwordClose}>
+                <DialogTitle>Change Password</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        To change your password, please enter your old password followed by
+                        your new password. 
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Old Password"
+                        type="password"
+                        fullWidth
+                        variant="standard"
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="New Password"
+                        type="password"
+                        fullWidth
+                        variant="standard"
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Confirm New Password"
+                        type="password"
+                        fullWidth
+                        variant="standard"
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={passwordClose}>Cancel</Button>
+                    <Button onClick={passwordClose}>Submit</Button>
+                </DialogActions>
+            </Dialog>
             <hr className = "Hr"/>
             <h4>2 Factor Authentication</h4>
             <button className="Button">Enable</button>
             <hr className = "Hr"/>
             <h4>Delete Account</h4>
-            <button className="Button">Delete</button>
+            <button className="Button" onClick={deleteOpen}>Delete</button>
+            <Dialog open={delOpen} onClose={deleteClose}>
+                <DialogTitle>Delete Account</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        To delete your account, please enter your email. 
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Enter email"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                    />
+
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={deleteClose}>Cancel</Button>
+                    <Button onClick={deleteClose}>Delete</Button>
+                </DialogActions>
+            </Dialog>
         </>
     )
 }
