@@ -1,8 +1,10 @@
+
 import { CenterFocusStrong } from "@mui/icons-material";
 import { useState } from "react";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 import SignIn from "../image_content/signIn.png";
+
 
 export const Login = () => {
 
@@ -13,7 +15,7 @@ export const Login = () => {
       <Header />
       {display === "signIn" && (
         <div style={{}}>
-        <section style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", borderStyle: "solid"}} >
+        <section style={{ display: "flex", flexDirection: "row", justifyContent: "space-between"}} >
           <section style={{margin: "auto", textAlign: "center"}}>
             <h1 style={{fontSize: "50px"}}>Welcome Back!</h1>
             <form action="">
