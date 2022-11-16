@@ -113,9 +113,9 @@ export const Todo = () => {
                     <div style ={rightContainer}>
                        
 <div style={toDoList}>
-        <br/><br/>
-        <h2 ref={ref}>To Do List App (ReactJs)</h2>
-        <br/><br/>
+        
+        <h2 ref={ref}>To Do List App</h2>
+        
         
             {/* Update Task */}
             {active === "Second" &&

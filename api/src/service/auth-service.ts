@@ -22,8 +22,11 @@ async function signIn(req: SignInRequest): Promise<AuthResponse> {
         throw new HttpError(HttpStatus.UNAUTHORIZED, "Wrong email or password");
     }
     await userService.updateLastSignIn(user.userId);
-    const accessToken = jwtUtil.generateAccessJWT(user.userId);
-    const refreshToken = jwtUtil.generateRefreshJWT(user.userId, accessToken);
+    const accessToken = await jwtUtil.generateAccessJWT(user.userId);
+    const refreshToken = await jwtUtil.generateRefreshJWT(
+        user.userId,
+        accessToken
+    );
     return { accessToken, refreshToken };
 }
 
@@ -59,8 +62,11 @@ async function verifyEmail(req: VerifyEmailRequest): Promise<AuthResponse> {
         throw new HttpError(HttpStatus.UNAUTHORIZED, "Code expired");
     }
     await userService.verifyEmail(user.userId);
-    const accessToken = jwtUtil.generateAccessJWT(user.userId);
-    const refreshToken = jwtUtil.generateRefreshJWT(user.userId, accessToken);
+    const accessToken = await jwtUtil.generateAccessJWT(user.userId);
+    const refreshToken = await jwtUtil.generateRefreshJWT(
+        user.userId,
+        accessToken
+    );
     return { accessToken, refreshToken };
 }
 
@@ -97,12 +103,12 @@ async function resetPassword(req: ResetPasswordRequest): Promise<void> {
 async function refreshAccessToken(
     req: RefreshAccessTokenRequest
 ): Promise<RefreshAccessTokenResponse> {
-    const { userId } = jwtUtil.verifyRefreshToken(req.refreshToken);
+    const { userId } = await jwtUtil.verifyRefreshToken(req.refreshToken);
     if (userId !== req.userId) {
         throw new HttpError(HttpStatus.UNAUTHORIZED, "Invalid refresh token");
     }
     await userService.updateLastSignIn(userId);
-    const accessToken = jwtUtil.generateAccessJWT(userId);
+    const accessToken = await jwtUtil.generateAccessJWT(userId);
     return { accessToken };
 }
 

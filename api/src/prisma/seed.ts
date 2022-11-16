@@ -1,5 +1,5 @@
-import { prisma } from "../src/util/prisma";
-import { authService, SignUpRequest } from "../src/service/auth-service";
+import { prisma } from "../util/prisma";
+import { authService, SignUpRequest } from "../service/auth-service";
 
 async function init() {
     // Categories
@@ -129,9 +129,9 @@ async function init() {
     const dummyUser: SignUpRequest = {
         firstName: "Dummy",
         lastName: "User",
-        userName: "dummyuser",
-        email: "dummyuser@example.com",
-        password: "Password123!",
+        userName: "dummy",
+        email: "dummy@example.com",
+        password: "Dummy123!",
         categoryId: 1,
         xpLevelId: 1,
     };

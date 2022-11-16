@@ -64,13 +64,17 @@ async function updateAndReturnTaskDTO(
     const task = await taskRepository.update(
         req.taskId,
         req.taskName,
-        req.taskDescription
+        req.taskDescription,
+        req.completed
     );
     return createTaskdDTO(task);
 }
 
-async function completeTask(taskId: number): Promise<void> {
-    await taskRepository.updateCompleted(taskId, true);
+async function updateTaskCompletedStatus(
+    taskId: number,
+    completed: boolean
+): Promise<void> {
+    await taskRepository.updateCompleted(taskId, completed);
 }
 
 async function deleteById(taskId: number): Promise<void> {
@@ -87,6 +91,7 @@ export interface UpdateTaskRequest {
     taskId: number;
     taskName: string;
     taskDescription: string;
+    completed: boolean;
 }
 
 export const taskService = {
@@ -95,6 +100,6 @@ export const taskService = {
     getTaskDTOIfBelongsToUser,
     createAndReturnTaskDTO,
     updateAndReturnTaskDTO,
-    completeTask,
+    updateTaskCompletedStatus,
     deleteById,
 };

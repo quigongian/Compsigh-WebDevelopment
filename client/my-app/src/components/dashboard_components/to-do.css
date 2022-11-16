@@ -63,3 +63,18 @@
   .taskBg .iconWrapper span:hover {
     color: yellow;
   }
+
+  .form-control {
+    border: none;
+    width: 300px;
+    padding: 10px;
+    border-radius: 20px;
+    
+  }
+  .btn{
+    background: #B9DFFF;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #eee;
+  }
