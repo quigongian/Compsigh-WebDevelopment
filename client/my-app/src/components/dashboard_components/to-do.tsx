@@ -191,16 +191,6 @@ export const Todo = () => {
                                 </span>
                             </div>
                         </div>
-
-                        {/* <span>Title</span>
-                        <select>
-                            <option>Three</option>
-                            <option>Four</option>
-                            <option>Five</option>
-                            <option>Six</option>
-                            <option>Seven</option>
-                        </select> */}
-
                     </React.Fragment>
                 )
             })}                       
