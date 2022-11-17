@@ -3,8 +3,6 @@ import { CenterFocusStrong } from "@mui/icons-material";
 import { useState } from "react";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
-// import  NewSignIn from "../image_content/newSignIn.png";
-// sign in
 import  SignOut from "../image_content/signOut.png";
 import "./Login.css";
 
