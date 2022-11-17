@@ -2,18 +2,20 @@ import { NextFunction, Request, Response } from "express";
 import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
 
-export function defaultErrorHandler(
-    err: Error,
+export function globalErrorHandler(
+    error: Error,
     req: Request,
     res: Response,
     next: NextFunction
 ) {
-    console.error(err);
+    console.log("--------------------------------");
+    console.error(error.stack);
+    console.log("--------------------------------");
     if (res.headersSent) {
-        return next(err);
+        return next(error);
     }
-    if (err instanceof HttpError) {
-        res.status(err.statusCode).json({ error: err.message });
+    if (error instanceof HttpError) {
+        res.status(error.statusCode).json({ error: error.message });
     } else {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
             error: "Internal server error",

@@ -9,25 +9,28 @@ import {
 } from "./email-verification-service";
 
 async function signIn(req: SignInRequest): Promise<AuthResponse> {
-    const user = await userService.getByEmail(req.email);
-    if (!user.emailVerified) {
-        await emailVerificationService.setupEmailVerification(
+    try {
+        const user = await userService.getByEmail(req.email);
+        if (!user.emailVerified) {
+            await emailVerificationService.setupEmailVerification(
+                user.userId,
+                user.email,
+                EmailVerificationType.VERIFY_EMAIL
+            );
+            throw new HttpError(HttpStatus.UNAUTHORIZED, "Please verify email");
+        }
+        if (!(await cryptUtil.compare(req.password, user.password))) {
+        }
+        await userService.updateLastSignIn(user.userId);
+        const accessToken = await jwtUtil.generateAccessJWT(user.userId);
+        const refreshToken = await jwtUtil.generateRefreshJWT(
             user.userId,
-            user.email,
-            EmailVerificationType.VERIFY_EMAIL
+            accessToken
         );
-        throw new HttpError(HttpStatus.UNAUTHORIZED, "Please verify email");
-    }
-    if (!(await cryptUtil.compare(req.password, user.password))) {
+        return { accessToken, refreshToken };
+    } catch (error) {
         throw new HttpError(HttpStatus.UNAUTHORIZED, "Wrong email or password");
     }
-    await userService.updateLastSignIn(user.userId);
-    const accessToken = await jwtUtil.generateAccessJWT(user.userId);
-    const refreshToken = await jwtUtil.generateRefreshJWT(
-        user.userId,
-        accessToken
-    );
-    return { accessToken, refreshToken };
 }
 
 async function signUp(req: SignUpRequest): Promise<void> {
