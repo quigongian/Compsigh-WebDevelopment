@@ -75,17 +75,15 @@ export const Login = () => {
             <br />
 
             <select className="dropDown" name="experienceLevel" id="expLevel">
-              <option value="experienceLevel" disabled>Experience Level</option>
+              <option value="experienceLevel" disabled selected>Experience Level</option>
               <option value="beginner">Beginner</option>
               <option value="intermediate">Intermediate</option>
               <option value="advanced">Advanced</option>
             </select>
             <br />
 
-            {/* how do i make this required and have a placeholde */}
-            {/* how do i change the padding on the arrow */}
             <select className="dropDown" name="careerPath" id="careerPath">
-              <option value="careerPath" disabled>Select a Career Path</option>
+              <option value="careerPath" disabled selected>Select a Career Path</option>
               <option value="cs">Computer Science</option>
               <option value="ch">Computer Hardware</option>
               <option value="cyber">Cyber Security</option>
