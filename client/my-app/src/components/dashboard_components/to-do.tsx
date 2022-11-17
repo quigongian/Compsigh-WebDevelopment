@@ -181,21 +181,26 @@ export const Todo = () => {
                                         title: task.title,
                                         status: task.status ? true : false}); 
                                         setActive("Second");
-                                        handleScroll();}}
-                                >       
+                                        handleScroll();}}>       
                                 <Edit/>
                                 </span>
                                 )}
                                 <span title="Delete"
-                                    onClick={()=> {deleteTask(task.id); setActive("First")}}
-                                > 
+                                    onClick={()=> {deleteTask(task.id); setActive("First")}}> 
                                 <DeleteIcon />
                                 </span>
                             </div>
                         </div>
-                       
 
-        
+                        {/* <span>Title</span>
+                        <select>
+                            <option>Three</option>
+                            <option>Four</option>
+                            <option>Five</option>
+                            <option>Six</option>
+                            <option>Seven</option>
+                        </select> */}
+
                     </React.Fragment>
                 )
             })}                       

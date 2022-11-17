@@ -41,6 +41,7 @@
 .taskBg .taskText{
     flex:1;
 }
+
 .taskBg .done .taskText{
     text-decoration: line-through;
     opacity: 0.3;
@@ -59,11 +60,11 @@
     display: inline-block;
     margin: 0px 10px 0 10px;
     cursor: pointer;
-    color: #81B29A;
+    color: #E07A5F;
   }
 
   .taskBg .iconWrapper span:hover {
-    color: #b1f0d1;
+    color: #ffa48b;
   }
 
   .form-control {
@@ -81,13 +82,23 @@
     padding: 10px 24px;
     border-radius: 10px;
     box-shadow: 5px 5px 5px #eee;
+    font-weight: normal;
+  }
+
+  .btn:hover{
+    cursor: pointer;
   }
 
   .btncancel{
+    font-weight: normal;
     background: #E07A5F;
     margin-left: 5px;
     border: none;
     padding: 10px 24px;
     border-radius: 10px;
     box-shadow: 5px 5px 5px #eee;
+  }
+
+  .btncancel:hover{
+    cursor: pointer;
   }
