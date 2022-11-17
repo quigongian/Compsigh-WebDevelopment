@@ -5,7 +5,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Container = {
-  border: "1px solid pink",
+//   border: "1px solid pink",
   marginLeft: "9%",
   height: "99.5vh"
 };
@@ -16,7 +16,7 @@ const Wrapper = {
 };
 
 const rightContainer = {
-  border: "1px solid transparent",
+//   border: "1px solid red",
   height: "100%",
   width: "100%",
   display: "flex",
@@ -41,7 +41,7 @@ export const Todo = () => {
 
     //Temp States
     const [newTask, setNewTask] = useState('');
-    const [updateData, setUpdateData] = useState({id: 0, title: "", status: false});
+    const [updateData, setUpdateData] = useState({id: 1, title: "", status: false});
     const [active, setActive] = useState("First")
    
       const ref = useRef<null | HTMLDivElement>(null); 
@@ -79,10 +79,6 @@ export const Todo = () => {
         setToDo(newTask);
     }
 
-    //cancels task update
-    const cancelUpdate = () =>{
-    }
-    
     //updates task
     const changeTask = (e:any) =>{
         let newEntry={
@@ -96,13 +92,13 @@ export const Todo = () => {
 
     const updateTask = () =>{
         let filterRecords = [...toDo].filter(task => task.id !== updateData.id)
-        let updatedObject = [updateData, ...filterRecords]
+        let updatedObject = [...filterRecords, updateData]
         if(updateData.id !== 0){
             setToDo(updatedObject)
         }
-        setUpdateData({id:0, title: "", status: false})
+        setUpdateData({id: 0 , title: "", status: false})
     }
-
+    
  
 
 
@@ -114,7 +110,7 @@ export const Todo = () => {
                        
 <div style={toDoList}>
         
-        <h2 ref={ref}>To Do List App</h2>
+        <h2 ref={ref}>Your To-do List</h2>
         
         
             {/* Update Task */}
@@ -122,39 +118,38 @@ export const Todo = () => {
             <span className = "updateTask">
 
                 <div className="row">
-                <div className="col">
-                    <input 
-                    value={updateData && updateData.title}
-                    onChange ={(e:any) => changeTask(e)}
-                    className="form-control"/>
-                </div> 
-                <div className="col-auto">
-                    <button className="btn"
-                    onClick={()=>{updateTask(); setActive("First");}}
-                    >Update</button>
-                    <button className="btn" onClick={()=>{setActive("First");}}>Cancel</button>
+                        <div className="col">
+                            <input 
+                            value={updateData && updateData.title}
+                            onChange ={(e:any) => changeTask(e)}
+                            className="form-control"/>
+                        </div> 
+                        <div className="col-auto">
+                            <button className="btn"
+                            onClick={()=>{updateTask(); setActive("First");}}>Update</button>
+                            <button className="btncancel" onClick={()=>{setActive("First");}}>Cancel</button>
+                        </div>
                 </div>
-            </div>
             <br/>
-        </span>
+            </span>
                    
                 }
             {/* Add Task */}
             {active === "First" &&
      <span className ="addTask">
         <div className ="row">
-            <div className="col">
-                <input 
-                value={newTask}
-                onChange={ (e:any)=>setNewTask(e.target.value) }
-                className="form-control"/>
-            </div>
-            <div className="col-auto">
-                <button 
-                onClick={addTask}
-                
-                className="btn" >Add Task</button>
-            </div>
+                <div className="col">
+                    <input 
+                    value={newTask}
+                    onChange={ (e:any)=>setNewTask(e.target.value) }
+                    className="form-control"/>
+                </div>
+                <div className="col-auto">
+                    <button 
+                    onClick={addTask}
+                    
+                    className="btn" >Add Task</button>
+                </div>
         </div>
         <br/>
     </span>
@@ -172,10 +167,8 @@ export const Todo = () => {
                                 <span className ="taskText">{task.title}</span>
                             </div>
                             <div className="iconWrapper">
-                                
-                                <span title="Completed / Not Completed"
-                                    onClick={(e:any)=> markDone(task.id)}
-                                >
+                                <span title="Complete/Uncomplete"
+                                    onClick={(e:any)=> markDone(task.id)}>
                                 <CheckCircleIcon/>
                                 </span>
                                 {task.status ? null :(
@@ -186,14 +179,14 @@ export const Todo = () => {
                                         status: task.status ? true : false}); 
                                         setActive("Second");
                                         handleScroll();}}
-                                >
+                                >       
                                 <Edit/>
                                 </span>
                                 )}
                                 <span title="Delete"
                                     onClick={()=> {deleteTask(task.id); setActive("First")}}
                                 > 
-                                <DeleteIcon/>
+                                <DeleteIcon />
                                 </span>
                             </div>
                         </div>
