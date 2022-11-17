@@ -346,8 +346,8 @@ const Appearance = () => {
             <h1>Appearance</h1>
             <p>Display Mode</p>
             <div className = "ButtonGroup">
-                <button className = "LightButton">comsigh light</button>
-                <button className = "DarkButton">comsigh dark</button>
+                <button className = "LightButton"><strong>comsigh light</strong></button>
+                <button className = "DarkButton"><strong>comsigh dark</strong></button>
             </div>
             <p>Accessibility</p>
         </>

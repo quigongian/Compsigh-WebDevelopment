@@ -59,6 +59,13 @@ li button {
   background-color: transparent;
   border: none;
 }
+
+li button:hover{
+  background: #3D405B;
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+}
 /*|------------------------------------------------------------------------Sidebar------------------------------------------------------------------------|*/
 
 #content-title {
@@ -163,8 +170,8 @@ li button {
   font-size: 24px;
   display: inline-block;
   text-align: center;
-  width: 15%;
-  height: 100%;
+  width: 225px;
+  height: 125px;
   padding: 15px 32px;
   border-radius: 12px;
   color: #3D405B; 
@@ -178,8 +185,8 @@ li button {
   font-size: 24px;
   display: inline-block;
   text-align: center;
-  width: 15%;
-  height: 100%;
+  width: 225px;
+  height: 125px;
   padding: 15px 32px;
   border-radius: 12px;
   color: #F4F1DE; 
