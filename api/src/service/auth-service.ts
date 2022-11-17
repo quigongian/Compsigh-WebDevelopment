@@ -7,6 +7,14 @@ import {
     emailVerificationService,
     EmailVerificationType,
 } from "./email-verification-service";
+import {
+    RefreshAccessTokenRequest,
+    ResetPasswordRequest,
+    SignInRequest,
+    SignUpRequest,
+    VerifyEmailRequest,
+} from "../models/requests";
+import { AuthResponse, RefreshAccessTokenResponse } from "../models/responses";
 
 async function signIn(req: SignInRequest): Promise<AuthResponse> {
     try {
@@ -113,47 +121,6 @@ async function refreshAccessToken(
     await userService.updateLastSignIn(userId);
     const accessToken = await jwtUtil.generateAccessJWT(userId);
     return { accessToken };
-}
-
-export interface SignInRequest {
-    email: string;
-    password: string;
-}
-
-export interface SignUpRequest {
-    firstName: string;
-    lastName: string;
-    userName: string;
-    email: string;
-    password: string;
-    categoryId: number;
-    xpLevelId: number;
-}
-
-export interface VerifyEmailRequest {
-    email: string;
-    code: string;
-}
-
-export interface ResetPasswordRequest {
-    email: string;
-    password: string;
-    repeatPassword: string;
-    code: string;
-}
-
-export interface RefreshAccessTokenRequest {
-    userId: number;
-    refreshToken: string;
-}
-
-export interface AuthResponse {
-    accessToken: string;
-    refreshToken: string;
-}
-
-export interface RefreshAccessTokenResponse {
-    accessToken: string;
 }
 
 export const authService = {

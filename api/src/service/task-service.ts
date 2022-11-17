@@ -1,4 +1,4 @@
-import { TaskDTO, createTaskdDTO } from "../dto/TaskDTO";
+import { TaskDTO, createTaskdDTO } from "../models/domain";
 import { taskRepository } from "../repository/task-repository";
 import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";

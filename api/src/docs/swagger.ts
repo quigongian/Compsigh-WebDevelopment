@@ -38,10 +38,10 @@ export const swaggerSpec = swaggerJSDoc({
                     "firstName",
                     "lastName",
                     "email",
-                    "categoryId",
                     "categoryName",
                     "xpLevelId",
                     "xpLevelName",
+                    "theme	",
                 ],
                 properties: {
                     userId: { type: "integer", format: "int64" },
@@ -49,10 +49,9 @@ export const swaggerSpec = swaggerJSDoc({
                     firstName: { type: "string" },
                     lastName: { type: "string" },
                     email: { type: "string" },
-                    categoryId: { type: "integer", format: "int64" },
                     categoryName: { type: "string" },
-                    xpLevelId: { type: "integer", format: "int64" },
                     xpLevelName: { type: "string" },
+                    theme: { type: "string", enum: ["LIGHT", "DARK"] },
                 },
             },
             CheckInDTO: {
@@ -74,6 +73,7 @@ export const swaggerSpec = swaggerJSDoc({
                         type: "string",
                         enum: ["GOOD", "NEUTRAL", "BAD"],
                     },
+                    createdAt: { type: "date" },
                 },
             },
             TaskDTO: {
@@ -89,6 +89,7 @@ export const swaggerSpec = swaggerJSDoc({
                     taskName: { type: "string" },
                     taskDescription: { type: "string" },
                     completed: { type: "boolean", default: false },
+                    createdAt: { type: "date" },
                 },
             },
             Category: {
@@ -187,14 +188,24 @@ export const swaggerSpec = swaggerJSDoc({
                 required: [
                     "email",
                     "oldPassword",
-                    "password",
+                    "newPassword",
                     "repeatPassword",
                 ],
                 properties: {
                     email: { type: "string" },
                     oldPassword: { type: "string" },
-                    password: { type: "string" },
+                    newPassword: { type: "string" },
                     repeatPassword: { type: "string" },
+                },
+            },
+            ChangeThemeRequest: {
+                type: "object",
+                required: ["theme"],
+                properties: {
+                    theme: {
+                        type: "string",
+                        enum: ["LIGHT", "DARK"],
+                    },
                 },
             },
             CreateCheckInRequest: {
@@ -233,32 +244,32 @@ export const swaggerSpec = swaggerJSDoc({
                 required: ["completed"],
                 properties: { completed: { type: "boolean", default: false } },
             },
+            ErrorResponse: {
+                type: "object",
+                required: ["error"],
+                properties: { error: { type: "string" } },
+            },
             Created: { description: "Created" },
             NoContent: { description: "NoContent" },
             BadRequest: {
                 description: "BadRequest",
-                schema: { $ref: "#/definitions/Error" },
+                schema: { $ref: "#/definitions/ErrorResponse" },
             },
             Unauthorized: {
                 description: "Unauthorized",
-                schema: { $ref: "#/definitions/Error" },
+                schema: { $ref: "#/definitions/ErrorResponse" },
             },
             Forbidden: {
                 description: "Forbidden",
-                schema: { $ref: "#/definitions/Error" },
+                schema: { $ref: "#/definitions/ErrorResponse" },
             },
             NotFound: {
                 description: "NotFound",
-                schema: { $ref: "#/definitions/Error" },
+                schema: { $ref: "#/definitions/ErrorResponse" },
             },
             InternalServerError: {
                 description: "InternalServerError",
-                schema: { $ref: "#/definitions/Error" },
-            },
-            Error: {
-                type: "object",
-                required: ["error"],
-                properties: { error: { type: "string" } },
+                schema: { $ref: "#/definitions/ErrorResponse" },
             },
         },
     },

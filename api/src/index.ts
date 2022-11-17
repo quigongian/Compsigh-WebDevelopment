@@ -36,6 +36,7 @@ api.post("/auth/password/reset", authController.resetPassword);
 api.get("/user/", AUTH(userController.getUser));
 api.delete("/user", AUTH(userController.deleteAccount));
 api.patch("/user/password", AUTH(userController.changePassword));
+api.patch("/user/theme", AUTH(userController.changeTheme));
 api.get("/checkin", AUTH(checkInController.getPaginatedCheckIns));
 api.post("/checkin", AUTH(checkInController.makeCheckIn));
 api.get("/checkin/:checkInId", AUTH(checkInController.getCheckIn));

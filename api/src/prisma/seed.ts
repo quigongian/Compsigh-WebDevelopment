@@ -1,5 +1,6 @@
 import { prisma } from "../util/prisma";
-import { authService, SignUpRequest } from "../service/auth-service";
+import { authService } from "../service/auth-service";
+import { SignUpRequest } from "../models/requests";
 
 async function init() {
     // Categories

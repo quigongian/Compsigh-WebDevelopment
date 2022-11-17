@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { User, Theme } from "@prisma/client";
 import { prisma } from "../util/prisma";
 
 async function getAllUnverifiedUsers(): Promise<User[]> {
@@ -90,6 +90,13 @@ async function updateLastSignIn(
     });
 }
 
+async function updateTheme(userId: number, theme: Theme): Promise<User> {
+    return await prisma.user.update({
+        where: { userId },
+        data: { theme },
+    });
+}
+
 async function deleteById(userId: number): Promise<void> {
     await prisma.user.delete({ where: { userId } });
 }
@@ -106,5 +113,6 @@ export const userRepository = {
     updateEmailVerified,
     updateLastSignIn,
     updateLastCheckIn,
+    updateTheme,
     deleteById,
 };

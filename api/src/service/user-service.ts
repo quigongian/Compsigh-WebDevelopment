@@ -1,5 +1,5 @@
-import { User, Task } from "@prisma/client";
-import { UserDTO, createUserDTO } from "../dto/UserDTO";
+import { User, Task, Theme } from "@prisma/client";
+import { UserDTO, createUserDTO } from "../models/domain";
 import { userRepository } from "../repository/user-repository";
 import { taskService } from "../service/task-service";
 import { categoryService } from "./category-service";
@@ -112,13 +112,13 @@ async function updatePassword(
 async function changePassword(
     userId: number,
     oldPassword: string,
-    password: string,
+    newPassword: string,
     repeatPassword: string
 ): Promise<void> {
-    if (password !== repeatPassword) {
+    if (newPassword !== repeatPassword) {
         throw new HttpError(HttpStatus.BadRequest, "Passwords do not match");
     }
-    if (!isStrongPassword(password)) {
+    if (!isStrongPassword(newPassword)) {
         throw new HttpError(
             HttpStatus.BadRequest,
             "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
@@ -131,8 +131,8 @@ async function changePassword(
     if (!(await cryptUtil.compare(oldPassword, user.password))) {
         throw new HttpError(HttpStatus.BadRequest, "Incorrect password");
     }
-    password = await cryptUtil.hash(password);
-    await userRepository.updatePassword(userId, password);
+    newPassword = await cryptUtil.hash(newPassword);
+    await userRepository.updatePassword(userId, newPassword);
 }
 
 async function verifyEmail(userId: number): Promise<void> {
@@ -145,6 +145,13 @@ async function updateLastCheckIn(userId: number): Promise<void> {
 
 async function updateLastSignIn(userId: number): Promise<void> {
     await userRepository.updateLastSignIn(userId, new Date());
+}
+
+async function updateTheme(userId: number, theme: string): Promise<void> {
+    if (!Object.values(Theme).includes(theme as Theme)) {
+        throw new HttpError(HttpStatus.BadRequest, "Invalid theme option");
+    }
+    await userRepository.updateTheme(userId, theme as Theme);
 }
 
 async function deleteUser(userId: number, userName: string): Promise<void> {
@@ -203,5 +210,6 @@ export const userService = {
     verifyEmail,
     updateLastSignIn,
     updateLastCheckIn,
+    updateTheme,
     deleteUser,
 };

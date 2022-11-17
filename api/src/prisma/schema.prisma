@@ -22,6 +22,7 @@ model User {
     lastSignIn        DateTime?
     lastCheckIn       DateTime?
     emailVerified     Boolean            @default(false)
+    theme             Theme              @default(LIGHT)
     tasks             Task[]
     emailVerification EmailVerification?
     checkIns          CheckIn[]
@@ -86,4 +87,9 @@ enum CheckInStatus {
     GOOD
     NEUTRAL
     BAD
+}
+
+enum Theme {
+    LIGHT
+    DARK
 }

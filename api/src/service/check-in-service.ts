@@ -1,5 +1,5 @@
 import { CheckInStatus } from "@prisma/client";
-import { CheckInDTO, createCheckinDTO } from "../dto/CheckinDTO";
+import { CheckInDTO, createCheckinDTO } from "../models/domain";
 import { checkInRepository } from "../repository/check-in-repository";
 import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
