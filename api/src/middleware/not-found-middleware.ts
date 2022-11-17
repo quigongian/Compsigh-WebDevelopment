@@ -7,5 +7,5 @@ export function notFoundHandler(
     res: Response,
     next: NextFunction
 ) {
-    throw new HttpError(HttpStatus.NOT_FOUND, "URL Not found");
+    throw new HttpError(HttpStatus.NotFound, "URL Not found");
 }

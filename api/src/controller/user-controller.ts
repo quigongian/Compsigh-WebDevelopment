@@ -30,7 +30,7 @@ import { HttpStatus } from "../util/HttpStatus";
 async function getUser(req: Request, res: Response, next: NextFunction) {
     try {
         const userDTO = await userService.getUserDTOById(req.userId);
-        res.status(HttpStatus.OK).json(userDTO);
+        res.status(HttpStatus.Ok).json(userDTO);
     } catch (error) {
         next(error);
     }
@@ -69,7 +69,7 @@ async function getUser(req: Request, res: Response, next: NextFunction) {
 async function deleteAccount(req: Request, res: Response, next: NextFunction) {
     try {
         await userService.deleteUser(req.userId, req.body.userName);
-        res.sendStatus(HttpStatus.NO_CONTENT);
+        res.sendStatus(HttpStatus.NoContent);
     } catch (error) {
         next(error);
     }
@@ -113,7 +113,7 @@ async function changePassword(req: Request, res: Response, next: NextFunction) {
             req.body.password,
             req.body.repeatPassword
         );
-        res.sendStatus(HttpStatus.NO_CONTENT);
+        res.sendStatus(HttpStatus.NoContent);
     } catch (error) {
         next(error);
     }

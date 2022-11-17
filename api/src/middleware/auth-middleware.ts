@@ -9,14 +9,14 @@ export function AUTH(handler: RequestHandler): RequestHandler {
             const authHeader = req.header("authorization");
             if (!authHeader) {
                 throw new HttpError(
-                    HttpStatus.UNAUTHORIZED,
+                    HttpStatus.Unauthorized,
                     "Authorization header not defined"
                 );
             }
             const attrs = authHeader.split(" ");
             if (attrs.length !== 2 || attrs[0] !== "Bearer" || !attrs[1]) {
                 throw new HttpError(
-                    HttpStatus.UNAUTHORIZED,
+                    HttpStatus.Unauthorized,
                     "invalid authorization header"
                 );
             }

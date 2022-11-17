@@ -30,7 +30,7 @@ async function getAllUsersDueCheckIn(): Promise<User[]> {
 async function getById(userId: number): Promise<User> {
     const user = await userRepository.getById(userId);
     if (!user) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "User not found");
+        throw new HttpError(HttpStatus.NotFound, "User not found");
     }
     return user;
 }
@@ -45,7 +45,7 @@ async function getUserDTOById(userId: number): Promise<UserDTO> {
 async function getByEmail(email: string): Promise<User> {
     const user = await userRepository.getByEmail(email);
     if (!user) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "User not found");
+        throw new HttpError(HttpStatus.NotFound, "User not found");
     }
     return user;
 }
@@ -55,7 +55,7 @@ async function createAndReturnUserDTO(
 ): Promise<UserDTO> {
     if (await userRepository.existsByEmail(req.email)) {
         throw new HttpError(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.BadRequest,
             "Email already exists, sign in instead"
         );
     }
@@ -66,11 +66,11 @@ async function createAndReturnUserDTO(
         !req.email ||
         !req.password
     ) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Missing required fields");
+        throw new HttpError(HttpStatus.BadRequest, "Missing required fields");
     }
     if (!isStrongPassword(req.password)) {
         throw new HttpError(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.BadRequest,
             "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
         );
     }
@@ -97,11 +97,11 @@ async function updatePassword(
     repeatPassword: string
 ): Promise<void> {
     if (password !== repeatPassword) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Passwords do not match");
+        throw new HttpError(HttpStatus.BadRequest, "Passwords do not match");
     }
     if (!isStrongPassword(password)) {
         throw new HttpError(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.BadRequest,
             "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
         );
     }
@@ -116,20 +116,20 @@ async function changePassword(
     repeatPassword: string
 ): Promise<void> {
     if (password !== repeatPassword) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Passwords do not match");
+        throw new HttpError(HttpStatus.BadRequest, "Passwords do not match");
     }
     if (!isStrongPassword(password)) {
         throw new HttpError(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.BadRequest,
             "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
         );
     }
     const user = await userRepository.getById(userId);
     if (!user) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "User not found");
+        throw new HttpError(HttpStatus.NotFound, "User not found");
     }
     if (!(await cryptUtil.compare(oldPassword, user.password))) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Incorrect password");
+        throw new HttpError(HttpStatus.BadRequest, "Incorrect password");
     }
     password = await cryptUtil.hash(password);
     await userRepository.updatePassword(userId, password);
@@ -150,10 +150,10 @@ async function updateLastSignIn(userId: number): Promise<void> {
 async function deleteUser(userId: number, userName: string): Promise<void> {
     const user = await userRepository.getById(userId);
     if (!user) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "User not found");
+        throw new HttpError(HttpStatus.NotFound, "User not found");
     }
     if (user.userName !== userName) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Incorrect user name");
+        throw new HttpError(HttpStatus.BadRequest, "Incorrect user name");
     }
     await userRepository.deleteById(userId);
 }

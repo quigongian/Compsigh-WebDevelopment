@@ -22,7 +22,7 @@ async function getAllTaskDTOsByCompletedStatus(
 async function getTaskDTOById(taskId: number): Promise<TaskDTO> {
     const task = await taskRepository.getById(taskId);
     if (!task) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "Task not found");
+        throw new HttpError(HttpStatus.NotFound, "Task not found");
     }
     return createTaskdDTO(task);
 }
@@ -33,11 +33,11 @@ async function getTaskDTOIfBelongsToUser(
 ): Promise<TaskDTO> {
     const task = await taskRepository.getById(Number(taskId));
     if (!task) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "Task not found");
+        throw new HttpError(HttpStatus.NotFound, "Task not found");
     }
     if (task.userId !== userId) {
         throw new HttpError(
-            HttpStatus.FORBIDDEN,
+            HttpStatus.Forbidden,
             "Task does not belong to user"
         );
     }
@@ -48,7 +48,7 @@ async function createAndReturnTaskDTO(
     req: CreateTaskRequest
 ): Promise<TaskDTO> {
     if (!req.taskName) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Missing required fields");
+        throw new HttpError(HttpStatus.BadRequest, "Missing required fields");
     }
     const task = await taskRepository.create(
         req.userId,

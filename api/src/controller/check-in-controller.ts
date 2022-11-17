@@ -50,7 +50,7 @@ async function getPaginatedCheckIns(
             page: req.query.page as string | null,
             size: req.query.size as string | null,
         });
-        res.status(HttpStatus.OK).json(checkInDTOs);
+        res.status(HttpStatus.Ok).json(checkInDTOs);
     } catch (error) {
         next(error);
     }
@@ -99,7 +99,7 @@ async function makeCheckIn(req: Request, res: Response, next: NextFunction) {
             checkInStatus: req.body.checkInStatus,
         });
         await userService.updateLastCheckIn(req.userId);
-        res.status(HttpStatus.CREATED).json(checkIn);
+        res.status(HttpStatus.Created).json(checkIn);
     } catch (error) {
         next(error);
     }
@@ -139,7 +139,7 @@ async function getCheckIn(req: Request, res: Response, next: NextFunction) {
         const checkInDTO = await checkInService.getCheckInDTOById(
             req.params.checkInId
         );
-        res.status(HttpStatus.OK).json(checkInDTO);
+        res.status(HttpStatus.Ok).json(checkInDTO);
     } catch (error) {
         next(error);
     }

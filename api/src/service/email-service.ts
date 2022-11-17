@@ -20,7 +20,7 @@ async function createTransport(): Promise<
     const accessTokenResponse = await oauth2Client.getAccessToken();
     if (!accessTokenResponse || !accessTokenResponse.token) {
         throw new HttpError(
-            HttpStatus.INTERNAL_SERVER_ERROR,
+            HttpStatus.InternalServerError,
             "Error getting access token"
         );
     }

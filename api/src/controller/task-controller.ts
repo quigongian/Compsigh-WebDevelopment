@@ -37,7 +37,7 @@ async function getAllTasks(req: Request, res: Response, next: NextFunction) {
             req.userId,
             req.query.completed as string | null
         );
-        res.status(HttpStatus.OK).json(tasksDTOs);
+        res.status(HttpStatus.Ok).json(tasksDTOs);
     } catch (error) {
         next(error);
     }
@@ -82,7 +82,7 @@ async function createTask(req: Request, res: Response, next: NextFunction) {
             taskName: req.body.taskName,
             taskDescription: req.body.taskDescription,
         });
-        res.status(HttpStatus.CREATED).json(createdTaskDTO);
+        res.status(HttpStatus.Created).json(createdTaskDTO);
     } catch (error) {
         next(error);
     }
@@ -127,7 +127,7 @@ async function getTask(req: Request, res: Response, next: NextFunction) {
             req.params.taskId,
             req.userId
         );
-        res.status(HttpStatus.OK).json(taskDTO);
+        res.status(HttpStatus.Ok).json(taskDTO);
     } catch (error) {
         next(error);
     }
@@ -186,7 +186,7 @@ async function updateTask(req: Request, res: Response, next: NextFunction) {
             completed: req.body.completed,
             taskDescription: req.body.taskDescription,
         });
-        res.status(HttpStatus.OK).json(updatedTaskDTO);
+        res.status(HttpStatus.Ok).json(updatedTaskDTO);
     } catch (error) {
         next(error);
     }
@@ -230,7 +230,7 @@ async function deleteTask(req: Request, res: Response, next: NextFunction) {
             req.userId
         );
         await taskService.deleteById(taskDTO.taskId);
-        res.sendStatus(HttpStatus.NO_CONTENT);
+        res.sendStatus(HttpStatus.NoContent);
     } catch (error) {
         next(error);
     }
@@ -290,7 +290,7 @@ async function updateCompletedStatus(
             taskDTO.taskId,
             req.body.completed as boolean
         );
-        res.sendStatus(HttpStatus.NO_CONTENT);
+        res.sendStatus(HttpStatus.NoContent);
     } catch (error) {
         next(error);
     }

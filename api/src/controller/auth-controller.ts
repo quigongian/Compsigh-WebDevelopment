@@ -36,7 +36,7 @@ async function signIn(req: Request, res: Response, next: NextFunction) {
             email: req.body.email,
             password: req.body.password,
         });
-        res.status(HttpStatus.OK).json(authResponse);
+        res.status(HttpStatus.Ok).json(authResponse);
     } catch (error) {
         next(error);
     }
@@ -79,7 +79,7 @@ async function signUp(req: Request, res: Response, next: NextFunction) {
             xpLevelId: req.body.xpLevelId,
             categoryId: req.body.categoryId,
         });
-        res.sendStatus(HttpStatus.CREATED);
+        res.sendStatus(HttpStatus.Created);
     } catch (error) {
         next(error);
     }
@@ -124,7 +124,7 @@ async function refreshAccessToken(
         const refreshAccessTokenResponse = await authService.refreshAccessToken(
             req.body.refreshToken
         );
-        res.status(HttpStatus.OK).json(refreshAccessTokenResponse);
+        res.status(HttpStatus.Ok).json(refreshAccessTokenResponse);
     } catch (error) {
         next(error);
     }
@@ -168,7 +168,7 @@ async function verifyEmail(req: Request, res: Response, next: NextFunction) {
             email: req.body.email,
             code: req.body.code,
         });
-        res.status(HttpStatus.OK).json(authResponse);
+        res.status(HttpStatus.Ok).json(authResponse);
     } catch (error) {
         next(error);
     }
@@ -206,7 +206,7 @@ async function forgotPassword(req: Request, res: Response, next: NextFunction) {
     } catch (error) {
         console.error(error);
     }
-    res.sendStatus(HttpStatus.NO_CONTENT);
+    res.sendStatus(HttpStatus.NoContent);
 }
 
 /**
@@ -247,7 +247,7 @@ async function resetPassword(req: Request, res: Response, next: NextFunction) {
             repeatPassword: req.body.repeatPassword,
             code: req.body.code,
         });
-        res.sendStatus(HttpStatus.NO_CONTENT);
+        res.sendStatus(HttpStatus.NoContent);
     } catch (error) {
         next(error);
     }

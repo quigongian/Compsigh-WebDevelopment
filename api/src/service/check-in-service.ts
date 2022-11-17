@@ -28,7 +28,7 @@ async function getPaginatedCheckInDTOs(
 async function getCheckInDTOById(checkInId: string): Promise<CheckInDTO> {
     const checkIn = await checkInRepository.getById(Number(checkInId));
     if (!checkIn) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "Check in not found");
+        throw new HttpError(HttpStatus.NotFound, "Check in not found");
     }
     return createCheckinDTO(checkIn);
 }
@@ -41,13 +41,13 @@ async function createAndReturnCheckInDTO(
             req.checkInStatus as CheckInStatus
         )
     ) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Invalid check in status");
+        throw new HttpError(HttpStatus.BadRequest, "Invalid check in status");
     }
     let checkIn;
     checkIn = await checkInRepository.getLastCheckInByUserId(req.userId);
     if (checkIn && checkIn.createdAt.getDay() === new Date().getDay()) {
         throw new HttpError(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.BadRequest,
             "User has already checked in today"
         );
     }

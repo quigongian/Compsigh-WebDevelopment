@@ -17,7 +17,7 @@ async function signIn(req: SignInRequest): Promise<AuthResponse> {
                 user.email,
                 EmailVerificationType.VERIFY_EMAIL
             );
-            throw new HttpError(HttpStatus.UNAUTHORIZED, "Please verify email");
+            throw new HttpError(HttpStatus.Unauthorized, "Please verify email");
         }
         if (!(await cryptUtil.compare(req.password, user.password))) {
         }
@@ -29,7 +29,7 @@ async function signIn(req: SignInRequest): Promise<AuthResponse> {
         );
         return { accessToken, refreshToken };
     } catch (error) {
-        throw new HttpError(HttpStatus.UNAUTHORIZED, "Wrong email or password");
+        throw new HttpError(HttpStatus.Unauthorized, "Wrong email or password");
     }
 }
 
@@ -47,7 +47,7 @@ async function signUp(req: SignUpRequest): Promise<void> {
 async function verifyEmail(req: VerifyEmailRequest): Promise<AuthResponse> {
     const user = await userService.getByEmail(req.email);
     if (user.emailVerified) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Email already verified");
+        throw new HttpError(HttpStatus.BadRequest, "Email already verified");
     }
     const emailVerification = await emailVerificationService.getByUserId(
         user.userId
@@ -57,12 +57,12 @@ async function verifyEmail(req: VerifyEmailRequest): Promise<AuthResponse> {
         !(await cryptUtil.compare(req.code, emailVerification.code))
     ) {
         throw new HttpError(
-            HttpStatus.UNAUTHORIZED,
+            HttpStatus.Unauthorized,
             "Invalid verification code"
         );
     }
     if (emailVerification.expiresAt < new Date()) {
-        throw new HttpError(HttpStatus.UNAUTHORIZED, "Code expired");
+        throw new HttpError(HttpStatus.Unauthorized, "Code expired");
     }
     await userService.verifyEmail(user.userId);
     const accessToken = await jwtUtil.generateAccessJWT(user.userId);
@@ -91,10 +91,10 @@ async function resetPassword(req: ResetPasswordRequest): Promise<void> {
         !emailVerification ||
         !(await cryptUtil.compare(req.code, emailVerification.code))
     ) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Invalid code");
+        throw new HttpError(HttpStatus.BadRequest, "Invalid code");
     }
     if (emailVerification.expiresAt < new Date()) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Code expired");
+        throw new HttpError(HttpStatus.BadRequest, "Code expired");
     }
     await userService.updatePassword(
         user.userId,
@@ -108,7 +108,7 @@ async function refreshAccessToken(
 ): Promise<RefreshAccessTokenResponse> {
     const { userId } = await jwtUtil.verifyRefreshToken(req.refreshToken);
     if (userId !== req.userId) {
-        throw new HttpError(HttpStatus.UNAUTHORIZED, "Invalid refresh token");
+        throw new HttpError(HttpStatus.Unauthorized, "Invalid refresh token");
     }
     await userService.updateLastSignIn(userId);
     const accessToken = await jwtUtil.generateAccessJWT(userId);

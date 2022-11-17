@@ -47,7 +47,7 @@ async function verifyAccessToken(
         ) as AccessTokenPayload;
         return accessTokenPayload;
     } catch (error) {
-        throw new HttpError(HttpStatus.UNAUTHORIZED, "Invalid access token");
+        throw new HttpError(HttpStatus.Unauthorized, "Invalid access token");
     }
 }
 
@@ -72,13 +72,13 @@ async function verifyRefreshToken(
         ) as AccessTokenPayload;
         if (accessTokenPayload.userId !== refreshTokenPayload.userId) {
             throw new HttpError(
-                HttpStatus.UNAUTHORIZED,
+                HttpStatus.Unauthorized,
                 "Invalid refresh token"
             );
         }
         return refreshTokenPayload;
     } catch (error) {
-        throw new HttpError(HttpStatus.UNAUTHORIZED, "Invalid refresh token");
+        throw new HttpError(HttpStatus.Unauthorized, "Invalid refresh token");
     }
 }
 

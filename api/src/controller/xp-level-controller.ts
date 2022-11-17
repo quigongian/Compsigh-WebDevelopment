@@ -24,7 +24,7 @@ import { HttpStatus } from "../util/HttpStatus";
 async function getAllXpLevels(req: Request, res: Response, next: NextFunction) {
     try {
         const xpLevels = await xpLevelService.getAll();
-        res.status(HttpStatus.OK).json(xpLevels);
+        res.status(HttpStatus.Ok).json(xpLevels);
     } catch (error) {
         next(error);
     }

@@ -20,7 +20,7 @@ import { HttpStatus } from "../util/HttpStatus";
  *          $ref: '#/definitions/InternalServerError'
  */
 function ping(req: Request, res: Response, next: NextFunction) {
-    res.status(HttpStatus.OK).send("pong");
+    res.status(HttpStatus.Ok).send("pong");
 }
 
 export const healthCheckController = {

@@ -28,7 +28,7 @@ async function getAllCategories(
 ) {
     try {
         const categories = await categoryService.getAll();
-        res.status(HttpStatus.OK).json(categories);
+        res.status(HttpStatus.Ok).json(categories);
     } catch (error) {
         next(error);
     }
