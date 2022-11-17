@@ -75,17 +75,17 @@ export const Login = () => {
             <br />
 
             <select className="dropDown" name="experienceLevel" id="expLevel">
-              <option value="">Experience Level</option>
-              <option value="">Beginner</option>
-              <option value="">Intermediate</option>
-              <option value="">Advanced</option>
+              <option value="experienceLevel" disabled>Experience Level</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
             </select>
             <br />
 
             {/* how do i make this required and have a placeholde */}
             {/* how do i change the padding on the arrow */}
             <select className="dropDown" name="careerPath" id="careerPath">
-              <option value="careerPath">Select a Career Path</option>
+              <option value="careerPath" disabled>Select a Career Path</option>
               <option value="cs">Computer Science</option>
               <option value="ch">Computer Hardware</option>
               <option value="cyber">Cyber Security</option>
@@ -113,22 +113,23 @@ export const Login = () => {
 
       {display === "forgotPassword" && (
         <section style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-        <section style={{ marginLeft: "100px" }}>
-          <h2>Reset Your Password</h2>
+        <section className="section">
+          <h1>Reset Password</h1>
 
-          <p>Enter you Compsigh email and we'll send you a link to reset your password.</p>
+          <p>Confirm email to recieve instructions 
+           <br /> on resetting your password.</p>
 
           <form action="">
-            <input type="email" name="resetpassword" placeholder="E-Mail" required />
+            <input className="input" id="reset" type="email" name="resetpassword" placeholder="E-Mail *" required />
             <br />
 
-            <button>Reset Password</button>
-            <button onClick={() => setDisplay("signIn")}>Cancel</button>
+            <button className="signIn" id="cancel" onClick={() => setDisplay("signIn")}>Cancel</button>
+            <button className="signIn">Reset Password</button>
 
           </form>
         </section>
 
-        <section style={{height:"700px"}}>
+        <section style={{height:"740px"}}>
            <img src={SignOut} alt=""/>
         </section>
 
