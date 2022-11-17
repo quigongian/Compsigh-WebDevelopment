@@ -21,7 +21,7 @@ export const envVars = {
     JWT_REFRESH_TOKEN_EXPIRATION: loadEnvVar("JWT_REFRESH_TOKEN_EXPIRATION"),
     CRYPT_KEY: loadEnvVar("CRYPT_KEY"),
     APP_EMAIL_ADDRESS: loadEnvVar("APP_EMAIL_ADDRESS"),
-    CLIENT_ID: loadEnvVar("CLIENT_ID"),
-    CLIENT_SECRET: loadEnvVar("CLIENT_SECRET"),
-    REFRESH_TOKEN: loadEnvVar("REFRESH_TOKEN"),
+    // CLIENT_ID: loadEnvVar("CLIENT_ID"),
+    // CLIENT_SECRET: loadEnvVar("CLIENT_SECRET"),
+    // REFRESH_TOKEN: loadEnvVar("REFRESH_TOKEN"),
 };
