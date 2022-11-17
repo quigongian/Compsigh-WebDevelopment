@@ -19,10 +19,10 @@ import { HttpStatus } from "../util/HttpStatus";
  *        500:
  *          $ref: '#/definitions/InternalServerError'
  */
-export function pingHandler(req: Request, res: Response, next: NextFunction) {
+function ping(req: Request, res: Response, next: NextFunction) {
     res.status(HttpStatus.OK).send("pong");
 }
 
-export interface Error {
-    error: string;
-}
+export const healthCheckController = {
+    ping,
+};

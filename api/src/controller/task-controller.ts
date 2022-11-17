@@ -68,6 +68,8 @@ async function getAllTasks(req: Request, res: Response, next: NextFunction) {
  *          description: Created - Returns TaskDTO
  *          schema:
  *            $ref: "#/definitions/TaskDTO"
+ *        400:
+ *          $ref: "#/definitions/BadRequest"
  *        401:
  *          $ref: "#/definitions/Unauthorized"
  *        500:
@@ -286,7 +288,7 @@ async function updateCompletedStatus(
         console.log(taskDTO);
         await taskService.updateTaskCompletedStatus(
             taskDTO.taskId,
-            req.body.completed
+            req.body.completed as boolean
         );
         res.sendStatus(HttpStatus.NO_CONTENT);
     } catch (error) {

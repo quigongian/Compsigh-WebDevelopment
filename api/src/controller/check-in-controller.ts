@@ -81,6 +81,8 @@ async function getPaginatedCheckIns(
  *          description: Created - Returns CheckInDTO
  *          schema:
  *            $ref: "#/definitions/CheckInDTO"
+ *        400:
+ *          $ref: "#/definitions/BadRequest"
  *        401:
  *          $ref: "#/definitions/Unauthorized"
  *        500:

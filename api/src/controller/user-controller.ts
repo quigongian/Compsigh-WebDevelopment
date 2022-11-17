@@ -18,6 +18,8 @@ import { HttpStatus } from "../util/HttpStatus";
  *          description: Ok - Returns UserDTO
  *          schema:
  *            $ref: "#/definitions/UserDTO"
+ *        400:
+ *          $ref: "#/definitions/BadRequest"
  *        401:
  *          $ref: "#/definitions/Unauthorized"
  *        404:
@@ -94,6 +96,8 @@ async function deleteAccount(req: Request, res: Response, next: NextFunction) {
  *      responses:
  *        204:
  *          $ref: "#/definitions/NoContent"
+ *        400:
+ *          $ref: "#/definitions/BadRequest"
  *        401:
  *          $ref: "#/definitions/Unauthorized"
  *        404:

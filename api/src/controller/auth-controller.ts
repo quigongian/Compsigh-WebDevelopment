@@ -63,8 +63,8 @@ async function signIn(req: Request, res: Response, next: NextFunction) {
  *      responses:
  *        201:
  *          $ref: "#/definitions/Created"
- *        401:
- *          $ref: "#/definitions/Unauthorized"
+ *        400:
+ *          $ref: "#/definitions/BadRequest"
  *        500:
  *          $ref: "#/definitions/InternalServerError"
  */
@@ -153,8 +153,12 @@ async function refreshAccessToken(
  *          description: Ok - Returns AuthResponse
  *          schema:
  *            $ref: "#/definitions/AuthResponse"
+ *        400:
+ *          $ref: "#/definitions/BadRequest"
  *        401:
  *          $ref: "#/definitions/Unauthorized"
+ *        404:
+ *          $ref: "#/definitions/NotFound"
  *        500:
  *          $ref: "#/definitions/InternalServerError"
  */
@@ -191,8 +195,8 @@ async function verifyEmail(req: Request, res: Response, next: NextFunction) {
  *      responses:
  *        204:
  *          $ref: "#/definitions/NoContent"
- *        401:
- *          $ref: "#/definitions/Unauthorized"
+ *        404:
+ *          $ref: "#/definitions/NotFound"
  *        500:
  *          $ref: "#/definitions/InternalServerError"
  */
@@ -226,8 +230,12 @@ async function forgotPassword(req: Request, res: Response, next: NextFunction) {
  *      responses:
  *        204:
  *          $ref: "#/definitions/NoContent"
+ *        400:
+ *          $ref: "#/definitions/BadRequest"
  *        401:
  *          $ref: "#/definitions/Unauthorized"
+ *        404:
+ *          $ref: "#/definitions/NotFound"
  *        500:
  *          $ref: "#/definitions/InternalServerError"
  */
