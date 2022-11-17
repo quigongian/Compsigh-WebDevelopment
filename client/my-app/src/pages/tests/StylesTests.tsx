@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Subheading, Heading, Paragraph } from "../../globalStyles";
-import ping from "../../services/pingRequest";
+import {ping} from "../../services/requests"
 
 export const StylesTests = () => {
   return (
