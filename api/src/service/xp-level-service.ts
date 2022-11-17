@@ -10,7 +10,7 @@ async function getAll(): Promise<XpLevel[]> {
 async function getById(xpLevelId: number): Promise<XpLevel> {
     const xpLevel = await xpLevelRepository.getById(xpLevelId);
     if (!xpLevel) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "XpLevel not found");
+        throw new HttpError(HttpStatus.NotFound, "XpLevel not found");
     }
     return xpLevel;
 }

@@ -1,0 +1,96 @@
+.checkin-container {
+    background-color: #232323;
+    height: 100vh;
+    width: 100vw;
+    display: grid !important;
+    grid-template-columns: 1fr, 60px;
+    grid-template-rows: 150px 250px;
+    gap: 1.5rem;
+}
+
+.questions-container {
+    width: 700px;
+    height: 500px;
+    border-radius: 23px;
+    background-color: #3e4059;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* border: 1px solid #000000;  Possibly remove the border?? */
+    margin-left: 20%;
+    padding-left: 2%;
+    padding-top: 1%;
+    grid-column: 1;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.questions {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 15px;
+    color: #EFF4FE;
+    line-height: 30px;
+    padding: 0;
+}
+
+.drop-down {
+    width: 93%;
+    background-color: #DDDBDB;
+    padding: 0.2rem;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: center;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+
+.drop-down-content-item {
+    width: 90%;
+    background-color: #DDDBDB;
+    color: #000000;
+    padding: 0.1rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 130px;
+}
+
+.button {
+    background-color: #D27F65;
+    color: #DDDBDB;
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+
+.calendar {
+    width: 300px;
+    height: 330px;
+    border-radius: 23px;
+    background-color: #3e4059;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 2%;
+    margin-top: 10%;
+    grid-column: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.previous {
+    width: 213px;
+    height: 125px;
+    border-radius: 23px;
+    background-color: #3e4059;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* border: 1px solid #000000; */
+    padding: 10%;
+    grid-column: 2;
+    grid-row-start: 3;
+}

@@ -12,7 +12,9 @@
   left: 120px;
 }
 
-.quotationMarks {
+.bigQuotentionMarks {
+  background-color: aquamarine;
+
   position: absolute;
   width: 600px;
   height: 123px;

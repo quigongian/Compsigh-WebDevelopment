@@ -1,6 +1,7 @@
-import axios from "axios";
+import { http } from "./http-client";
 
-export default async function ping() {
-  let { data } = await axios.get("http://localhost:3001/api/ping");
-  console.log(data);
-}
+const ping = async (): Promise<string> => {
+    return await http.get("/ping");
+};
+
+export default ping;

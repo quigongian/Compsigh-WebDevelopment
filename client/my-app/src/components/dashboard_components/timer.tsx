@@ -3,6 +3,8 @@ import './timer.css'
 import settingButton from "../../image_content/Settings icon.svg"
 import playButton from "../../image_content/Play button.svg"
 import replayButton from "../../image_content/Replay.svg"
+import settingsSound from "../../image_content/SettingsSound.svg"
+
 
 
 export const Timer = () => {
@@ -38,8 +40,22 @@ export const Timer = () => {
             <img className="replay" src={replayButton} alt="replay button" />
           </div>
 
+          <div className="settingsSound">
+            <img className="settingsSound" src={settingsSound} alt= "setting sound" />
+
+          </div>
+          
+          
+          <div className="dropdown">
+            <span><b>Select</b></span>
+            <div className="dropdown-content">
+            <p>Bells</p>
+            <p>Birds</p>
+            <p>Melody</p>
+           </div>
+         </div>
         </div>
       </body>
     </>
-  );
+ );
 };

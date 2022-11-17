@@ -6,36 +6,36 @@ import { envVars } from "../util/env-vars";
 import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
 
-async function createTransport(): Promise<
-    Transporter<SMTPTransport.SentMessageInfo>
-> {
-    const oauth2Client = new google.auth.OAuth2(
-        envVars.CLIENT_ID,
-        envVars.CLIENT_SECRET,
-        "https://developers.google.com/oauthplayground"
-    );
-    oauth2Client.setCredentials({
-        refresh_token: envVars.REFRESH_TOKEN,
-    });
-    const accessTokenResponse = await oauth2Client.getAccessToken();
-    if (!accessTokenResponse || !accessTokenResponse.token) {
-        throw new HttpError(
-            HttpStatus.INTERNAL_SERVER_ERROR,
-            "Error getting access token"
-        );
-    }
-    return nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            type: "OAuth2",
-            user: envVars.APP_EMAIL_ADDRESS,
-            accessToken: accessTokenResponse.token,
-            clientId: envVars.CLIENT_ID,
-            clientSecret: envVars.CLIENT_SECRET,
-            refreshToken: envVars.REFRESH_TOKEN,
-        },
-    });
-}
+// async function createTransport(): Promise<
+//     Transporter<SMTPTransport.SentMessageInfo>
+// > {
+//     const oauth2Client = new google.auth.OAuth2(
+//         envVars.CLIENT_ID,
+//         envVars.CLIENT_SECRET,
+//         "https://developers.google.com/oauthplayground"
+//     );
+//     oauth2Client.setCredentials({
+//         refresh_token: envVars.REFRESH_TOKEN,
+//     });
+//     const accessTokenResponse = await oauth2Client.getAccessToken();
+//     if (!accessTokenResponse || !accessTokenResponse.token) {
+//         throw new HttpError(
+//             HttpStatus.InternalServerError,
+//             "Error getting access token"
+//         );
+//     }
+//     return nodemailer.createTransport({
+//         service: "gmail",
+//         auth: {
+//             type: "OAuth2",
+//             user: envVars.APP_EMAIL_ADDRESS,
+//             accessToken: accessTokenResponse.token,
+//             clientId: envVars.CLIENT_ID,
+//             clientSecret: envVars.CLIENT_SECRET,
+//             refreshToken: envVars.REFRESH_TOKEN,
+//         },
+//     });
+// }
 
 async function sendEmail(mailOptions: Mail.Options): Promise<void> {
     // const transport = await createTransport();

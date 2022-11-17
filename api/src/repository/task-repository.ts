@@ -2,14 +2,20 @@ import { Task } from "@prisma/client";
 import { prisma } from "../util/prisma";
 
 async function getAllByUserId(userId: number): Promise<Task[]> {
-    return await prisma.task.findMany({ where: { userId } });
+    return await prisma.task.findMany({
+        where: { userId },
+        orderBy: { createdAt: "desc" },
+    });
 }
 
 async function getAllByUserIdAndCompleted(
     userId: number,
     completed: boolean
 ): Promise<Task[]> {
-    return await prisma.task.findMany({ where: { userId, completed } });
+    return await prisma.task.findMany({
+        where: { userId, completed },
+        orderBy: { createdAt: "desc" },
+    });
 }
 
 async function getById(taskId: number): Promise<Task | null> {
@@ -29,11 +35,17 @@ async function create(
 async function update(
     taskId: number,
     taskName: string,
-    taskDescription: string
+    taskDescription: string,
+    completed: boolean
 ): Promise<Task> {
     return await prisma.task.update({
-        where: { taskId: taskId },
-        data: { taskName, taskDescription },
+        where: { taskId },
+        data: {
+            taskName,
+            taskDescription,
+            completed,
+            completedAt: completed ? new Date() : null,
+        },
     });
 }
 
@@ -43,7 +55,7 @@ async function updateCompleted(
 ): Promise<Task> {
     return await prisma.task.update({
         where: { taskId },
-        data: { completed, completedAt: new Date() },
+        data: { completed, completedAt: completed ? new Date() : null },
     });
 }
 

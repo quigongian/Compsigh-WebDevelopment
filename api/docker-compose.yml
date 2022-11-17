@@ -2,23 +2,34 @@ version: "3.9"
 
 services:
   
-  server:
-    container_name: server
+  compsigh_api:
+    container_name: compsigh_api
     build: .
     depends_on:
-      - db
+      - compsigh_postgres_db
+    env_file:
+      - .env
     ports:
       - "${PORT}:${PORT}"
-    env_file:
-      - .env
     volumes:
-      - .:/usr/src/app
+      - src_data:/usr/src/app
   
-  db:
-    container_name: db
+  compsigh_postgres_db:
+    container_name: compsigh_postgres_db
     image: "postgres"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "${DB_PORT}:${DB_PORT}"
-    env_file:
-      - .env
-  
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  src_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/src
+  postgres_data:

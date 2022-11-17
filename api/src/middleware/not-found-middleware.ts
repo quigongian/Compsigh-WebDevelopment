@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
 
 export function notFoundHandler(
@@ -6,5 +7,5 @@ export function notFoundHandler(
     res: Response,
     next: NextFunction
 ) {
-    res.status(HttpStatus.NOT_FOUND).json({ error: "URL not found" });
+    throw new HttpError(HttpStatus.NotFound, "URL Not found");
 }

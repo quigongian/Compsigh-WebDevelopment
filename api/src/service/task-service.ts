@@ -2,10 +2,11 @@ import { TaskDTO, createTaskdDTO } from "../dto/TaskDTO";
 import { taskRepository } from "../repository/task-repository";
 import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
+import { Task } from "@prisma/client";
 
 async function getAllTaskDTOsByCompletedStatus(
     userId: number,
-    completed: string | undefined
+    completed: string | null
 ): Promise<TaskDTO[]> {
     let tasks;
     if (completed === "true") {
@@ -21,7 +22,7 @@ async function getAllTaskDTOsByCompletedStatus(
 async function getTaskDTOById(taskId: number): Promise<TaskDTO> {
     const task = await taskRepository.getById(taskId);
     if (!task) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "Task not found");
+        throw new HttpError(HttpStatus.NotFound, "Task not found");
     }
     return createTaskdDTO(task);
 }
@@ -32,52 +33,73 @@ async function getTaskDTOIfBelongsToUser(
 ): Promise<TaskDTO> {
     const task = await taskRepository.getById(Number(taskId));
     if (!task) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "Task not found");
+        throw new HttpError(HttpStatus.NotFound, "Task not found");
     }
     if (task.userId !== userId) {
         throw new HttpError(
-            HttpStatus.FORBIDDEN,
+            HttpStatus.Forbidden,
             "Task does not belong to user"
         );
     }
     return task;
 }
 
-async function createTaskDTO(
-    userId: number,
-    taskName: string,
-    taskDescription: string
+async function createAndReturnTaskDTO(
+    req: CreateTaskRequest
 ): Promise<TaskDTO> {
-    if (!taskName) {
-        throw new HttpError(HttpStatus.BAD_REQUEST, "Missing required fields");
+    if (!req.taskName) {
+        throw new HttpError(HttpStatus.BadRequest, "Missing required fields");
     }
-    const task = await taskRepository.create(userId, taskName, taskDescription);
+    const task = await taskRepository.create(
+        req.userId,
+        req.taskName,
+        req.taskDescription
+    );
     return createTaskdDTO(task);
 }
 
-async function updateTaskDTO(
-    taskId: number,
-    taskName: string,
-    taskDescription: string
+async function updateAndReturnTaskDTO(
+    req: UpdateTaskRequest
 ): Promise<TaskDTO> {
-    const task = await taskRepository.update(taskId, taskName, taskDescription);
+    const task = await taskRepository.update(
+        req.taskId,
+        req.taskName,
+        req.taskDescription,
+        req.completed
+    );
     return createTaskdDTO(task);
 }
 
-async function complete(taskId: number): Promise<void> {
-    await taskRepository.updateCompleted(taskId, true);
+async function updateTaskCompletedStatus(
+    taskId: number,
+    completed: boolean
+): Promise<void> {
+    await taskRepository.updateCompleted(taskId, completed);
 }
 
 async function deleteById(taskId: number): Promise<void> {
     await taskRepository.deleteById(taskId);
 }
 
+export interface CreateTaskRequest {
+    userId: number;
+    taskName: string;
+    taskDescription: string;
+}
+
+export interface UpdateTaskRequest {
+    taskId: number;
+    taskName: string;
+    taskDescription: string;
+    completed: boolean;
+}
+
 export const taskService = {
     getAllTaskDTOsByCompletedStatus,
     getTaskDTOById,
     getTaskDTOIfBelongsToUser,
-    createTaskDTO,
-    updateTaskDTO,
-    complete,
+    createAndReturnTaskDTO,
+    updateAndReturnTaskDTO,
+    updateTaskCompletedStatus,
     deleteById,
 };

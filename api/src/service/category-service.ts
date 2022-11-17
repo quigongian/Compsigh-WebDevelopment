@@ -10,7 +10,7 @@ async function getAll(): Promise<Category[]> {
 async function getById(categoryId: number): Promise<Category> {
     const category = await categoryRepository.getById(categoryId);
     if (!category) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "Category not found");
+        throw new HttpError(HttpStatus.NotFound, "Category not found");
     }
     return category;
 }

@@ -5,18 +5,21 @@ import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
 
 async function getPaginatedCheckInDTOs(
-    userId: number,
-    page: string | undefined,
-    size: string | undefined
+    req: GetPaginatedCheckInRequest
 ): Promise<CheckInDTO[]> {
     let checkIns;
-    if (!page) {
-        checkIns = await checkInRepository.getAllByUserId(userId);
+    if (!req.page) {
+        checkIns = await checkInRepository.getAllByUserId(req.userId);
     } else {
+        const defaultPageSize = 31;
+        const pageNumber = Math.max(Number(req.page), 1);
+        const pageSize = req.size
+            ? Math.max(Number(req.size), 1)
+            : defaultPageSize;
         checkIns = await checkInRepository.getPaginatedCheckIns(
-            userId,
-            Math.min(Number(page), 1),
-            size ? Number(size) : 31
+            req.userId,
+            pageNumber,
+            pageSize
         );
     }
     return checkIns.map((checkIn) => createCheckinDTO(checkIn));
@@ -25,47 +28,53 @@ async function getPaginatedCheckInDTOs(
 async function getCheckInDTOById(checkInId: string): Promise<CheckInDTO> {
     const checkIn = await checkInRepository.getById(Number(checkInId));
     if (!checkIn) {
-        throw new HttpError(HttpStatus.NOT_FOUND, "Check in not found");
+        throw new HttpError(HttpStatus.NotFound, "Check in not found");
     }
     return createCheckinDTO(checkIn);
 }
 
 async function createAndReturnCheckInDTO(
-    userId: number,
-    answer1: string,
-    answer2: string,
-    answer3: string,
-    answer4: string,
-    comments: string | null,
-    checkInStatusStr: string
+    req: CreateCheckInRequest
 ): Promise<CheckInDTO> {
-    let checkInStatus: CheckInStatus;
-    switch (checkInStatusStr) {
-        case CheckInStatus.GOOD:
-            checkInStatus = CheckInStatus.GOOD;
-            break;
-        case CheckInStatus.NEUTRAL:
-            checkInStatus = CheckInStatus.NEUTRAL;
-            break;
-        case CheckInStatus.BAD:
-            checkInStatus = CheckInStatus.BAD;
-            break;
-        default:
-            throw new HttpError(
-                HttpStatus.BAD_REQUEST,
-                "Invalid check in status"
-            );
+    if (
+        !Object.values(CheckInStatus).includes(
+            req.checkInStatus as CheckInStatus
+        )
+    ) {
+        throw new HttpError(HttpStatus.BadRequest, "Invalid check in status");
     }
-    const checkIn = await checkInRepository.create(
-        userId,
-        answer1,
-        answer2,
-        answer3,
-        answer4,
-        comments,
-        checkInStatus
+    let checkIn;
+    checkIn = await checkInRepository.getLastCheckInByUserId(req.userId);
+    if (checkIn && checkIn.createdAt.getDay() === new Date().getDay()) {
+        throw new HttpError(
+            HttpStatus.BadRequest,
+            "User has already checked in today"
+        );
+    }
+    checkIn = await checkInRepository.create(
+        req.userId,
+        req.answer2,
+        req.answer3,
+        req.answer4,
+        req.comments,
+        req.checkInStatus as CheckInStatus
     );
     return createCheckinDTO(checkIn);
+}
+
+export interface GetPaginatedCheckInRequest {
+    userId: number;
+    page: string | null;
+    size: string | null;
+}
+
+export interface CreateCheckInRequest {
+    userId: number;
+    answer2: string;
+    answer3: string;
+    answer4: string;
+    comments: string | null;
+    checkInStatus: string;
 }
 
 export const checkInService = {
