@@ -4,6 +4,7 @@ import women from "../image_content/women.svg";
 import idea_search from "../image_content/idea_search.svg";
 import clock_calender from "../image_content/clock_calender.svg";
 import "./home.css";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const [clickedButton, setClickedButton] = useState("");
@@ -31,12 +32,15 @@ export const Home = () => {
             </p>
 
             <div className="btn-group">
-              <button onClick={buttonHandler} className="button" name="btn1"></button>
-              <button onClick={buttonHandler} className="button" name="btn2"></button>
-              <button onClick={buttonHandler} className="button" name="btn3"></button>
-              <button onClick={buttonHandler} className="button" name="btn4"></button>
+              <button onClick={buttonHandler} className="button1" name="btn1"></button>
+              <button onClick={buttonHandler} className="button2" name="btn2"></button>
+              <button onClick={buttonHandler} className="button3" name="btn3"></button>
+              <button onClick={buttonHandler} className="button4" name="btn4"></button>
             </div>
-            <button className="main-btn">Get Started</button>
+            <Link to="/login">
+            <button className="main-btn"  >Get Started</button>
+            </Link>
+           
 
 
           </div>
