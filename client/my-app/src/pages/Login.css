@@ -1,3 +1,160 @@
 .Login {
     min-height: 100vh;
 }
+
+/* Sign In Component Styles */
+
+#email{
+    margin-bottom: 40px;
+}
+
+#email:hover{
+    border: solid 1px grey;
+}
+
+h1{
+    font-size: 50px; 
+    margin-bottom: 80px;
+}
+
+.input{
+
+    background-color: #D9D9D9;
+    border: none; 
+    border-radius: 10px; 
+    box-shadow: 0px 2px 3px lightslategrey;
+    font-size: 18px;
+    padding: 11px 210px 11px 25px;
+}
+
+.input::placeholder{
+    color: #908484;
+}
+
+.forgot{
+    border: none;
+    color: #908484;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.forgot:hover{
+    text-decoration: none;
+}
+
+label{
+    color: #908484;
+    font-size: 15px;
+    margin-left: 5px;
+}
+.account{
+    border: none;
+    color: #908484;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 13px; 
+    margin-top: 10px;
+    text-decoration: underline;
+}
+
+.account:hover{
+    text-decoration: none;
+}
+
+#password{
+    margin-bottom: 15px;
+}
+
+#password:hover{
+    border: solid 1px grey;
+}
+
+.section{
+    margin: auto;
+    margin-top: 80px; 
+    text-align: center;
+}
+
+.signIn{
+    color: white;
+    background-color: #81B29A;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 2px 3px lightslategrey;
+    font-size: 21px;
+    font-weight: bold;
+    padding: 7px 25px;
+}
+
+.signIn:hover{
+    border: solid 1px grey;
+    box-shadow: 100px;
+}
+
+span{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* Sign Up Component Styles */
+
+#cancel{
+    margin-right: 30px;
+}
+
+#careerPath{
+    box-shadow: 0px 2px 3px lightslategrey;
+    margin-bottom: 30px;
+    padding: 11px 185px 11px 25px;
+}
+
+#careerPath:hover{
+    border: solid 1px grey;
+}
+
+.dropDown{
+    background-color: #D9D9D9;
+    border: none; 
+    border-radius: 10px; 
+    color: #908484;
+    font-size: 18px;
+}
+#expLevel{
+    box-shadow: 0px 2px 3px lightslategrey;
+    margin-bottom: 30px;
+    padding: 11px 244px 11px 18px;
+}
+
+#expLevel:hover{
+    border: solid 1px grey;
+}
+
+#input{
+    margin-bottom: 30px;
+}
+
+#input:hover{
+    border: solid 1px grey;
+}
+
+p{
+    color: #908484;
+    line-height: 25px;
+    margin-bottom: 30px;
+}
+
+#section2{
+    margin-top: 30px;
+}
+
+#reset{
+    margin-bottom: 40px;
+}
+
+#welcome{
+    margin-bottom: 30px;
+}
+
+
+
