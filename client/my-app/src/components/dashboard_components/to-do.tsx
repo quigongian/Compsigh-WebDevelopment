@@ -5,9 +5,12 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Container = {
+    
 //   border: "1px solid pink",
   marginLeft: "9%",
-  height: "99.5vh"
+  height: "99.5vh",
+  width: "90vw",
+  display: "grid !important",
 };
 const Wrapper = {
   display: "flex",
