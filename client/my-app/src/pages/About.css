@@ -1,16 +1,23 @@
 .about-wrapper {
-  background: url("../image_content/aboutBGWave.png");
+  /* background: url("../image_content/aboutBGWave.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
-  height: 100vh;
+  background-size: cover; */
+  background-color: #3D405B;
+  height: 130vh;
   width: 100vw;
   margin: 0;
   padding: 0;
   display: flex;
   scroll-behavior: none;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50vh;
+  position: absolute;
 }
-
+.pc1{
+ 
+}
 .block {
   width: 50vw;
   height: 50vh;
@@ -18,8 +25,47 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 99;
 }
 
 .p {
   width: 300px;
 }
+
+.wave {
+  position: relative;
+  
+  bottom: 0;
+  user-select: none;
+}
+
+.one {
+  z-index: 3;
+}
+.two {
+  z-index: 2;
+  animation: move 3s ease-in-out 0s infinite both;
+}
+.three {
+  z-index: 1;
+  animation: move 4s ease-in-out 0s infinite both;
+}
+.four {
+  z-index: 0;
+  animation: move 5s ease 0s infinite both;
+}
+
+@keyframes move {
+  0% {
+    margin-bottom: 0;
+  }
+  
+  50% {
+    margin-bottom:3%;
+  }
+
+  100% {
+    margin-bottom: 0;
+  }
+}
+
