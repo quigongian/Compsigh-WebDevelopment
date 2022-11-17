@@ -114,7 +114,7 @@ export const Login = () => {
         <section className="section">
           <h1>Reset Password</h1>
 
-          <p>Confirm email to recieve instructions 
+          <p id="confirm">Confirm email to recieve instructions 
            <br /> on resetting your password.</p>
 
           <form action="">

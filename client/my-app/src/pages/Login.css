@@ -22,7 +22,7 @@ h1{
     background-color: #D9D9D9;
     border: none; 
     border-radius: 10px; 
-    box-shadow: 0px 2px 3px lightslategrey;
+    box-shadow: 0px 2px 3px rgb(165, 174, 185);
     font-size: 18px;
     padding: 11px 210px 11px 25px;
 }
@@ -80,7 +80,7 @@ label{
     background-color: #81B29A;
     border: none;
     border-radius: 20px;
-    box-shadow: 0px 2px 3px lightslategrey;
+    box-shadow: 0px 2px 3px rgb(165, 174, 185);
     font-size: 21px;
     font-weight: bold;
     padding: 7px 25px;
@@ -104,7 +104,7 @@ span{
 }
 
 #careerPath{
-    box-shadow: 0px 2px 3px lightslategrey;
+    box-shadow: 0px 2px 3px rgb(165, 174, 185);
     margin-bottom: 30px;
     padding: 11px 185px 11px 25px;
 }
@@ -121,7 +121,7 @@ span{
     font-size: 18px;
 }
 #expLevel{
-    box-shadow: 0px 2px 3px lightslategrey;
+    box-shadow: 0px 2px 3px rgb(165, 174, 185);
     margin-bottom: 30px;
     padding: 11px 244px 11px 18px;
 }
@@ -138,8 +138,8 @@ span{
     border: solid 1px grey;
 }
 
-p{
-    color: red;
+#confirm{
+    color: #908484;
     line-height: 25px;
     margin-bottom: 30px;
 }
