@@ -1,5 +1,6 @@
 Check email/userName already in use when signup or update user info
+
 Check docker compose volume only syncs src folder
-Update email endpoint
-Update category/xplevel endpoint
-Uppdate avatar and storing image with security endpoint
+
+Update category/xplevel endpoint within changeTheme endpoint
+Update avatar and storing image with security endpoint

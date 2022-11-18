@@ -9,8 +9,6 @@ import { HttpStatus } from "../util/HttpStatus";
  *      tags:
  *        - xplevel
  *      summary: Get all xplevels
- *      produces:
- *        - "application/json"
  *      responses:
  *        200:
  *          description: Ok - Returns XpLevel[]

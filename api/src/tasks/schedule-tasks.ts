@@ -1,5 +1,4 @@
-import { TaskScheduler } from "./TaskScheduler";
-import { TaskFrequency } from "./Task";
+import { TaskScheduler, TaskFrequency } from "./TaskScheduler";
 import { emailTasks } from "./email-tasks";
 import { userTasks } from "./user-tasks";
 

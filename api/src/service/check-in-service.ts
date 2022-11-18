@@ -1,15 +1,20 @@
 import { CheckInStatus } from "@prisma/client";
 import { CheckInDTO, createCheckinDTO } from "../models/domain";
+import {
+    CreateCheckInRequest,
+    GetPaginatedCheckInRequest,
+} from "../models/requests";
 import { checkInRepository } from "../repository/check-in-repository";
 import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
 
 async function getPaginatedCheckInDTOs(
+    userId: number,
     req: GetPaginatedCheckInRequest
 ): Promise<CheckInDTO[]> {
     let checkIns;
     if (!req.page) {
-        checkIns = await checkInRepository.getAllByUserId(req.userId);
+        checkIns = await checkInRepository.getAllByUserId(userId);
     } else {
         const defaultPageSize = 31;
         const pageNumber = Math.max(Number(req.page), 1);
@@ -17,7 +22,7 @@ async function getPaginatedCheckInDTOs(
             ? Math.max(Number(req.size), 1)
             : defaultPageSize;
         checkIns = await checkInRepository.getPaginatedCheckIns(
-            req.userId,
+            userId,
             pageNumber,
             pageSize
         );
@@ -34,6 +39,7 @@ async function getCheckInDTOById(checkInId: string): Promise<CheckInDTO> {
 }
 
 async function createAndReturnCheckInDTO(
+    userId: number,
     req: CreateCheckInRequest
 ): Promise<CheckInDTO> {
     if (
@@ -44,7 +50,7 @@ async function createAndReturnCheckInDTO(
         throw new HttpError(HttpStatus.BadRequest, "Invalid check in status");
     }
     let checkIn;
-    checkIn = await checkInRepository.getLastCheckInByUserId(req.userId);
+    checkIn = await checkInRepository.getLastCheckInByUserId(userId);
     if (checkIn && checkIn.createdAt.getDay() === new Date().getDay()) {
         throw new HttpError(
             HttpStatus.BadRequest,
@@ -52,7 +58,7 @@ async function createAndReturnCheckInDTO(
         );
     }
     checkIn = await checkInRepository.create(
-        req.userId,
+        userId,
         req.answer2,
         req.answer3,
         req.answer4,
@@ -60,21 +66,6 @@ async function createAndReturnCheckInDTO(
         req.checkInStatus as CheckInStatus
     );
     return createCheckinDTO(checkIn);
-}
-
-export interface GetPaginatedCheckInRequest {
-    userId: number;
-    page: string | null;
-    size: string | null;
-}
-
-export interface CreateCheckInRequest {
-    userId: number;
-    answer2: string;
-    answer3: string;
-    answer4: string;
-    comments: string | null;
-    checkInStatus: string;
 }
 
 export const checkInService = {

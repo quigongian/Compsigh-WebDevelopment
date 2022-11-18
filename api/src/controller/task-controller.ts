@@ -9,8 +9,6 @@ import { taskService } from "../service/task-service";
  *      tags:
  *        - task
  *      summary: Get tasks by completed status
- *      produces:
- *        - "application/json"
  *      security:
  *        - JWT: []
  *      parameters:
@@ -50,10 +48,6 @@ async function getAllTasks(req: Request, res: Response, next: NextFunction) {
  *      tags:
  *        - task
  *      summary: Create task
- *      consumes:
- *        - "application/json"
- *      produces:
- *        - "application/json"
  *      security:
  *        - JWT: []
  *      parameters:
@@ -95,8 +89,6 @@ async function createTask(req: Request, res: Response, next: NextFunction) {
  *      tags:
  *        - task
  *      summary: Get task by id
- *      produces:
- *        - "application/json"
  *      security:
  *        - JWT: []
  *      parameters:
@@ -140,10 +132,6 @@ async function getTask(req: Request, res: Response, next: NextFunction) {
  *      tags:
  *        - task
  *      summary: Update task
- *      consumes:
- *        - "application/json"
- *      produces:
- *        - "application/json"
  *      security:
  *        - JWT: []
  *      parameters:
@@ -198,9 +186,7 @@ async function updateTask(req: Request, res: Response, next: NextFunction) {
  *    delete:
  *      tags:
  *        - task
- *      summary: Delete task
- *      produces:
- *        - "application/json"
+ *      summary: Delete taskn"
  *      security:
  *        - JWT: []
  *      parameters:
@@ -243,10 +229,6 @@ async function deleteTask(req: Request, res: Response, next: NextFunction) {
  *      tags:
  *        - task
  *      summary: Update task completed status
- *      consumes:
- *        - "application/json"
- *      produces:
- *        - "application/json"
  *      security:
  *        - JWT: []
  *      parameters:

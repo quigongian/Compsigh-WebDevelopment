@@ -8,6 +8,8 @@ import { generatedTaskRepository } from "../repository/generated-task-repository
 import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
 import { cryptUtil } from "../util/crypt-util";
+import { emailVerificationService } from "./email-verification-service";
+import { UpdateEmailRequest } from "../models/requests";
 
 async function getAllUnverifiedUsers(): Promise<User[]> {
     return await userRepository.getAllUnverifiedUsers();
@@ -135,6 +137,24 @@ async function changePassword(
     await userRepository.updatePassword(userId, newPassword);
 }
 
+async function updateEmail(
+    userId: number,
+    req: UpdateEmailRequest
+): Promise<void> {
+    if (await userRepository.existsByEmail(req.email)) {
+        throw new HttpError(
+            HttpStatus.BadRequest,
+            "Email already exists, sign in instead"
+        );
+    }
+    await emailVerificationService.verifyCodeAgainstEmail(
+        userId,
+        req.email,
+        req.code
+    );
+    await userRepository.updateEmail(userId, req.email);
+}
+
 async function verifyEmail(userId: number): Promise<void> {
     await userRepository.updateEmailVerified(userId, true);
 }
@@ -207,6 +227,7 @@ export const userService = {
     createAndReturnUserDTO,
     updatePassword,
     changePassword,
+    updateEmail,
     verifyEmail,
     updateLastSignIn,
     updateLastCheckIn,

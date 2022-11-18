@@ -2,7 +2,6 @@ import { TaskDTO, createTaskdDTO } from "../models/domain";
 import { taskRepository } from "../repository/task-repository";
 import { HttpError } from "../util/HttpError";
 import { HttpStatus } from "../util/HttpStatus";
-import { Task } from "@prisma/client";
 
 async function getAllTaskDTOsByCompletedStatus(
     userId: number,

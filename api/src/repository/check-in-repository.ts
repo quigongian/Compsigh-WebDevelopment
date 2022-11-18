@@ -42,7 +42,7 @@ async function create(
     answer2: string,
     answer3: string,
     answer4: string,
-    comments: string | null,
+    comments: string | undefined,
     checkInStatus: CheckInStatus
 ): Promise<CheckIn> {
     return await prisma.checkIn.create({

@@ -8,19 +8,16 @@ import { HttpStatus } from "../util/HttpStatus";
  *      tags:
  *        - healthcheck
  *      summary: Ping the server
- *      produces:
- *        - text/plain
  *      responses:
  *        200:
  *          description: Ok - Server is up and running
  *          schema:
- *            type: string
- *            example: pong
+ *            $ref: "#/definitions/PingResponse"
  *        500:
  *          $ref: '#/definitions/InternalServerError'
  */
 function ping(req: Request, res: Response, next: NextFunction) {
-    res.status(HttpStatus.Ok).send("pong");
+    res.status(HttpStatus.Ok).send({ message: "pong" });
 }
 
 export const healthCheckController = {

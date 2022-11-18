@@ -8,21 +8,23 @@ async function getByUserId(userId: number): Promise<EmailVerification | null> {
 async function create(
     userId: number,
     code: string,
+    email: string,
     expiresAt: Date
 ): Promise<EmailVerification> {
     return await prisma.emailVerification.create({
-        data: { userId, code, expiresAt },
+        data: { userId, code, expiresAt, email },
     });
 }
 
 async function update(
     userId: number,
     code: string,
+    email: string,
     expiresAt: Date
 ): Promise<EmailVerification> {
     return await prisma.emailVerification.update({
         where: { userId },
-        data: { code, expiresAt },
+        data: { code, email, expiresAt },
     });
 }
 

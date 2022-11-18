@@ -15,7 +15,10 @@ export function globalErrorHandler(
         return next(error);
     }
     if (error instanceof HttpError) {
-        res.status(error.statusCode).json({ error: error.message });
+        res.status(error.code).json({
+            code: error.code,
+            error: error.message,
+        });
     } else {
         res.status(HttpStatus.InternalServerError).json({
             error: "Internal server error",

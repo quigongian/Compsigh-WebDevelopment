@@ -12,6 +12,8 @@ export const swaggerSpec = swaggerJSDoc({
         host: "localhost:8080",
         basePath: "/api/v1",
         schemes: ["http"],
+        consumes: ["application/json"],
+        produces: ["application/json"],
         securityDefinitions: {
             JWT: {
                 type: "apiKey",
@@ -168,22 +170,37 @@ export const swaggerSpec = swaggerJSDoc({
                 required: ["email"],
                 properties: { email: { type: "string" } },
             },
-            ResetPasswordRequest: {
-                type: "object",
-                required: ["email", "password", "repeatPassword", "code"],
-                properties: {
-                    email: { type: "string" },
-                    password: { type: "string" },
-                    repeatPassword: { type: "string" },
-                    code: { type: "string" },
-                },
-            },
             DeleteUserRequest: {
                 type: "object",
                 required: ["userName"],
                 properties: { userName: { type: "string" } },
             },
-            ChangePasswordRequest: {
+            ResetPasswordRequest: {
+                type: "object",
+                required: ["email", "password", "repeatPassword", "code"],
+                properties: {
+                    email: { type: "string" },
+                    newPassword: { type: "string" },
+                    repeatPassword: { type: "string" },
+                    code: { type: "string" },
+                },
+            },
+            ChangeEmailRequest: {
+                type: "object",
+                required: ["email"],
+                properties: {
+                    email: { type: "string" },
+                },
+            },
+            UpdateEmailRequest: {
+                type: "object",
+                required: ["email", "code"],
+                properties: {
+                    email: { type: "string" },
+                    code: { type: "string" },
+                },
+            },
+            UpdatePasswordRequest: {
                 type: "object",
                 required: [
                     "email",
@@ -244,32 +261,49 @@ export const swaggerSpec = swaggerJSDoc({
                 required: ["completed"],
                 properties: { completed: { type: "boolean", default: false } },
             },
+            PingResponse: {
+                type: "object",
+                required: ["message"],
+                properties: {
+                    message: { type: "string" },
+                },
+                example: {
+                    message: "pong",
+                },
+            },
             ErrorResponse: {
                 type: "object",
-                required: ["error"],
-                properties: { error: { type: "string" } },
+                required: ["code", "error"],
+                properties: {
+                    code: { type: "integer", minimum: 100, maximum: 599 },
+                    error: { type: "string" },
+                },
             },
-            Created: { description: "Created" },
-            NoContent: { description: "NoContent" },
+            Created: {
+                description: "Created",
+            },
+            NoContent: {
+                description: "NoContent",
+            },
             BadRequest: {
                 description: "BadRequest",
-                schema: { $ref: "#/definitions/ErrorResponse" },
+                allOf: [{ $ref: "#/definitions/ErrorResponse" }],
             },
             Unauthorized: {
                 description: "Unauthorized",
-                schema: { $ref: "#/definitions/ErrorResponse" },
+                allOf: [{ $ref: "#/definitions/ErrorResponse" }],
             },
             Forbidden: {
                 description: "Forbidden",
-                schema: { $ref: "#/definitions/ErrorResponse" },
+                allOf: [{ $ref: "#/definitions/ErrorResponse" }],
             },
             NotFound: {
                 description: "NotFound",
-                schema: { $ref: "#/definitions/ErrorResponse" },
+                allOf: [{ $ref: "#/definitions/ErrorResponse" }],
             },
             InternalServerError: {
                 description: "InternalServerError",
-                schema: { $ref: "#/definitions/ErrorResponse" },
+                allOf: [{ $ref: "#/definitions/ErrorResponse" }],
             },
         },
     },

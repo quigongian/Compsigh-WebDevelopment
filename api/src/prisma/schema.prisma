@@ -78,6 +78,7 @@ model EmailVerification {
     user      User     @relation(fields: [userId], references: [userId], onDelete: Cascade)
     userId    Int
     code      String
+    email     String
     expiresAt DateTime
 
     @@id(userId)

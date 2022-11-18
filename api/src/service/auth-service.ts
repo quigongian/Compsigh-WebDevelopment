@@ -57,21 +57,11 @@ async function verifyEmail(req: VerifyEmailRequest): Promise<AuthResponse> {
     if (user.emailVerified) {
         throw new HttpError(HttpStatus.BadRequest, "Email already verified");
     }
-    const emailVerification = await emailVerificationService.getByUserId(
-        user.userId
+    await emailVerificationService.verifyCodeAgainstEmail(
+        user.userId,
+        req.email,
+        req.code
     );
-    if (
-        !emailVerification ||
-        !(await cryptUtil.compare(req.code, emailVerification.code))
-    ) {
-        throw new HttpError(
-            HttpStatus.Unauthorized,
-            "Invalid verification code"
-        );
-    }
-    if (emailVerification.expiresAt < new Date()) {
-        throw new HttpError(HttpStatus.Unauthorized, "Code expired");
-    }
     await userService.verifyEmail(user.userId);
     const accessToken = await jwtUtil.generateAccessJWT(user.userId);
     const refreshToken = await jwtUtil.generateRefreshJWT(
@@ -106,16 +96,17 @@ async function resetPassword(req: ResetPasswordRequest): Promise<void> {
     }
     await userService.updatePassword(
         user.userId,
-        req.password,
+        req.newPassword,
         req.repeatPassword
     );
 }
 
 async function refreshAccessToken(
+    userId: number,
     req: RefreshAccessTokenRequest
 ): Promise<RefreshAccessTokenResponse> {
-    const { userId } = await jwtUtil.verifyRefreshToken(req.refreshToken);
-    if (userId !== req.userId) {
+    const payload = await jwtUtil.verifyRefreshToken(req.refreshToken);
+    if (userId !== payload.userId) {
         throw new HttpError(HttpStatus.Unauthorized, "Invalid refresh token");
     }
     await userService.updateLastSignIn(userId);

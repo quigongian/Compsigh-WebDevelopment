@@ -60,6 +60,13 @@ async function updatePassword(userId: number, password: string): Promise<User> {
     });
 }
 
+async function updateEmail(userId: number, email: string) {
+    return await prisma.user.update({
+        where: { userId },
+        data: { email },
+    });
+}
+
 async function updateEmailVerified(
     userId: number,
     emailVerified: boolean
@@ -109,7 +116,8 @@ export const userRepository = {
     getByEmail,
     existsByEmail,
     create,
-    updatePassword,
+	updatePassword,
+	updateEmail,
     updateEmailVerified,
     updateLastSignIn,
     updateLastCheckIn,

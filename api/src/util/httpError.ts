@@ -1,10 +1,10 @@
 import { HttpStatus } from "./HttpStatus";
 
 export class HttpError extends Error {
-    public readonly statusCode: HttpStatus;
+    public readonly code: HttpStatus;
 
-    constructor(statusCode: HttpStatus, message: string) {
+    constructor(code: HttpStatus, message: string) {
         super(message);
-        this.statusCode = statusCode;
+        this.code = code;
     }
 }

@@ -9,10 +9,6 @@ import { authService } from "../service/auth-service";
  *      tags:
  *        - auth
  *      summary: Sign in
- *      consumes:
- *        - "application/json"
- *      produces:
- *        - "application/json"
  *      parameters:
  *        - in: body
  *          name: body
@@ -49,10 +45,6 @@ async function signIn(req: Request, res: Response, next: NextFunction) {
  *      tags:
  *        - auth
  *      summary: Sign up
- *      consumes:
- *        - "application/json"
- *      produces:
- *        - "application/json"
  *      parameters:
  *        - in: body
  *          name: body
@@ -92,10 +84,6 @@ async function signUp(req: Request, res: Response, next: NextFunction) {
  *      tags:
  *        - auth
  *      summary: Refresh token
- *      consumes:
- *        - "application/json"
- *      produces:
- *        - "application/json"
  *      security:
  *        - JWT: []
  *      parameters:
@@ -122,6 +110,7 @@ async function refreshAccessToken(
 ) {
     try {
         const refreshAccessTokenResponse = await authService.refreshAccessToken(
+            req.userId,
             req.body.refreshToken
         );
         res.status(HttpStatus.Ok).json(refreshAccessTokenResponse);
@@ -137,10 +126,6 @@ async function refreshAccessToken(
  *      tags:
  *        - auth
  *      summary: Verify email
- *      consumes:
- *        - "application/json"
- *      produces:
- *        - "application/json"
  *      parameters:
  *        - in: body
  *          name: body
@@ -181,10 +166,6 @@ async function verifyEmail(req: Request, res: Response, next: NextFunction) {
  *      tags:
  *        - auth
  *      summary: Forgot password
- *      consumes:
- *        - "application/json"
- *      produces:
- *        - "application/json"
  *      parameters:
  *        - in: body
  *          name: body
@@ -216,10 +197,6 @@ async function forgotPassword(req: Request, res: Response, next: NextFunction) {
  *      tags:
  *        - auth
  *      summary: Reset password
- *      consumes:
- *        - "application/json"
- *      produces:
- *        - "application/json"
  *      parameters:
  *        - in: body
  *          name: body
@@ -243,7 +220,7 @@ async function resetPassword(req: Request, res: Response, next: NextFunction) {
     try {
         await authService.resetPassword({
             email: req.body.email,
-            password: req.body.password,
+            newPassword: req.body.newPassword,
             repeatPassword: req.body.repeatPassword,
             code: req.body.code,
         });

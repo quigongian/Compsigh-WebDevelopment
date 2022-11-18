@@ -16,7 +16,6 @@ export interface SignUpRequest {
 }
 
 export interface RefreshAccessTokenRequest {
-    userId: number;
     refreshToken: string;
 }
 
@@ -31,7 +30,7 @@ export interface ForgotPasswordRequest {
 
 export interface ResetPasswordRequest {
     email: string;
-    password: string;
+    newPassword: string;
     repeatPassword: string;
     code: string;
 }
@@ -40,22 +39,36 @@ export interface DeleteUserRequest {
     userName: number;
 }
 
-export interface ChangePasswordRequest {
+export interface UpdatePasswordRequest {
     email: string;
     oldPassword: string;
     newPassword: string;
     repeatPassword: string;
 }
 
+export interface ChangeEmailRequest {
+    email: string;
+}
+
+export interface UpdateEmailRequest {
+    email: string;
+    code: string;
+}
+
 export interface ChangeThemeRequest {
     theme: Theme;
+}
+
+export interface GetPaginatedCheckInRequest {
+    page: string | undefined;
+    size: string | undefined;
 }
 
 export interface CreateCheckInRequest {
     answer2: string;
     answer3: string;
     answer4: string;
-    comments: string;
+    comments: string | undefined;
     checkInStatus: CheckInStatus;
 }
 

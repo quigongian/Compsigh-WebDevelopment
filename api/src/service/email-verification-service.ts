@@ -2,6 +2,8 @@ import { EmailVerification } from "@prisma/client";
 import { emailVerificationRepository } from "../repository/email-verification-repository";
 import { emailService } from "./email-service";
 import { cryptUtil } from "../util/crypt-util";
+import { HttpError } from "../util/HttpError";
+import { HttpStatus } from "../util/HttpStatus";
 
 async function getByUserId(userId: number): Promise<EmailVerification | null> {
     return await emailVerificationRepository.getByUserId(userId);
@@ -10,7 +12,8 @@ async function getByUserId(userId: number): Promise<EmailVerification | null> {
 async function updateOrCreateByUserId(
     userId: number,
     code: string,
-    dateExpires: Date
+    email: string,
+    expiresAt: Date
 ): Promise<EmailVerification> {
     const emailVerification = await emailVerificationRepository.getByUserId(
         userId
@@ -19,10 +22,16 @@ async function updateOrCreateByUserId(
         return await emailVerificationRepository.update(
             userId,
             code,
-            dateExpires
+            email,
+            expiresAt
         );
     }
-    return await emailVerificationRepository.create(userId, code, dateExpires);
+    return await emailVerificationRepository.create(
+        userId,
+        code,
+        email,
+        expiresAt
+    );
 }
 
 async function setupEmailVerification(
@@ -32,8 +41,8 @@ async function setupEmailVerification(
 ) {
     const code = Math.random().toString().slice(-6);
     const hashedCode = await cryptUtil.hash(code);
-    const dateExpires = new Date(Date.now() + 60 * 60 * 1000);
-    await updateOrCreateByUserId(userId, hashedCode, dateExpires);
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+    await updateOrCreateByUserId(userId, hashedCode, email, expiresAt);
     switch (emailVerificationType) {
         case EmailVerificationType.VERIFY_EMAIL:
             await emailService.sendVerificationEmail(email, code);
@@ -46,6 +55,29 @@ async function setupEmailVerification(
     }
 }
 
+async function verifyCodeAgainstEmail(
+    userId: number,
+    email: string,
+    code: string
+): Promise<void> {
+    const emailVerification = await emailVerificationRepository.getByUserId(
+        userId
+    );
+    if (
+        !emailVerification ||
+        emailVerification.email !== email ||
+        !(await cryptUtil.compare(code, emailVerification.code))
+    ) {
+        throw new HttpError(
+            HttpStatus.Unauthorized,
+            "Invalid verification code"
+        );
+    }
+    if (emailVerification.expiresAt < new Date()) {
+        throw new HttpError(HttpStatus.Unauthorized, "Code expired");
+    }
+}
+
 export enum EmailVerificationType {
     VERIFY_EMAIL,
     PASSWORD_RESET,
@@ -55,4 +87,5 @@ export const emailVerificationService = {
     getByUserId,
     updateOrCreateByUserId,
     setupEmailVerification,
+    verifyCodeAgainstEmail,
 };

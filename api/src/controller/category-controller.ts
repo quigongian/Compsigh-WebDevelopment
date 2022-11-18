@@ -9,8 +9,6 @@ import { HttpStatus } from "../util/HttpStatus";
  *      tags:
  *        - category
  *      summary: Get all categories
- *      produces:
- *        - "application/json"
  *      responses:
  *        200:
  *          description: Ok - Returns Category[]

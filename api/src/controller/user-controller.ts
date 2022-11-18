@@ -1,4 +1,8 @@
 import { Request, Response, NextFunction } from "express";
+import {
+    emailVerificationService,
+    EmailVerificationType,
+} from "../service/email-verification-service";
 import { userService } from "../service/user-service";
 import { HttpStatus } from "../util/HttpStatus";
 
@@ -9,8 +13,6 @@ import { HttpStatus } from "../util/HttpStatus";
  *      tags:
  *        - user
  *      summary: Get current user
- *      produces:
- *        - "application/json"
  *      security:
  *        - JWT: []
  *      responses:
@@ -42,9 +44,7 @@ async function getUser(req: Request, res: Response, next: NextFunction) {
  *    delete:
  *      tags:
  *        - user
- *      summary: Delete current user account
- *      produces:
- *        - "application/json"
+ *      summary: Delete user account
  *      security:
  *        - JWT: []
  *      parameters:
@@ -81,18 +81,16 @@ async function deleteAccount(req: Request, res: Response, next: NextFunction) {
  *    patch:
  *      tags:
  *        - user
- *      summary: Change current user password
- *      produces:
- *        - "application/json"
+ *      summary: Change user password
  *      security:
  *        - JWT: []
  *      parameters:
  *        - in: body
  *          name: body
- *          description: ChangePasswordRequest
+ *          description: UpdatePasswordRequest
  *          required: true
  *          schema:
- *            $ref: "#/definitions/ChangePasswordRequest"
+ *            $ref: "#/definitions/UpdatePasswordRequest"
  *      responses:
  *        204:
  *          $ref: "#/definitions/NoContent"
@@ -105,14 +103,91 @@ async function deleteAccount(req: Request, res: Response, next: NextFunction) {
  *        500:
  *          $ref: "#/definitions/InternalServerError"
  */
-async function changePassword(req: Request, res: Response, next: NextFunction) {
+async function updatePassword(req: Request, res: Response, next: NextFunction) {
     try {
         await userService.changePassword(
             req.userId,
             req.body.oldPassword,
-            req.body.newPassword,
+            req.body.password,
             req.body.repeatPassword
         );
+        res.sendStatus(HttpStatus.NoContent);
+    } catch (error) {
+        next(error);
+    }
+}
+
+/**
+ * @swagger
+ *  /user/email:
+ *    post:
+ *      tags:
+ *        - user
+ *      summary: Request email change
+ *      security:
+ *        - JWT: []
+ *      parameters:
+ *        - in: body
+ *          name: body
+ *          description: ChangeEmailRequest
+ *          required: true
+ *          schema:
+ *            $ref: "#/definitions/ChangeEmailRequest"
+ *      responses:
+ *        204:
+ *          $ref: "#/definitions/NoContent"
+ *        401:
+ *          $ref: "#/definitions/Unauthorized"
+ *        500:
+ *          $ref: "#/definitions/InternalServerError"
+ */
+async function changeEmail(req: Request, res: Response, next: NextFunction) {
+    try {
+        await emailVerificationService.setupEmailVerification(
+            req.userId,
+            req.body.email,
+            EmailVerificationType.VERIFY_EMAIL
+        );
+        res.sendStatus(HttpStatus.NoContent);
+    } catch (error) {
+        next(error);
+    }
+}
+
+/**
+ * @swagger
+ *  /user/email:
+ *    patch:
+ *      tags:
+ *        - user
+ *      summary: Change user email
+ *      security:
+ *        - JWT: []
+ *      parameters:
+ *        - in: body
+ *          name: body
+ *          description: UpdateEmailRequest
+ *          required: true
+ *          schema:
+ *            $ref: "#/definitions/UpdateEmailRequest"
+ *      responses:
+ *        204:
+ *          $ref: "#/definitions/NoContent"
+ *        400:
+ *          $ref: "#/definitions/BadRequest"
+ *        401:
+ *          $ref: "#/definitions/Unauthorized"
+ *        404:
+ *          $ref: "#/definitions/NotFound"
+ *        500:
+ *          $ref: "#/definitions/InternalServerError"
+ */
+async function updateEmail(req: Request, res: Response, next: NextFunction) {
+    try {
+        await userService.updateEmail(req.userId, {
+            email: req.body.email,
+            code: req.body.code,
+        });
         res.sendStatus(HttpStatus.NoContent);
     } catch (error) {
         next(error);
@@ -125,9 +200,7 @@ async function changePassword(req: Request, res: Response, next: NextFunction) {
  *    patch:
  *      tags:
  *        - user
- *      summary: Change current user theme option
- *      produces:
- *        - "application/json"
+ *      summary: Change user theme option
  *      security:
  *        - JWT: []
  *      parameters:
@@ -161,6 +234,8 @@ async function changeTheme(req: Request, res: Response, next: NextFunction) {
 export const userController = {
     getUser,
     deleteAccount,
-    changePassword,
+    updatePassword,
+    changeEmail,
+    updateEmail,
     changeTheme,
 };
