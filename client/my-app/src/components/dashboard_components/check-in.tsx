@@ -3,8 +3,12 @@ import bottomWave from "../image_content/bottomWave.svg";
 import midWave from "../image_content/midWave.svg";
 import secondWave from "../image_content/secondWave.svg";
 import topWave from "../image_content/topWave.svg";
-import { BiChevronDown } from "react-icons/bi";
 import "./check-in.css";
+import { Box,
+         TextField,
+         MenuItem } from "@mui/material";
+
+
 
 export const CheckIn = () => {
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -33,62 +37,168 @@ export const CheckIn = () => {
 };
 
 const Questions = () => {
-  const [open1, setOpen1] = useState(false);
-  const [open2, setOpen2] = useState(false);
-  const [open3, setOpen3] = useState(false);
-  const [open4, setOpen4] = useState(false);
+  const [open, setOpen] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOpen(event.target.value as string);
+  };
   return (
+    <>
     <div className="questions-container">
-      <div className="questions">
-        <p style={{ marginBottom: "0" }}>How productive would you say you were today?</p>
-        <div className="drop-down" onClick={(e) => setOpen1(!open1)}>
-          <BiChevronDown style={{ cursor: "pointer", color: "#908484" }} />
+      <div className = "questions">
+        <Question1 />
+        <Question2 />
+        <Question3 />
+        <Question4 />
+        <Question5 />
+        <div className="button-container">
+          <button className="button"> Submit </button>
         </div>
-        {open1 && (
-          <div className="drop-down-content">
-            <div className="drop-down-content-item"> Great </div>
-            <div className="drop-down-content-item"> Alright </div>
-            <div className="drop-down-content-item"> Terrible </div>
-          </div>
-        )}
-        <p style={{ marginBottom: "0" }}>Have you completed all your tasks?</p>
-        <div className="drop-down" onClick={(e) => setOpen2(!open2)}>
-          <BiChevronDown style={{ cursor: "pointer", color: "#908484" }} />
-        </div>
-        {open2 && (
-          <div className="drop-down-content">
-            <div className="drop-down-content-item"> Yes </div>
-            <div className="drop-down-content-item"> Somewhat </div>
-            <div className="drop-down-content-item"> No, not at all </div>
-          </div>
-        )}
-        <p style={{ marginBottom: "0" }}>Are you making any progress towards your goals?</p>
-        <div className="drop-down" onClick={(e) => setOpen3(!open3)}>
-          <BiChevronDown style={{ cursor: "pointer", color: "#908484" }} />
-        </div>
-        {open3 && (
-          <div className="drop-down-content">
-            <div className="drop-down-content-item"> Yes, today I have </div>
-            <div className="drop-down-content-item"> No, I have not been making progress </div>
-          </div>
-        )}
-        <p style={{ marginBottom: "0" }}>Do you foresee any problems in progress?</p>
-        <div className="drop-down" onClick={(e) => setOpen4(!open4)}>
-          <BiChevronDown style={{ cursor: "pointer", color: "#908484" }} />
-        </div>
-        {open4 && (
-          <div className="drop-down-content">
-            <div className="drop-down-content-item"> Definitely </div>
-            <div className="drop-down-content-item"> Possibly </div>
-            <div className="drop-down-content-item"> No </div>
-          </div>
-        )}
-        <p style={{ marginBottom: "0" }}>If so, what are those problems?</p>
-      </div>
-      <div className="button-container" /* onClick={submit}*/>
-        <button className="button"> Submit </button>
       </div>
     </div>
+    </>
+  );
+};
+
+const Question1 = () => {
+  const [open, setOpen] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOpen(event.target.value as string);
+  };
+  return (
+    <>
+    <Box className = "questions1">
+      <p style={{ marginBottom: "0" }}>How productive would you say you were today?</p>
+        <TextField 
+          sx = {{
+            "& .MuiInputBase-root": {
+              height: 30 }
+          }}
+          id = "standard_basic" 
+          select
+          value={open}
+          size = "small"
+          InputLabelProps={{shrink: false}}
+          onChange = {handleChange}
+          className = "textfield"
+          >
+          <MenuItem value="Great">Great</MenuItem>
+          <MenuItem value="Alright">Alright</MenuItem>
+          <MenuItem value="Terrible">Terrible</MenuItem>
+        </TextField>
+      </Box>
+    </>
+  );
+};
+
+const Question2 = () => {
+  const [open, setOpen] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOpen(event.target.value as string);
+  };
+  return (
+    <>
+    <Box className = "questions2">
+    <p style={{marginBottom: "0"}}>Have you completed all your tasks?</p>
+      <TextField 
+          sx = {{
+            "& .MuiInputBase-root": {
+              height: 30 }
+          }}
+          id = "standard_basic" 
+          select
+          value={open}
+          size = "small"
+          InputLabelProps={{shrink: false}}
+          onChange = {handleChange}
+          className="textfield"
+          >
+          <MenuItem value="Yes">Yes</MenuItem>
+          <MenuItem value="Somewhat">Somewhat</MenuItem>
+          <MenuItem value="No">No, not at all</MenuItem>
+        </TextField>
+      </Box>
+    </>
+  );
+};
+
+const Question3 = () => {
+  const [open, setOpen] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOpen(event.target.value as string);
+  };
+  return (
+    <>
+    <Box className = "questions3">
+    <p style={{marginBottom: "0"}}>Are you making any progress towards your goals?</p>
+      <TextField 
+          sx = {{
+            "& .MuiInputBase-root": {
+              height: 30 }
+          }}
+          id = "standard_basic" 
+          select
+          value={open}
+          size = "small"
+          InputLabelProps={{shrink: false}}
+          onChange = {handleChange}
+          className="textfield"
+          >
+          <MenuItem value="Yes">Yes, today I have</MenuItem>
+          <MenuItem value="No">No, I have not been making progress</MenuItem>
+        </TextField>
+      </Box>
+    </>
+  );
+};
+
+const Question4 = () => {
+  const [open, setOpen] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOpen(event.target.value as string);
+  };
+  return (
+    <>
+    <Box className = "questions4">
+    <p style={{marginBottom: "0"}}>Do you foresee any problems in progress?</p>
+      <TextField 
+          sx = {{
+            "& .MuiInputBase-root": {
+              height: 30 }
+          }}
+          id = "standard_basic" 
+          select
+          value={open}
+          size = "small"
+          InputLabelProps={{shrink: false}}
+          onChange = {handleChange}
+          className="textfield"
+          >
+          <MenuItem value="Yes">Definitely</MenuItem>
+          <MenuItem value="No">Possibly</MenuItem>
+          <MenuItem value="No">No</MenuItem>
+        </TextField>
+      </Box>
+    </>
+  );
+};
+
+const Question5 = () => {
+  const [open, setOpen] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOpen(event.target.value as string);
+  };
+  return (
+    <>
+    <Box className = "questions4">
+    <p style={{marginBottom: "0"}}>If so, what are those problems?</p>
+      <TextField
+          id="outlined-multiline-static"
+          multiline
+          rows={3.20}
+          className="textfield"
+        />
+      </Box>
+    </>
   );
 };
 
