@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import bottomWave from "../image_content/bottomWave.svg";
-import midWave from "../image_content/midWave.svg";
-import secondWave from "../image_content/secondWave.svg";
-import topWave from "../image_content/topWave.svg";
+import bottomWave from "../../image_content/bottomWave.svg";
+import midWave from "../../image_content/midWave.svg";
+import secondWave from "../../image_content/secondWave.svg";
+import topWave from "../../image_content/topWave.svg";
 import "./check-in.css";
 import { Box,
          TextField,
          MenuItem } from "@mui/material";
+import { margin } from "@mui/system";
 
 
 
@@ -31,11 +32,16 @@ export const CheckIn = () => {
         <Questions />
         <Calendar />
         <Previous />
+
+      <img className="wave one" src={bottomWave} alt="" width={"100%"} />
+      <img className="wave two" src={midWave} alt="" width={"100%"} />
+      <img className="wave three" src={secondWave} alt="" width={"100%"} />
+      <img className="wave four" src={topWave} alt="" width={"100%"} />
       </div>
     </>
   );
 };
-
+// ---------------------------------------------- Questions Container ----------------------------------------------
 const Questions = () => {
   const [open, setOpen] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +72,7 @@ const Question1 = () => {
   };
   return (
     <>
-    <Box className = "questions1">
+    {/* <Box className = "questions1"> */}
       <p style={{ marginBottom: "0" }}>How productive would you say you were today?</p>
         <TextField 
           sx = {{
@@ -85,7 +91,7 @@ const Question1 = () => {
           <MenuItem value="Alright">Alright</MenuItem>
           <MenuItem value="Terrible">Terrible</MenuItem>
         </TextField>
-      </Box>
+      {/* </Box> */}
     </>
   );
 };
@@ -97,7 +103,7 @@ const Question2 = () => {
   };
   return (
     <>
-    <Box className = "questions2">
+    {/* <Box className = "questions2"> */}
     <p style={{marginBottom: "0"}}>Have you completed all your tasks?</p>
       <TextField 
           sx = {{
@@ -116,7 +122,7 @@ const Question2 = () => {
           <MenuItem value="Somewhat">Somewhat</MenuItem>
           <MenuItem value="No">No, not at all</MenuItem>
         </TextField>
-      </Box>
+      {/* </Box> */}
     </>
   );
 };
@@ -128,7 +134,7 @@ const Question3 = () => {
   };
   return (
     <>
-    <Box className = "questions3">
+    {/* <Box className = "questions3"> */}
     <p style={{marginBottom: "0"}}>Are you making any progress towards your goals?</p>
       <TextField 
           sx = {{
@@ -146,7 +152,7 @@ const Question3 = () => {
           <MenuItem value="Yes">Yes, today I have</MenuItem>
           <MenuItem value="No">No, I have not been making progress</MenuItem>
         </TextField>
-      </Box>
+      {/* </Box> */}
     </>
   );
 };
@@ -158,7 +164,7 @@ const Question4 = () => {
   };
   return (
     <>
-    <Box className = "questions4">
+    {/* <Box className = "questions4"> */}
     <p style={{marginBottom: "0"}}>Do you foresee any problems in progress?</p>
       <TextField 
           sx = {{
@@ -177,35 +183,173 @@ const Question4 = () => {
           <MenuItem value="No">Possibly</MenuItem>
           <MenuItem value="No">No</MenuItem>
         </TextField>
-      </Box>
+      {/* </Box> */}
     </>
   );
 };
 
 const Question5 = () => {
+  const [value, setValue] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value as string);
+  };
+  return (
+    <>
+    {/* <Box className = "questions4"> */}
+    <p style={{marginBottom: "0"}}>If so, what are those problems?</p>
+      <TextField
+          id="outlined-multiline-static"
+          multiline
+          rows={3.20}
+          inputProps={{ maxLength: 250 }}
+          className="textfield"
+        />
+      {/* </Box> */}
+    </>
+  );
+};
+
+// ---------------------------------------------- Calendar Container ----------------------------------------------
+const Calendar = () => {
+  return <div className="calendar"></div>;
+};
+
+// ---------------------------------------------- Previous Container ----------------------------------------------
+const Previous = () => {
+  return(
+    <div className="previous">
+      <p style={{ marginLeft: "73%", marginTop: "0%", fontWeight: "lighter", color: "#FFFFFF", lineHeight: "10px", fontSize: "13px" }}>
+            November 20, 2022
+          </p>
+      <Previous1 />
+      <Previous2 />
+      <Previous3 />
+      <Previous4 />
+      <Previous5 />
+  </div>
+  );
+};
+
+const Previous1 = () => {
   const [open, setOpen] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOpen(event.target.value as string);
   };
   return (
     <>
-    <Box className = "questions4">
-    <p style={{marginBottom: "0"}}>If so, what are those problems?</p>
-      <TextField
-          id="outlined-multiline-static"
-          multiline
-          rows={3.20}
-          className="textfield"
-        />
-      </Box>
+      <p className="previous-questions" style = {{marginBottom: "0"}}>How productive would you say you were today?</p>
+        <TextField 
+          sx = {{
+            "& .MuiInputBase-root": {
+              height: 20 }
+          }}
+          disabled
+          id="outlined-disabled"
+          defaultValue=" "        //Value from Calendar
+          size = "small"
+          InputLabelProps={{shrink: false}}
+          onChange = {handleChange}
+          className = "textfield"
+          />
     </>
   );
 };
 
-const Calendar = () => {
-  return <div className="calendar"></div>;
+const Previous2 = () => {
+  const [open, setOpen] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOpen(event.target.value as string);
+  };
+  return (
+    <>
+      <p className="previous-questions" style = {{marginBottom: "0"}}>Have you completed all your tasks?</p>
+        <TextField 
+          sx = {{
+            "& .MuiInputBase-root": {
+              height: 20 }
+          }}
+          disabled
+          id="outlined-disabled"
+          defaultValue=" "        //Value from Calendar
+          size = "small"
+          InputLabelProps={{shrink: false}}
+          onChange = {handleChange}
+          className = "textfield"
+          />
+    </>
+  );
 };
 
-const Previous = () => {
-  return <div className="previous"></div>;
+const Previous3 = () => {
+  const [open, setOpen] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOpen(event.target.value as string);
+  };
+  return (
+    <>
+      <p className="previous-questions" style = {{marginBottom: "0"}}>Are you making any progress towards your goals?</p>
+        <TextField 
+          sx = {{
+            "& .MuiInputBase-root": {
+              height: 20 }
+          }}
+          disabled
+          id="outlined-disabled"
+          defaultValue=" "        //Value from Calendar
+          size = "small"
+          InputLabelProps={{shrink: false}}
+          onChange = {handleChange}
+          className = "textfield"
+          />
+    </>
+  );
+};
+
+const Previous4 = () => {
+  const [open, setOpen] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOpen(event.target.value as string);
+  };
+  return (
+    <>
+      <p className="previous-questions" style = {{marginBottom: "0"}}>Do you forsee any problems in progress?</p>
+        <TextField 
+          sx = {{
+            "& .MuiInputBase-root": {
+              height: 20 }
+          }}
+          disabled
+          id="outlined-disabled"
+          defaultValue=" "        //Value from Calendar
+          size = "small"
+          InputLabelProps={{shrink: false}}
+          onChange = {handleChange}
+          className = "textfield"
+          />
+    </>
+  );
+};
+
+const Previous5 = () => {
+  const [open, setOpen] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOpen(event.target.value as string);
+  };
+  return (
+    <>
+      <p className="previous-questions" style = {{marginBottom: "0" }}>If so, what are those problems?</p>
+        <TextField 
+          sx = {{
+            "& .MuiInputBase-root": {
+              height: 50}
+          }}
+          id="outlined-multiline-disabled"
+          multiline
+          rows={4}
+          InputLabelProps={{shrink: false}}
+          onChange = {handleChange}
+          className = "textfield"
+          />
+    </>
+  );
 };
