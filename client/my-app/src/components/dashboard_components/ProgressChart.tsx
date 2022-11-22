@@ -24,7 +24,6 @@ const ProgressChart = () => {
         justifyContent: "center",
         alignItems: "center",
         borderRadius: "23px",
-        marginTop: "40px",
         position: "relative",
       }}
     >

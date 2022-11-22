@@ -11,6 +11,10 @@ export const Landing = () => {
     <div>
       <Quotes />
       <Heatmap />
+      <div className="charts" style={{ display: "flex" }}>
+        <ActivityChart />
+        <ProgressChart />
+      </div>
     </div>
   );
 };
@@ -24,11 +28,6 @@ export const Quotes = () => {
       <div className="rndQuotes">{quotesJSON.quotes[num].quote}</div>
       <div className="creditsContainer">
         <div className="quotesCredits">- {quotesJSON.quotes[num].author}</div>
-      </div>
-      <Heatmap />
-      <div className="charts" style={{ display: "flex" }}>
-        <ActivityChart />
-        <ProgressChart />
       </div>
     </div>
   );

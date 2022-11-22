@@ -26,7 +26,6 @@ const ActivityChart = () => {
         justifyContent: "space-evenly",
         alignItems: "center",
         borderRadius: "23px",
-        marginTop: "40px",
         position: "relative",
       }}
     >
