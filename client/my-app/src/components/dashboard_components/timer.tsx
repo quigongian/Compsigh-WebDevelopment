@@ -10,10 +10,12 @@ import resetbtn from './../../image_content/resetButton.svg';
 
 export const Timer = () => {
 
+  const popsrc = require("./../../sound_content/button-sound.mp3");
+
   const [time, setTime] = useState(1500);
   const [isActive, setIsActive] = useState(false);
   const [mode, setMode] = useState("pomodoro");
-  // const pop = new Audio(popsrc);
+  const pop = new Audio(popsrc);
 
   useEffect(() => {
     if (isActive && time > 0) {
@@ -27,7 +29,7 @@ export const Timer = () => {
 
   const toggleClock = () => {
     setIsActive(!isActive);
-    // pop.play();
+    pop.play();
   };
 
   const getTime = () => {
