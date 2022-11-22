@@ -18,25 +18,42 @@ export const Timer = () => {
   const [time, setTime] = useState(1500);
   const [isActive, setIsActive] = useState(false);
   const [mode, setMode] = useState("pomodoro");
+  const [ring,setRing] = useState("bell");
+ 
 
   const pop = new Audio(popsrc);
   const melody = new Audio(melodySrc)
   const bell = new Audio(bellSrc)
   const birds = new Audio(birdsSrc)
 
-  const playMelody = () => {
+
+
+  const clickMelody = () => {
+    setRing("melody");
     melody.play();
   };
-  const playBell = () => {
+  const clickBell = () => {
+    setRing("click");
     bell.play();
   };
-  const playBirds = () => {
+  const clickBirds = () => {
+    setRing("click");
     birds.play();
   };
 
   
 
   useEffect(() => {
+    if (time ==0){
+      if (ring == "bell"){
+        bell.play();
+      }else if (ring=="melody"){
+        melody.play();
+      }else{
+        birds.play();
+      }
+    }
+
     if (isActive && time > 0) {
       const interval = setInterval(() => {
         setTime((time) => time - 1);
@@ -140,9 +157,9 @@ export const Timer = () => {
           <div className="dropdown">
               <span><b>Select</b></span>
               <div className="dropdown-content">
-              <button >Bells</button>
-              <button >Birds</button>
-              <button >Melody</button>
+              <button  onClick={clickBell}>Bells</button>
+              <button onClick={clickBirds}>Birds</button>
+              <button onClick= {clickMelody}>Melody</button>
               </div>
           </div>
           
