@@ -12,8 +12,8 @@ export const Timer = () => {
 
   const popsrc = require("./../../sound_content/button-sound.mp3");
   const melodySrc = require("./../../sound_content/melody.wav")
-  const bellSrc = require("./../../sound_content/birds.wav")
-  const birdsSrc = require("./../../sound_content/bell.wav")
+  const bellSrc = require("./../../sound_content/bell.wav")
+  const birdsSrc = require("./../../sound_content/birds.wav")
 
   const [time, setTime] = useState(1500);
   const [isActive, setIsActive] = useState(false);
@@ -33,11 +33,11 @@ export const Timer = () => {
     melody.play();
   };
   const clickBell = () => {
-    setRing("click");
+    setRing("bell");
     bell.play();
   };
   const clickBirds = () => {
-    setRing("click");
+    setRing("birds");
     birds.play();
   };
 
@@ -83,7 +83,7 @@ export const Timer = () => {
   }
 
   const shortClick = () => {
-    setTime(300);
+    setTime(5);
     setMode("short");
     if (isActive) {
       setIsActive(!isActive);
