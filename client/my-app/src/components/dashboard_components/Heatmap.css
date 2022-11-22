@@ -18,7 +18,6 @@
   padding: 10px 35px 0px 10px;
   border-radius: 0 0 23px 23px;
   background-color: #3d405b;
-  /* background-color: #f4f1de; */
 }
 
 .react-calendar-heatmap text {
@@ -29,4 +28,40 @@
 .react-calendar-heatmap rect:hover {
   stroke: black;
   stroke-width: 1px;
+}
+
+.heatmapTitleDiv {
+  margin-top: 40px;
+  margin-left: 185px;
+  background-color: #3d405b;
+  width: 790px;
+  border-radius: 23px 23px 0 0;
+}
+
+.heatmapTitle {
+  margin-bottom: 0;
+  color: #f4f1de;
+  margin-left: 50px;
+  padding-top: 20px;
+}
+
+#scale {
+  width: 11px;
+  height: 10px;
+}
+
+.scale1 {
+  background-color: #dbae98;
+}
+
+.scale2 {
+  background-color: #d89d82;
+}
+
+.scale3 {
+  background-color: #e48167;
+}
+
+.scale4 {
+  background-color: #da5d3c;
 }

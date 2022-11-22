@@ -6,8 +6,8 @@ import ReactTooltip from "react-tooltip";
 const Heatmap = () => {
   return (
     <div className="heatmap">
-      <div style={{ marginTop: "40px", marginLeft: "185px", backgroundColor: "#3d405b", width: "790px", borderRadius: "23px 23px 0 0" }}>
-        <h5 style={{ marginBottom: 0, color: "#f4f1de", marginLeft: "50px", paddingTop: "20px" }}>Task HeatMap</h5>
+      <div className="heatmapTitleDiv">
+        <h5 className="heatmapTitle">Task HeatMap</h5>
       </div>
       <ReactTooltip />
       <CalendarHeatmap
@@ -62,6 +62,40 @@ const Heatmap = () => {
         }}
         onClick={(value) => alert(`Clicked on value with count: ${value.count}`)}
       />
+
+      <div style={{ display: "flex", width: "100px", height: "30px" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            // backgroundColor: "yellow",
+            width: "270px",
+            height: "25px",
+            marginLeft: "49rem",
+            justifyContent: "space-evenly",
+            marginTop: "-40px",
+          }}
+        >
+          <div style={{ color: "#f4f1de", fontWeight: "400", fontSize: "14px" }}>Less</div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              marginTop: "5px",
+              width: "80px",
+              height: "15px",
+            }}
+          >
+            <div id="scale" className="scale1"></div>
+            <div id="scale" className="scale2"></div>
+            <div id="scale" className="scale3"></div>
+            <div id="scale" className="scale4"></div>
+          </div>
+          <div style={{ color: "#f4f1de", fontWeight: "400", fontSize: "14px" }}>More</div>
+        </div>
+      </div>
+
+      {/*  */}
     </div>
   );
 };

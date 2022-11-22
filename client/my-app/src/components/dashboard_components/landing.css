@@ -13,7 +13,6 @@
 }
 
 .quotationMarks {
-  /* background-color: aquamarine; */
   position: absolute;
   width: 600px;
   height: 123px;
@@ -25,6 +24,8 @@
   margin-left: 365px;
   margin-top: -135px;
   width: 400px;
+  height: 55px;
+  background-color: black;
   color: #f4f1de;
 
   text-align: center;
@@ -42,7 +43,7 @@
   margin-left: 480px;
   margin-right: auto;
   width: 150px;
-  height: 50px;
+  height: 45px;
   text-align: center;
 }
 
