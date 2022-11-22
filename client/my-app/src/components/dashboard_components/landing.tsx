@@ -2,6 +2,7 @@ import quotationMarks from "../../image_content/quotationMarks.svg";
 import quotesBG from "../../image_content/quotesBG.svg";
 import "./landing.css";
 import quotesJSON from "./quotes.json";
+import Heatmap from "./Heatmap";
 
 export const Landing = () => {
   return (
@@ -21,6 +22,7 @@ export const Quotes = () => {
       <div className="creditsContainer">
         <div className="quotesCredits">- {quotesJSON.quotes[num].author}</div>
       </div>
+      <Heatmap />
     </div>
   );
 };

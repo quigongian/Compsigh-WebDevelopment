@@ -2,7 +2,7 @@
   width: 786px;
   height: 175px;
   margin-left: 185px;
-  margin-top: 40px;
+  margin-top: 35px;
   overflow: hidden;
 }
 
@@ -12,9 +12,8 @@
   left: 120px;
 }
 
-.bigQuotentionMarks {
-  background-color: aquamarine;
-
+.quotationMarks {
+  /* background-color: aquamarine; */
   position: absolute;
   width: 600px;
   height: 123px;
