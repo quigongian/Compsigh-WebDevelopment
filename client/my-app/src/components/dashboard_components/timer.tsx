@@ -11,11 +11,30 @@ import resetbtn from './../../image_content/resetButton.svg';
 export const Timer = () => {
 
   const popsrc = require("./../../sound_content/button-sound.mp3");
+  const melodySrc = require("./../../sound_content/melody.wav")
+  const bellSrc = require("./../../sound_content/birds.wav")
+  const birdsSrc = require("./../../sound_content/bell.wav")
 
   const [time, setTime] = useState(1500);
   const [isActive, setIsActive] = useState(false);
   const [mode, setMode] = useState("pomodoro");
+
   const pop = new Audio(popsrc);
+  const melody = new Audio(melodySrc)
+  const bell = new Audio(bellSrc)
+  const birds = new Audio(birdsSrc)
+
+  const playMelody = () => {
+    melody.play();
+  };
+  const playBell = () => {
+    bell.play();
+  };
+  const playBirds = () => {
+    birds.play();
+  };
+
+  
 
   useEffect(() => {
     if (isActive && time > 0) {
@@ -118,6 +137,15 @@ export const Timer = () => {
               <img src={resetbtn} />
             </button>
           </div>
+          <div className="dropdown">
+              <span><b>Select</b></span>
+              <div className="dropdown-content">
+              <button >Bells</button>
+              <button >Birds</button>
+              <button >Melody</button>
+              </div>
+          </div>
+          
         </main>
       </body>
     </>
