@@ -44,7 +44,7 @@ export const Login = () => {
                 <button className="signIn">Sign in</button>
               </div>
 
-              <button className="account" onClick={() => setDisplay("signUp")}>Don't have an account? Sign Up</button>
+              <button className="accountSignIn" onClick={() => setDisplay("signUp")}>Don't have an account? Sign Up</button>
 
             </form>
           </section>
@@ -95,7 +95,7 @@ export const Login = () => {
             <button className="signIn">Sign Up</button>
             <br />
 
-            <button className="account"onClick={() => setDisplay("signIn")}>Already have an account? Sign in</button>
+            <button className="accountSignIn"onClick={() => setDisplay("signIn")}>Already have an account? Sign in</button>
             
           </form>
         </section>
