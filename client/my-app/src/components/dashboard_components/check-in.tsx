@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import bottomWave from "../../image_content/bottomWave.svg";
 import midWave from "../../image_content/midWave.svg";
 import secondWave from "../../image_content/secondWave.svg";
-import topWave from "../../image_content/topWave.svg";
+// import topWave from "../../image_content/topWave.svg";
+import CalendarTracker from "./CalendarTracker";
 import "./check-in.css";
 import { Box,
          TextField,
          MenuItem } from "@mui/material";
-import { margin } from "@mui/system";
 
 
+
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const month = months[new Date().getMonth()];
+const day = new Date().getDate();
+const year = new Date().getFullYear();
 
 export const CheckIn = () => {
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  const month = months[new Date().getMonth()];
-  const day = new Date().getDate();
-  const year = new Date().getFullYear();
-
   return (
     <>
       <div className="checkin-container">
@@ -30,13 +30,13 @@ export const CheckIn = () => {
           </p>
         </div>
         <Questions />
-        <Calendar />
+        <CalendarTracker />
         <Previous />
 
       <img className="wave one" src={bottomWave} alt="" width={"100%"} />
       <img className="wave two" src={midWave} alt="" width={"100%"} />
       <img className="wave three" src={secondWave} alt="" width={"100%"} />
-      <img className="wave four" src={topWave} alt="" width={"100%"} />
+      {/* <img className="wave four" src={topWave} alt="" width={"100%"} /> */}
       </div>
     </>
   );
@@ -210,16 +210,18 @@ const Question5 = () => {
 };
 
 // ---------------------------------------------- Calendar Container ----------------------------------------------
-const Calendar = () => {
-  return <div className="calendar"></div>;
-};
+// const Calendar = () => {
+//   return <div className="calendar">
+//     <Calendar />
+//   </div>;
+// };
 
 // ---------------------------------------------- Previous Container ----------------------------------------------
 const Previous = () => {
   return(
     <div className="previous">
       <p style={{ marginLeft: "73%", marginTop: "0%", fontWeight: "lighter", color: "#FFFFFF", lineHeight: "10px", fontSize: "13px" }}>
-            November 20, 2022
+          {month} {day}, {year}
           </p>
       <Previous1 />
       <Previous2 />
