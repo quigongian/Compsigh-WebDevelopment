@@ -10,6 +10,7 @@ export const Landing = () => {
   return (
     <div>
       <Quotes />
+      <Heatmap />
     </div>
   );
 };
@@ -25,7 +26,7 @@ export const Quotes = () => {
         <div className="quotesCredits">- {quotesJSON.quotes[num].author}</div>
       </div>
       <Heatmap />
-      <div className="" style={{ display: "flex" }}>
+      <div className="charts" style={{ display: "flex" }}>
         <ActivityChart />
         <ProgressChart />
       </div>
