@@ -94,8 +94,6 @@ const Heatmap = () => {
           <div style={{ color: "#f4f1de", fontWeight: "400", fontSize: "14px" }}>More</div>
         </div>
       </div>
-
-      {/*  */}
     </div>
   );
 };
