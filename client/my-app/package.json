@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-calendar": "^3.9.0",
     "@types/react-calendar-heatmap": "^1.6.3"
   }
 }
