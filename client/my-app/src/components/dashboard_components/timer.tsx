@@ -6,9 +6,21 @@ import blob1 from './../../image_content/dashBlob1.svg';
 import playbtn from './../../image_content/playButton.svg';
 import pausebtn from './../../image_content/pauseButton.svg';
 import resetbtn from './../../image_content/resetButton.svg';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Slider from '@mui/material/Slider';
+import VolumeDown from '@mui/icons-material/VolumeDown';
+import VolumeUp from '@mui/icons-material/VolumeUp';
 
 
 export const Timer = () => {
+
+
+  const [value, setValue] = React.useState<number>(30);
+
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    setValue(newValue as number);
+  };
 
   const popsrc = require("./../../sound_content/button-sound.mp3");
   const melodySrc = require("./../../sound_content/melody.wav")
@@ -137,25 +149,31 @@ export const Timer = () => {
               <img src={resetbtn} />
             </button>
           </div>
-          <div className="dropdown">
-              <span><b>Select</b></span>
-              <div className="dropdown-content">
-              <button >Bells</button>
-              <button >Birds</button>
-              <button >Melody</button>
+          <div className="rectangle">
+              <div className="dropdown-box">
+                Timer Sound:
+                <div className="dropdown">
+                  <span><strong>Select</strong></span>
+                  <div className="dropdown-content">
+                    <button>Bells</button>
+                    <button>Birds</button>
+                    <button>Melody</button>
+                  </div>
+                </div>
               </div>
-          </div>
-          
+              <div className="slider">
+                Volume:
+                <Box sx={{ width: 300, color: 'white' }}>
+                  <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
+                    <VolumeDown />
+                    <Slider sx={{color: '#81B29A'}}aria-label="Volume" value={value} onChange={handleChange} />
+                    <VolumeUp />
+                  </Stack>
+                </Box>
+              </div>
+            </div>
         </main>
       </body>
     </>
   );
 };
-
-{/* <div className="dropdown">
-            <span><b>Select</b></span>
-            <div className="dropdown-content">
-            <p>Bells</p>
-            <p>Birds</p>
-            <p>Melody</p>
-           </div> */}
