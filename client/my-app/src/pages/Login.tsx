@@ -1,15 +1,54 @@
-
 import { CenterFocusStrong } from "@mui/icons-material";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
-import  SignOut from "../image_content/signOut.png";
+import SignOut from "../image_content/signOut.png";
+import { signIn,signUp } from "../services/requests";
 import "./Login.css";
 
 
 export const Login = () => {
 
-  const [display, setDisplay] = useState("signIn");
+	const [display, setDisplay] = useState("signIn");
+	
+	const submitSignIn = (e: FormEvent) => {
+		e.preventDefault();
+		signIn({ email: "dummy@example.com", password: "Dummy123!" })
+            .then((res) => {
+                if (res.status === 200) {
+                    console.log("User signed in successfully");
+                    // redirect to home page or something
+                } else {
+                    console.log("User sign in failed", res.statusText);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+	};
+	
+	const submitSignUp = (e: FormEvent) => {
+		e.preventDefault();
+		signUp({
+			firstName: "John",
+			lastName: "Doe",
+			email: "jdoe@example.com",
+			password: "Password-123",
+			categoryId: 1,
+			xpLevelId: 1,
+		})
+			.then((res) => {
+				if (res.status === 201) {
+					console.log("User created successfully");
+					// redirect to "sign in" page and display "a link to verify your email has been sent to your email address"
+				} else {
+					console.log("User creation failed", res.statusText);
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}
 
   return (
     <>
@@ -19,7 +58,7 @@ export const Login = () => {
         <section style={{ display: "flex", flexDirection: "row", justifyContent: "space-between"}} >
           <section className="section">
             <h1>Welcome Back!</h1>
-            <form action="">
+            <form onSubmit={submitSignIn}>
           
               <div>
                 <input className="input" type="email" name="email" placeholder="E-Mail *" required id="email"/>
@@ -61,7 +100,7 @@ export const Login = () => {
         <section style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
         <section className="section" id="section2">
           <h1 id="welcome">Welcome!</h1>
-          <form action="">
+          <form onSubmit={submitSignUp}>
 
             <input className="input" id="input" type="text" name="firstname" placeholder="First Name *" required />
             <br />
