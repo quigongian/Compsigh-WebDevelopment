@@ -54,16 +54,16 @@ const Profile = (props:{user:User}) => {
         <div className="pinfo-container">
           <ul>
             <li>
-              <h4>Frank Beans (name)</h4>
+              <h4>{props.user.firstName + " " + props.user.lastName}</h4>
             </li>
             <li>
-              <h4>frank@lovesbeans.com (email)</h4>
+              <h4>{props.user.email}</h4>
             </li>
             <li>
-              <h4>Data Engineer (career path)</h4>
+              <h4>{props.user.categoryName}</h4>
             </li>
             <li>
-              <h4>Expert (experience lvl)</h4>
+              <h4>{props.user.xpLevelName}</h4>
             </li>
           </ul>
         </div>
@@ -218,7 +218,7 @@ const ProfileEdit = (props:{user:User}) => {
             <TextField
               label="Name"
               variant="outlined"
-              defaultValue= {props.user.firstName}
+              value={props.user.firstName + " " + props.user.lastName}
               InputProps={{
                 readOnly: true,
               }}
@@ -230,7 +230,7 @@ const ProfileEdit = (props:{user:User}) => {
                 error={emailError}
                 id="outlined-basic"
                 label="Email"
-                defaultValue="frank@lovesbeans.com"
+                defaultValue={props.user.email}
                 helperText="Please enter a valid email"
                 variant="outlined"
                 required
