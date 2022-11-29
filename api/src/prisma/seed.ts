@@ -130,7 +130,6 @@ async function init() {
     const dummyUser: SignUpRequest = {
         firstName: "Dummy",
         lastName: "User",
-        userName: "dummy",
         email: "dummy@example.com",
         password: "Dummy123!",
         categoryId: 1,

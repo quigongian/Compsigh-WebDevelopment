@@ -8,7 +8,6 @@ export interface SignInRequest {
 export interface SignUpRequest {
     firstName: string;
     lastName: string;
-    userName: string;
     email: string;
     password: string;
     categoryId: number;
@@ -36,7 +35,7 @@ export interface ResetPasswordRequest {
 }
 
 export interface DeleteUserRequest {
-    userName: number;
+    email: string;
 }
 
 export interface UpdatePasswordRequest {

@@ -61,13 +61,7 @@ async function createAndReturnUserDTO(
             "Email already exists, sign in instead"
         );
     }
-    if (
-        !req.firstName ||
-        !req.lastName ||
-        !req.userName ||
-        !req.email ||
-        !req.password
-    ) {
+    if (!req.firstName || !req.lastName || !req.email || !req.password) {
         throw new HttpError(HttpStatus.BadRequest, "Missing required fields");
     }
     if (!isStrongPassword(req.password)) {
@@ -80,7 +74,6 @@ async function createAndReturnUserDTO(
     const user = await userRepository.create(
         req.firstName,
         req.lastName,
-        req.userName,
         req.email,
         req.password,
         req.categoryId,
@@ -174,13 +167,13 @@ async function updateTheme(userId: number, theme: string): Promise<void> {
     await userRepository.updateTheme(userId, theme as Theme);
 }
 
-async function deleteUser(userId: number, userName: string): Promise<void> {
+async function deleteUser(userId: number, email: string): Promise<void> {
     const user = await userRepository.getById(userId);
     if (!user) {
         throw new HttpError(HttpStatus.NotFound, "User not found");
     }
-    if (user.userName !== userName) {
-        throw new HttpError(HttpStatus.BadRequest, "Incorrect user name");
+    if (user.email !== email) {
+        throw new HttpError(HttpStatus.BadRequest, "Incorrect email");
     }
     await userRepository.deleteById(userId);
 }
@@ -210,7 +203,6 @@ function isStrongPassword(password: string): boolean {
 export interface CreateUserRequest {
     firstName: string;
     lastName: string;
-    userName: string;
     email: string;
     password: string;
     categoryId: number;

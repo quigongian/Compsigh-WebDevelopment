@@ -36,7 +36,6 @@ export const swaggerSpec = swaggerJSDoc({
                 type: "object",
                 required: [
                     "userId",
-                    "userName",
                     "firstName",
                     "lastName",
                     "email",
@@ -47,7 +46,6 @@ export const swaggerSpec = swaggerJSDoc({
                 ],
                 properties: {
                     userId: { type: "integer", format: "int64" },
-                    userName: { type: "string" },
                     firstName: { type: "string" },
                     lastName: { type: "string" },
                     email: { type: "string" },
@@ -123,14 +121,12 @@ export const swaggerSpec = swaggerJSDoc({
                 required: [
                     "firstName",
                     "lastName",
-                    "userName",
                     "email",
                     "password",
                     "categoryId",
                     "xpLevelId",
                 ],
                 properties: {
-                    userName: { type: "string" },
                     firstName: { type: "string" },
                     lastName: { type: "string" },
                     email: { type: "string" },
@@ -172,8 +168,8 @@ export const swaggerSpec = swaggerJSDoc({
             },
             DeleteUserRequest: {
                 type: "object",
-                required: ["userName"],
-                properties: { userName: { type: "string" } },
+                required: ["email"],
+                properties: { email: { type: "string" } },
             },
             ResetPasswordRequest: {
                 type: "object",

@@ -65,7 +65,6 @@ async function signUp(req: Request, res: Response, next: NextFunction) {
         await authService.signUp({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            userName: req.body.userName,
             email: req.body.email,
             password: req.body.password,
             xpLevelId: req.body.xpLevelId,

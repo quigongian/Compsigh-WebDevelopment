@@ -68,7 +68,7 @@ async function getUser(req: Request, res: Response, next: NextFunction) {
  */
 async function deleteAccount(req: Request, res: Response, next: NextFunction) {
     try {
-        await userService.deleteUser(req.userId, req.body.userName);
+        await userService.deleteUser(req.userId, req.body.email);
         res.sendStatus(HttpStatus.NoContent);
     } catch (error) {
         next(error);

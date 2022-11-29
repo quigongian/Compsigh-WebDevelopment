@@ -32,7 +32,6 @@ async function existsByEmail(email: string): Promise<boolean> {
 async function create(
     firstName: string,
     lastName: string,
-    userName: string,
     email: string,
     password: string,
     categoryId: number,
@@ -43,7 +42,6 @@ async function create(
         data: {
             firstName,
             lastName,
-            userName,
             email,
             password,
             categoryId,
