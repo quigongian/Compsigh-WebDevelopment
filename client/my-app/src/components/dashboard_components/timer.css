@@ -18,7 +18,7 @@ body {
 
 .timer {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
@@ -95,21 +95,36 @@ body {
 .hidden {
   display: none;
 }
+.dropdown-box{
+  font-size: 22px;
+  padding-top:25px;
+  padding-left: 70px;
+  top: 75%;
+  left: 43.8%;
 
+}
 .dropdown {
-  position: absolute;
   /* display: inline-block; */
+  font-size: 18px;
   background-color: #81b29b;
-  min-width: 250px;
-  top: 69%;
-  left: 40.8%;
-  padding: 1px 10px;
+  color: white;
+  width: 250px;
+  padding: 5px 10px;
   border-bottom-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   border-top-left-radius: 15px;
 }
-
+.rectangle{
+  position: absolute;
+  top: 47%;
+  left: 37.3%;
+  background-color: #3D405B;
+  color: white;
+  width: 27.29%;
+  height: 16.6%;
+  border-radius: 32px;
+}
 .dropdown-content {
   display: none;
   position: absolute;
@@ -124,4 +139,13 @@ body {
 
 .dropdown:hover .dropdown-content {
   display: block;
+  opacity: 0.75;
+}
+
+.slider{
+  font-size: 22px;
+  padding-top:35px;
+  padding-left: 70px;
+  top: 75%;
+  left: 43.8%;
 }
