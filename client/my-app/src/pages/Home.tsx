@@ -16,7 +16,8 @@ export const Home = () => {
             <h1 className="header"> Welcome to CompSigh</h1>
             <p className="mainpg">CompSigh is a website applicatoin dedicated in 
             helping students organize their tasks and achieve their goals. The website 
-            is primarily targeted at Computer Science students but it is welcomed to all.</p>
+            is primarily targeted at Computer Science students but it is welcomed to all. CompSigh 
+            hopes to improve productivity levels and lead to success in desired careers.</p>
             
             <Link to="/login">
             <button className="main-btn">Get Started</button>
