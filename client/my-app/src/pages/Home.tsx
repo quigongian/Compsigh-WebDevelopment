@@ -1,20 +1,11 @@
-import React, { useState } from "react";
 import { Header } from "../components/header";
 import women from "../image_content/women.svg";
 import idea_search from "../image_content/idea_search.svg";
 import clock_calender from "../image_content/clock_calender.svg";
 import "./home.css";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 export const Home = () => {
-  const [clickedButton, setClickedButton] = useState("");
-
-  const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-
-    const button: HTMLButtonElement = event.currentTarget;
-    setClickedButton(button.name);
-  };
   return (
     <>
       <Header />
@@ -22,23 +13,13 @@ export const Home = () => {
       <div className="temp">
         <div className="All">
           <div className="Sect1">
-            <h1 className="header"> About Us</h1>
-            <p className="mainpg">
-              {clickedButton !== "" ? `` : "We are a team of computer science students that want to help other students manage their time."}
-              {clickedButton === "btn1" ? `We are a team of computer science students that want to help other students manage their time.` : ""}
-              {clickedButton === "btn2" ? `blah ` : ""}
-              {clickedButton === "btn3" ? `blah bleh` : ""}
-              {clickedButton === "btn4" ? `blah bloo` : ""}
-            </p>
-
-            <div className="btn-group">
-              <button onClick={buttonHandler} className="button1" name="btn1"></button>
-              <button onClick={buttonHandler} className="button2" name="btn2"></button>
-              <button onClick={buttonHandler} className="button3" name="btn3"></button>
-              <button onClick={buttonHandler} className="button4" name="btn4"></button>
-            </div>
+            <h1 className="header"> Welcome to CompSigh</h1>
+            <p className="mainpg">CompSigh is a website applicatoin dedicated in 
+            helping students organize their tasks and achieve their goals. The website 
+            is primarily targeted at Computer Science students but it is welcomed to all.</p>
+            
             <Link to="/login">
-            <button className="main-btn"  >Get Started</button>
+            <button className="main-btn">Get Started</button>
             </Link>
            
 
