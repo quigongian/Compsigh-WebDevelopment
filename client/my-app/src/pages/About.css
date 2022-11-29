@@ -27,9 +27,17 @@
   justify-content: center;
   align-items: center;
   z-index: 99;
+  margin-top: 50px;
+}
+
+#pp1{
+  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .p {
+
   width: 300px;
 }
 

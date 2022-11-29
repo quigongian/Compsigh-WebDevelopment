@@ -31,15 +31,15 @@ export const About = () => {
     <>
     <Header/>
     <div className="about-wrapper">
-      <div className="row">
-        <Block
-          heading="Who We Are"
-          description="Lorem Ipsum dfjdnfjdn vfkvmkm vkfmvfi  vifmvfim vifmvf i fimvfivm vfm imf fimfv"
-          image={imageOne}
+      <div className="row"> 
+        <Block 
+          heading="Who We Are" 
+          description="We are a team of Computer Science students dedicated to alleviating the academic pressure placed on college students."
+          image={imageOne} 
         />
         <Block
-          heading="What We Can Do For You"
-          description="Lorem Ipsum dfjdnfjdn vfkvmkm vkfmvfi  vifmvfim vifmvf i fimvfivm vfm imf fimfv"
+          heading="Our Goal"
+          description="CompSigh serves to guide and keep you on track towards becoming your most productive self. Track your progress and watch as your goals become reality."
           image={imageTwo}
         />
       </div>
@@ -61,8 +61,8 @@ export const About = () => {
 const Block = ({ heading, description, image }: blockProps) => {
   return (
     <div className="block">
-      <Subheading color="#f4f1de">{heading}</Subheading>
-      <Paragraph className="p" color="#f4f1de">
+      <Subheading className= "hd1" color="#f4f1de" >{heading}</Subheading>
+      <Paragraph className="p" id="pp1" color="#f4f1de">
         {description}
       </Paragraph>
       <img className="pc1" src={image} alt="" />
