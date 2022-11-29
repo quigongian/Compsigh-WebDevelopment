@@ -14,7 +14,6 @@ Lastly, the application also allows students who are lost, start a educational t
 - Dominick Diaz (UX/UI Designer, Backend Developer)
 - Darielis Merced-Calderon (UX/UI Designer, Frontend Developer)
 - Eva Sennrich (UX/UI Designer, Frontend Developer)
-- Sage Pages (Backend Developer)
 - Edwin Villarroel (UX/UI Designer, Frontend Developer)
 - Carlos Miguel Garcia (UX/UI Designer, Backend Developer)
 - Stephanie Hernandez (UX/UI Designer, Frontend Developer)
