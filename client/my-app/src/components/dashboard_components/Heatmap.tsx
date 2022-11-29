@@ -3,7 +3,7 @@ import "react-calendar-heatmap/dist/styles.css";
 import "./Heatmap.css";
 import ReactTooltip from "react-tooltip";
 
-const Heatmap = () => {
+const Heatmap = (props: any) => {
   return (
     <div className="heatmap">
       <div className="heatmapTitleDiv">
@@ -15,7 +15,7 @@ const Heatmap = () => {
         endDate={new Date(Date.now())}
         showWeekdayLabels={true}
         showOutOfRangeDays={false}
-        values={[
+        values={[ //props.tasks
           { date: "2022-01-01", count: 3 },
           { date: "2022-01-02", count: 7 },
           { date: "2022-01-03", count: 9 },

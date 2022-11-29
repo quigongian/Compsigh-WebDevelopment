@@ -7,10 +7,15 @@ import ActivityChart from "./ActivityChart";
 import ProgressChart from "./ProgressChart";
 
 export const Landing = () => {
+  //data fetch
+  //use state hook that contains all the data
+  //pass the state variable as props to the nested components
+  //
   return (
     <div>
       <Quotes />
-      <Heatmap />
+      {/* We would be passing something like tasks = {tasks.dates} */}
+      <Heatmap/> 
       <div className="charts" style={{ display: "flex" }}>
         <ActivityChart />
         <ProgressChart />

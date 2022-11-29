@@ -43,24 +43,16 @@ export const About = () => {
           image={imageTwo}
         />
       </div>
-      <div className="row">
-        <Block
-          heading="Our Story"
-          description="Lorem Ipsum dfjdnfjdn vfkvmkm vkfmvfi  vifmvfim vifmvf i fimvfivm vfm imf fimfv"
-          image={imageThree}
-        />
-        <Block
-          heading="Something Else Here"
-          description="Lorem Ipsum dfjdnfjdn vfkvmkm vkfmvfi  vifmvfim vifmvf i fimvfivm vfm imf fimfv"
-          image={imageFour}
-        />
-      </div>
+      <img className="awave aone" src={wave1} alt="" width={"100%"} />
+    <img className="awave atwo" src={wavemid} alt="" width={"100%"} />
+    <img className="awave athree" src={wavetop} alt="" width={"100%"} />
+    <img className="awave afour" src={wavebot} alt="" width={"100%"} />
     </div>
     
-    <img className="wave one" src={wave1} alt="" width={"100%"} />
-    <img className="wave two" src={wavemid} alt="" width={"100%"} />
-    <img className="wave three" src={wavetop} alt="" width={"100%"} />
-    <img className="wave four" src={wavebot} alt="" width={"100%"} />
+    {/* <div className="waves"> */}
+    
+      {/* </div> */}
+    
     {/* <Footer/> */}
     </>
   );

@@ -4,7 +4,7 @@
   background-position: center;
   background-size: cover; */
   background-color: #3D405B;
-  height: 130vh;
+  height: 100vh;
   width: 100vw;
   margin: 0;
   padding: 0;
@@ -13,11 +13,12 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 50vh;
-  position: absolute;
+  position: relative;
 }
-.pc1{
- 
-}
+/* .waves{
+  position: fixed;
+} */
+
 .block {
   width: 50vw;
   height: 50vh;
@@ -32,25 +33,24 @@
   width: 300px;
 }
 
-.wave {
-  position: relative;
-  
+.awave {
+  position: absolute;
   bottom: 0;
   user-select: none;
 }
 
-.one {
+.aone {
   z-index: 3;
 }
-.two {
+.atwo {
   z-index: 2;
   animation: move 3s ease-in-out 0s infinite both;
 }
-.three {
+.athree {
   z-index: 1;
   animation: move 4s ease-in-out 0s infinite both;
 }
-.four {
+.afour {
   z-index: 0;
   animation: move 5s ease 0s infinite both;
 }

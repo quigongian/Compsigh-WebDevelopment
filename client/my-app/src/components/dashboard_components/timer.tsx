@@ -24,31 +24,48 @@ export const Timer = () => {
 
   const popsrc = require("./../../sound_content/button-sound.mp3");
   const melodySrc = require("./../../sound_content/melody.wav")
-  const bellSrc = require("./../../sound_content/birds.wav")
-  const birdsSrc = require("./../../sound_content/bell.wav")
+  const bellSrc = require("./../../sound_content/bell.wav")
+  const birdsSrc = require("./../../sound_content/birds.wav")
 
   const [time, setTime] = useState(1500);
   const [isActive, setIsActive] = useState(false);
   const [mode, setMode] = useState("pomodoro");
+  const [ring,setRing] = useState("bell");
+ 
 
   const pop = new Audio(popsrc);
   const melody = new Audio(melodySrc)
   const bell = new Audio(bellSrc)
   const birds = new Audio(birdsSrc)
 
-  const playMelody = () => {
+
+
+  const clickMelody = () => {
+    setRing("melody");
     melody.play();
   };
-  const playBell = () => {
+  const clickBell = () => {
+    setRing("bell");
     bell.play();
   };
-  const playBirds = () => {
+  const clickBirds = () => {
+    setRing("birds");
     birds.play();
   };
 
   
 
   useEffect(() => {
+    if (time ==0){
+      if (ring == "bell"){
+        bell.play();
+      }else if (ring=="melody"){
+        melody.play();
+      }else{
+        birds.play();
+      }
+    }
+
     if (isActive && time > 0) {
       const interval = setInterval(() => {
         setTime((time) => time - 1);
@@ -78,7 +95,7 @@ export const Timer = () => {
   }
 
   const shortClick = () => {
-    setTime(300);
+    setTime(5);
     setMode("short");
     if (isActive) {
       setIsActive(!isActive);
