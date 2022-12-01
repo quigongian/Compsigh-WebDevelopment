@@ -28,6 +28,7 @@ import { useState } from "react";
 import { createTheme } from "@mui/material/styles";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
+import { HttpStatusCode } from "axios";
 import { getUser } from "../../services/requests";
 import { User } from "../../services/models";
 
@@ -401,7 +402,7 @@ export const SettingsPage = () => {
   useEffect(() => {
     getUser()
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === HttpStatusCode.Ok) {
           setUser(response.data);
         } else {
           console.log("Error");

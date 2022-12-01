@@ -186,7 +186,7 @@ async function updateTask(req: Request, res: Response, next: NextFunction) {
  *    delete:
  *      tags:
  *        - task
- *      summary: Delete taskn"
+ *      summary: Delete task"
  *      security:
  *        - JWT: []
  *      parameters:

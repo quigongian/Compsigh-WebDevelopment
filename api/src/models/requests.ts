@@ -34,10 +34,6 @@ export interface ResetPasswordRequest {
     code: string;
 }
 
-export interface DeleteUserRequest {
-    email: string;
-}
-
 export interface UpdatePasswordRequest {
     email: string;
     oldPassword: string;

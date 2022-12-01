@@ -48,12 +48,12 @@ async function getUser(req: Request, res: Response, next: NextFunction) {
  *      security:
  *        - JWT: []
  *      parameters:
- *        - in: body
- *          name: body
- *          description: DeleteUserRequest
- *          required: true
+ *        - in: path
+ *          name: email
  *          schema:
- *            $ref: "#/definitions/DeleteUserRequest"
+ *            type: string
+ *          required: true
+ *          description: email
  *      responses:
  *        204:
  *          $ref: "#/definitions/NoContent"
@@ -68,7 +68,7 @@ async function getUser(req: Request, res: Response, next: NextFunction) {
  */
 async function deleteAccount(req: Request, res: Response, next: NextFunction) {
     try {
-        await userService.deleteUser(req.userId, req.body.email);
+        await userService.deleteUser(req.userId, req.params.email);
         res.sendStatus(HttpStatus.NoContent);
     } catch (error) {
         next(error);

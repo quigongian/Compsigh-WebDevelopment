@@ -1,4 +1,5 @@
 import { CenterFocusStrong } from "@mui/icons-material";
+import { HttpStatusCode } from "axios";
 import { FormEvent, useState } from "react";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
@@ -15,7 +16,7 @@ export const Login = () => {
 		e.preventDefault();
 		signIn({ email: "dummy@example.com", password: "Dummy123!" })
             .then((res) => {
-                if (res.status === 200) {
+                if (res.status === HttpStatusCode.Ok) {
                     console.log("User signed in successfully");
                     // redirect to home page or something
                 } else {
@@ -38,7 +39,7 @@ export const Login = () => {
 			xpLevelId: 1,
 		})
 			.then((res) => {
-				if (res.status === 201) {
+				if (res.status === HttpStatusCode.Created) {
 					console.log("User created successfully");
 					// redirect to "sign in" page and display "a link to verify your email has been sent to your email address"
 				} else {

@@ -1,16 +1,9 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-
-enum StatusCode {
-    Ok = 200,
-    Created = 201,
-    Accepted = 202,
-    NoContent = 204,
-    BadRequest = 400,
-    Unauthorized = 401,
-    Forbidden = 403,
-    NotFound = 404,
-    InternalServerError = 500,
-}
+import axios, {
+    AxiosInstance,
+    AxiosRequestConfig,
+    AxiosResponse,
+    HttpStatusCode,
+} from "axios";
 
 const headers: Readonly<Record<string, string | boolean>> = {
     Accept: "application/json",
@@ -41,7 +34,7 @@ const parseToken = (
     return response;
 };
 
-class Http {
+class HttpClient {
     private instance: AxiosInstance | null = null;
 
     private get http(): AxiosInstance {
@@ -111,19 +104,19 @@ class Http {
     private handleError(error: any): Promise<never> {
         console.log(error);
         switch (error.status) {
-            case StatusCode.BadRequest:
+            case HttpStatusCode.BadRequest:
                 console.log("Bad request");
                 break;
-            case StatusCode.Unauthorized:
+            case HttpStatusCode.Unauthorized:
                 console.log("Unauthorized");
                 break;
-            case StatusCode.Forbidden:
+            case HttpStatusCode.Forbidden:
                 console.log("Forbidden");
                 break;
-            case StatusCode.NotFound:
+            case HttpStatusCode.NotFound:
                 console.log("NotFound");
                 break;
-            case StatusCode.InternalServerError:
+            case HttpStatusCode.InternalServerError:
                 console.log("InternalServerError");
                 break;
             default:
@@ -134,4 +127,4 @@ class Http {
     }
 }
 
-export const http = new Http();
+export const httpClient = new HttpClient();

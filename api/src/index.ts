@@ -34,7 +34,7 @@ api.post("/auth/email/verify", authController.verifyEmail);
 api.post("/auth/password/forgot", authController.forgotPassword);
 api.post("/auth/password/reset", authController.resetPassword);
 api.get("/user/", AUTH(userController.getUser));
-api.delete("/user", AUTH(userController.deleteAccount));
+api.delete("/user/:email", AUTH(userController.deleteAccount));
 api.patch("/user/password", AUTH(userController.updatePassword));
 api.post("/user/email", AUTH(userController.changeEmail));
 api.patch("/user/email", AUTH(userController.updateEmail));

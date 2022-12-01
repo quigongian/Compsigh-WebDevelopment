@@ -166,11 +166,6 @@ export const swaggerSpec = swaggerJSDoc({
                 required: ["email"],
                 properties: { email: { type: "string" } },
             },
-            DeleteUserRequest: {
-                type: "object",
-                required: ["email"],
-                properties: { email: { type: "string" } },
-            },
             ResetPasswordRequest: {
                 type: "object",
                 required: ["email", "password", "repeatPassword", "code"],

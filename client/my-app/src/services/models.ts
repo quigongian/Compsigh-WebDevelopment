@@ -6,7 +6,35 @@ export interface User {
     email: string;
     categoryName: string;
     xpLevelName: string;
-    theme: string;
+    theme: Theme;
+}
+
+export interface CheckIn {
+    checkInId: number;
+    answer2: string;
+    answer3: string;
+    answer4: string;
+    comments: string | undefined;
+    checkInStatus: CheckInStatus;
+    createdAt: Date;
+}
+
+export interface Task {
+    taskId: number;
+    taskName: string;
+    taskDescription: string;
+    completed: boolean;
+    createdAt: Date;
+}
+
+export interface Category {
+    categoryId: number;
+    categoryName: string;
+}
+
+export interface XPLevel {
+    xpLevelId: number;
+    xpLevelname: string;
 }
 
 export interface SignInRequest {
@@ -43,10 +71,6 @@ export interface ResetPasswordRequest {
     code: string;
 }
 
-export interface DeleteUserRequest {
-    email: string;
-}
-
 export interface UpdatePasswordRequest {
     email: string;
     oldPassword: string;
@@ -64,10 +88,12 @@ export interface UpdateEmailRequest {
 }
 
 export interface ChangeThemeRequest {
-    theme: typeof Theme[keyof typeof Theme];
+    theme: Theme;
 }
 
-export const Theme = {
+export type Theme = typeof theme[keyof typeof theme];
+
+export const theme = {
     LIGHT: "LIGHT",
     DARK: "DARK",
 };
@@ -82,10 +108,12 @@ export interface CreateCheckInRequest {
     answer3: string;
     answer4: string;
     comments: string | undefined;
-    checkInStatus: typeof CheckInStatus[keyof typeof CheckInStatus];
+    checkInStatus: CheckInStatus;
 }
 
-export const CheckInStatus = {
+export type CheckInStatus = typeof checkInStatus[keyof typeof checkInStatus];
+
+export const checkInStatus = {
     GOOD: "GOOD",
     NEUTRAL: "NEUTRAL",
     BAD: "BAD",
