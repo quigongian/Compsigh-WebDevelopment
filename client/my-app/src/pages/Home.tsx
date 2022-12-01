@@ -9,7 +9,7 @@ export const Home = () => {
   return (
     <>
       <Header />
-
+      <body className="bodyVibes">
       <div className="temp">
         <div className="All">
           <div className="Sect1">
@@ -53,6 +53,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
+      </body>
     </>
   );
 };

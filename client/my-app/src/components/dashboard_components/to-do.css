@@ -102,3 +102,7 @@
   .btncancel:hover{
     cursor: pointer;
   }
+
+  .body {
+    overflow: hidden;
+  }

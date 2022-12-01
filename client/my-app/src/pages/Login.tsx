@@ -1,12 +1,11 @@
-import { CenterFocusStrong } from "@mui/icons-material";
 import { HttpStatusCode } from "../services/http-client";
 import { FormEvent, useState } from "react";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 import SignOut from "../image_content/signOut.png";
 import { signIn, signUp } from "../services/requests";
-import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -39,9 +38,9 @@ export const Login = () => {
             xpLevelId: 1,
         })
             .then((res) => {
-                if (res.status === HttpStatusCode.Created) {
+                if (res.status === HttpStatusCode.Ok) {
                     console.log("User created successfully");
-                    // redirect to "sign in" page and display "a link to verify your email has been sent to your email address"
+                    navigate("/dashboard");
                 } else {
                     console.log("User creation failed", res.statusText);
                 }
