@@ -1,4 +1,3 @@
-import { CenterFocusStrong } from "@mui/icons-material";
 import { HttpStatusCode } from "../services/http-client";
 import { FormEvent, useState } from "react";
 import { Footer } from "../components/footer";

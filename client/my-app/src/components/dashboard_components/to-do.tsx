@@ -79,7 +79,7 @@ export const Todo = () => {
         if (newTask) {
             createTask({ taskName: newTask, taskDescription: "" })
                 .then((response) => {
-                    if (response.status === HttpStatusCode.Ok) {
+                    if (response.status === HttpStatusCode.Created) {
                         setStale(true);
                         setNewTask("");
                     } else {
@@ -95,7 +95,7 @@ export const Todo = () => {
     const deleteTaskHandler = (id: number) => {
         deleteTask(id)
             .then((response) => {
-                if (response.status === HttpStatusCode.Ok) {
+                if (response.status === HttpStatusCode.NoContent) {
                     setStale(true);
                 } else {
                     console.log("Error");
@@ -110,7 +110,7 @@ export const Todo = () => {
         updateTaskCompletedStatus(id, {
             completed: !toDo[id].completed,
         }).then((response) => {
-            if (response.status === HttpStatusCode.Ok) {
+            if (response.status === HttpStatusCode.NoContent) {
                 setStale(true);
             } else {
                 console.log("Error");
