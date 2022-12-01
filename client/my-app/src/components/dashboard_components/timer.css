@@ -1,5 +1,5 @@
 .dashBlob2 {
-  position: absolute;
+  position:static;
   top: 0%;
   left: 0%;
   z-index: 0;
