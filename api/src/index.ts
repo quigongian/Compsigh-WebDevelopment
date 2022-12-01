@@ -54,6 +54,8 @@ app.use("/api/v1", api);
 app.use("*", notFoundHandler);
 app.use(globalErrorHandler);
 
+app.disable("etag");
+
 app.listen(PORT, () => {
     console.log(`Server started at http://localhost:${PORT}`);
     console.log(`Swagger Docs: http://localhost:${PORT}/api/v1/docs`);

@@ -24,6 +24,7 @@ export interface Task {
     taskName: string;
     taskDescription: string;
     completed: boolean;
+    completedAt: Date | undefined;
     createdAt: Date;
 }
 

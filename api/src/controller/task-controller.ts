@@ -267,7 +267,6 @@ async function updateCompletedStatus(
             req.params.taskId,
             req.userId
         );
-        console.log(taskDTO);
         await taskService.updateTaskCompletedStatus(
             taskDTO.taskId,
             req.body.completed as boolean
