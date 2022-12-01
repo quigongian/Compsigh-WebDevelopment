@@ -2,12 +2,14 @@
   position: absolute;
   top: 0%;
   left: 0%;
+  z-index: 0;
 }
 
 .dashBlob1 {
   position: absolute;
   right: 0%;
   bottom: 0%;
+  z-index: 0;
 }
 
 body {

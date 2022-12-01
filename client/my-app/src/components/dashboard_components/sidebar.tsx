@@ -11,6 +11,7 @@ import { Todo } from "../dashboard_components/to-do";
 import { Landing } from "../dashboard_components/landing";
 import { Timer } from "../dashboard_components/timer";
 import { Quotes } from "../dashboard_components/landing";
+import { Header } from "../header";
 
 export default function Sidebar() {
   const [state, setState] = useState("landing");
@@ -22,6 +23,8 @@ export default function Sidebar() {
           PaperProps={{
             sx: {
               backgroundColor: "#81B29A",
+              height:"100vh",
+              marginTop: "49px"
             },
           }}
           sx={{
