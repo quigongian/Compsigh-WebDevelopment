@@ -5,7 +5,7 @@ import ReactTooltip from "react-tooltip";
 
 const Heatmap = (props: any) => {
   return (
-    <div className="heatmap">
+    <>
       <div className="heatmapTitleDiv">
         <h5 className="heatmapTitle">Task HeatMap</h5>
       </div>
@@ -15,7 +15,8 @@ const Heatmap = (props: any) => {
         endDate={new Date(Date.now())}
         showWeekdayLabels={true}
         showOutOfRangeDays={false}
-        values={[ //props.tasks
+        values={[
+          //props.tasks
           { date: "2022-01-01", count: 3 },
           { date: "2022-01-02", count: 7 },
           { date: "2022-01-03", count: 9 },
@@ -94,7 +95,7 @@ const Heatmap = (props: any) => {
           <div style={{ color: "#f4f1de", fontWeight: "400", fontSize: "14px" }}>More</div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
