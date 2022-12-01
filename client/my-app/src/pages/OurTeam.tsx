@@ -18,6 +18,7 @@ export const OurTeam = () => {
   return (
     <>
     <Header/>
+    <body className="bodyVibes">
     <div className="team-wrapper">
       <div className="team-row">
         <Card
@@ -120,6 +121,7 @@ export const OurTeam = () => {
       <img className="wave three" src={secondWave} alt="" width={"100%"} />
       <img className="wave four" src={topWave} alt="" width={"100%"} />
     </div>
+    </body>
     </>
   );
 };
