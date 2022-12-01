@@ -19,15 +19,19 @@ import { AuthResponse, RefreshAccessTokenResponse } from "../models/responses";
 async function signIn(req: SignInRequest): Promise<AuthResponse> {
     try {
         const user = await userService.getByEmail(req.email);
-        if (!user.emailVerified) {
-            await emailVerificationService.setupEmailVerification(
-                user.userId,
-                user.email,
-                EmailVerificationType.VERIFY_EMAIL
-            );
-            throw new HttpError(HttpStatus.Unauthorized, "Please verify email");
-        }
+        // if (!user.emailVerified) {
+        //     await emailVerificationService.setupEmailVerification(
+        //         user.userId,
+        //         user.email,
+        //         EmailVerificationType.VERIFY_EMAIL
+        //     );
+        //     throw new HttpError(HttpStatus.Unauthorized, "Please verify email");
+        // }
         if (!(await cryptUtil.compare(req.password, user.password))) {
+            throw new HttpError(
+                HttpStatus.Unauthorized,
+                "Wrong email or password"
+            );
         }
         await userService.updateLastSignIn(user.userId);
         const accessToken = await jwtUtil.generateAccessJWT(user.userId);
@@ -41,15 +45,23 @@ async function signIn(req: SignInRequest): Promise<AuthResponse> {
     }
 }
 
-async function signUp(req: SignUpRequest): Promise<void> {
+async function signUp(req: SignUpRequest): Promise<AuthResponse> {
     const userDTO = await userService.createAndReturnUserDTO(
         req as CreateUserRequest
     );
-    await emailVerificationService.setupEmailVerification(
+    // await emailVerificationService.setupEmailVerification(
+    //     userDTO.userId,
+    //     userDTO.email,
+    //     EmailVerificationType.VERIFY_EMAIL
+    // );
+    await userService.verifyEmail(userDTO.userId);
+    await userService.updateLastSignIn(userDTO.userId);
+    const accessToken = await jwtUtil.generateAccessJWT(userDTO.userId);
+    const refreshToken = await jwtUtil.generateRefreshJWT(
         userDTO.userId,
-        userDTO.email,
-        EmailVerificationType.VERIFY_EMAIL
+        accessToken
     );
+    return { accessToken, refreshToken };
 }
 
 async function verifyEmail(req: VerifyEmailRequest): Promise<AuthResponse> {

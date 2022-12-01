@@ -53,16 +53,20 @@ async function signIn(req: Request, res: Response, next: NextFunction) {
  *          schema:
  *            $ref: "#/definitions/SignUpRequest"
  *      responses:
- *        201:
- *          $ref: "#/definitions/Created"
+ *        200:
+ *          description: Ok - Returns AuthResponse
+ *          schema:
+ *            $ref: "#/definitions/AuthResponse"
  *        400:
  *          $ref: "#/definitions/BadRequest"
  *        500:
  *          $ref: "#/definitions/InternalServerError"
  */
 async function signUp(req: Request, res: Response, next: NextFunction) {
+    //  *        201:
+    //  *          $ref: "#/definitions/Created"
     try {
-        await authService.signUp({
+        const authResponse = await authService.signUp({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -70,7 +74,8 @@ async function signUp(req: Request, res: Response, next: NextFunction) {
             xpLevelId: req.body.xpLevelId,
             categoryId: req.body.categoryId,
         });
-        res.sendStatus(HttpStatus.Created);
+        // res.sendStatus(HttpStatus.Created);
+        res.status(HttpStatus.Ok).json(authResponse);
     } catch (error) {
         next(error);
     }
