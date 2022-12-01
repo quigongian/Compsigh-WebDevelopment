@@ -5,17 +5,35 @@ import quotesJSON from "./quotes.json";
 import Heatmap from "./Heatmap";
 import ActivityChart from "./ActivityChart";
 import ProgressChart from "./ProgressChart";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const Landing = () => {
   //data fetch
   //use state hook that contains all the data
   //pass the state variable as props to the nested components
   //
+
+  const [tasks, setTasks] = useState({});
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
+    };
+    const getData = async () => {
+      const { data } = await axios.get("http://localhost:8080/api/v1/task", config);
+      setTasks(data);
+    };
+    getData();
+  }, []);
+
   return (
     <div>
       <Quotes />
       {/* We would be passing something like tasks = {tasks.dates} */}
-      <Heatmap/> 
+      <Heatmap tasks={tasks} />
       <div className="charts" style={{ display: "flex" }}>
         <ActivityChart />
         <ProgressChart />
