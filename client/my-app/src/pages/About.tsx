@@ -32,10 +32,10 @@ export const About = () => {
     <Header/>
     <div className="about-wrapper">
       <div className="row"> 
-        <Block 
+        <Block
           heading="Who We Are" 
           description="We are a team of Computer Science students dedicated to alleviating the academic pressure placed on college students."
-          image={imageOne} 
+          image={imageOne}
         />
         <Block
           heading="Our Goal"

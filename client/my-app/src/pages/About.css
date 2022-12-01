@@ -37,13 +37,12 @@
 }
 
 .p {
-
   width: 300px;
 }
 
 .awave {
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: 0%;
   user-select: none;
 }
 
