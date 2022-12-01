@@ -28,7 +28,7 @@ import { useState } from "react";
 import { createTheme } from "@mui/material/styles";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
-import { HttpStatusCode } from "axios";
+import { HttpStatusCode } from "../../services/http-client";
 import { getUser } from "../../services/requests";
 import { User } from "../../services/models";
 

@@ -86,8 +86,8 @@ const changeTheme = (
 };
 
 const getPaginatedCheckIns = (
-    page: number | undefined,
-    size: number | undefined
+    page?: number,
+    size?: number
 ): Promise<AxiosResponse<CheckIn[]>> => {
     return httpClient.get(`/checkin?page=${page}&size=${size}`);
 };
@@ -103,7 +103,7 @@ const getCheckIn = (checkInId: number): Promise<AxiosResponse<CheckIn>> => {
 };
 
 const getTasksByStatus = (
-    completedStatus: boolean | undefined
+    completedStatus?: boolean
 ): Promise<AxiosResponse<Task[]>> => {
     return httpClient.get(`/task?completed=${completedStatus}`);
 };
