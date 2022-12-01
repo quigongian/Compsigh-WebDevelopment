@@ -95,7 +95,7 @@ export const Timer = () => {
   }
 
   const shortClick = () => {
-    setTime(5);
+    setTime(300);
     setMode("short");
     if (isActive) {
       setIsActive(!isActive);
@@ -172,9 +172,9 @@ export const Timer = () => {
                 <div className="dropdown">
                   <span><strong>Select</strong></span>
                   <div className="dropdown-content">
-                    <button>Bells</button>
-                    <button>Birds</button>
-                    <button>Melody</button>
+                    <button><b>Bells</b></button>
+                    <button><b>Birds</b></button>
+                    <button><b>Melody</b></button>
                   </div>
                 </div>
               </div>
