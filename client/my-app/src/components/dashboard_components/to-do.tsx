@@ -67,7 +67,7 @@ export const Todo = () => {
                 if (response.status === HttpStatusCode.Ok) {
                     setToDo(response.data);
                 } else {
-                    console.log("Error");
+                    console.log("Error", response.statusText);
                 }
             })
             .catch((error) => {
@@ -80,10 +80,10 @@ export const Todo = () => {
             createTask({ taskName: newTask, taskDescription: "" })
                 .then((response) => {
                     if (response.status === HttpStatusCode.Created) {
-                        setStale(true);
+                        setStale((st) => !st);
                         setNewTask("");
                     } else {
-                        console.log("Error");
+                        console.log("Error", response.statusText);
                     }
                 })
                 .catch((error) => {
@@ -96,9 +96,9 @@ export const Todo = () => {
         deleteTask(id)
             .then((response) => {
                 if (response.status === HttpStatusCode.NoContent) {
-                    setStale(true);
+                    setStale((st) => !st);
                 } else {
-                    console.log("Error");
+                    console.log("Error", response.statusText);
                 }
             })
             .catch((error) => {
@@ -106,14 +106,15 @@ export const Todo = () => {
             });
     };
 
-    const markDone = (id: number) => {
-        updateTaskCompletedStatus(id, {
-            completed: !toDo[id].completed,
+    const markDone = (taskId: number) => {
+        const idx = toDo.findIndex((task) => task.taskId === taskId);
+        updateTaskCompletedStatus(taskId, {
+            completed: !toDo[idx].completed,
         }).then((response) => {
             if (response.status === HttpStatusCode.NoContent) {
-                setStale(true);
+                setStale((st) => !st);
             } else {
-                console.log("Error");
+                console.log("Error", response.statusText);
             }
         });
     };
@@ -135,10 +136,10 @@ export const Todo = () => {
         })
             .then((response) => {
                 if (response.status === HttpStatusCode.Ok) {
-                    setStale(true);
+                    setStale((st) => !st);
                     setUpdateData({ id: 0, title: "", status: false });
                 } else {
-                    console.log("Error");
+                    console.log("Error", response.statusText);
                 }
             })
             .catch((error) => {
