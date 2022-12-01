@@ -4,6 +4,17 @@ import "./Heatmap.css";
 import ReactTooltip from "react-tooltip";
 
 const Heatmap = (props: any) => {
+  const value: any = [];
+
+  const allTasks: any = props.tasks;
+
+  Object.keys(allTasks).map((i: any) => value.push({ date: allTasks[i].createdAt.split("T")[0], count: 2 }));
+
+  console.log("value", value);
+
+  var oneYearBeforeNow = new Date();
+  oneYearBeforeNow.setFullYear(oneYearBeforeNow.getFullYear() - 1);
+
   return (
     <div className="heatmap">
       <div className="heatmapTitleDiv">
@@ -11,31 +22,11 @@ const Heatmap = (props: any) => {
       </div>
       <ReactTooltip />
       <CalendarHeatmap
-        startDate={new Date("2021-12-31")}
+        startDate={new Date(oneYearBeforeNow)}
         endDate={new Date(Date.now())}
         showWeekdayLabels={true}
         showOutOfRangeDays={false}
-        values={[ //props.tasks
-          { date: "2022-01-01", count: 3 },
-          { date: "2022-01-02", count: 7 },
-          { date: "2022-01-03", count: 9 },
-          { date: "2022-01-04", count: 6 },
-          { date: "2022-02-20", count: 4 },
-          { date: "2022-03-30", count: 12 },
-          { date: "2022-04-30", count: 8 },
-          { date: "2022-05-30", count: 1 },
-          { date: "2022-06-30", count: 10 },
-          { date: "2022-07-30", count: 6 },
-          { date: "2022-08-30", count: 7 },
-          { date: "2022-09-30", count: 9 },
-          { date: "2022-10-30", count: 2 },
-          { date: "2022-11-30", count: 4 },
-          { date: "2022-12-30", count: 6 },
-          { date: "2022-10-23", count: 12 },
-          { date: "2022-04-16", count: 3 },
-          { date: "2022-03-14", count: 5 },
-          { date: "2022-09-23", count: 11 },
-        ]}
+        values={[props.tasks]}
         classForValue={(value) => {
           if (!value) {
             return "color-empty";
