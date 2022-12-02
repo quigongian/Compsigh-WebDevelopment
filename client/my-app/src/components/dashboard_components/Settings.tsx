@@ -424,48 +424,28 @@ const Security = (props:{user:User}) => {
   );
 };
 
-const Appearance = () => {
-  const[theme, setTheme] = useState<Theme>(Theme.LIGHT);
+const Appearance = (props: { onChageTheme: (newTheme: Theme) => void }) => {
+    const lightThemeHandler = () => {
+        props.onChageTheme(Theme.LIGHT);
+    };
+    const darkThemeHandler = () => {
+        props.onChageTheme(Theme.DARK);
+    };
 
-  const lightTheme = () => {
-    setTheme(Theme.LIGHT);
-    updateTheme();
-  };
-
-  const darkTheme = () => {
-    setTheme(Theme.DARK);
-    updateTheme();
-  };
-
-  const updateTheme = () => {
-    changeTheme({theme})
-        .then((response) => {
-            if (response.status === HttpStatusCode.NoContent) {
-                console.log("Theme changed");
-            } else {
-                console.log("Error", response.statusText);
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-  };
-
-    
-  return (
-    <>
-      <h1>Appearance</h1>
-      <p>Display Mode</p>
-      <div className="ButtonGroup">
-        <button onClick = {lightTheme} className="LightButton">
-          <strong>compsigh light</strong>
-        </button>
-        <button onClick = {darkTheme} className="DarkButton">
-          <strong>compsigh dark</strong>
-        </button>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <h1>Appearance</h1>
+            <p>Display Mode</p>
+            <div className="ButtonGroup">
+                <button onClick={lightThemeHandler} className="LightButton">
+                    <strong>compsigh light</strong>
+                </button>
+                <button onClick={darkThemeHandler} className="DarkButton">
+                    <strong>compsigh dark</strong>
+                </button>
+            </div>
+        </>
+    );
 };
 
 const Sidebar = () => {
@@ -476,27 +456,37 @@ const Sidebar = () => {
 export const SettingsPage = () => {
   const [state, setState] = React.useState("Profile"); //default state is profile
   const [user, setUser] = React.useState<User>({}as User);
-  const [Open, setOpen] = React.useState(false);
+	// const [Open, setOpen] = React.useState(false);
+	const [theme, setTheme] = useState<Theme>(Theme.LIGHT);
 
-  function userTheme() {
-    if (user.theme === Theme.LIGHT) {
-      return "Light";
-    } else {
-      return "Dark";
-    }
-  }
+	const onChageThemeHandler = (newTheme: Theme) => {
+        changeTheme({ theme: newTheme })
+            .then((response) => {
+                if (response.status === HttpStatusCode.NoContent) {
+                    console.log("Theme changed");
+                    setTheme(newTheme);
+                } else {
+                    console.log("Error", response.statusText);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
   useEffect(() => {
-    getUser()
-      .then((response) => {
-        if (response.status === 200) {
-          setUser(response.data);
-        } else {
-          console.log("Error");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      getUser()
+          .then((response) => {
+              if (response.status === 200) {
+				  setUser(response.data);
+				  setTheme(response.data.theme);
+              } else {
+                  console.log("Error");
+              }
+          })
+          .catch((error) => {
+              console.log(error);
+          });
   }, []);
 
   return (
@@ -531,7 +521,7 @@ export const SettingsPage = () => {
         <div className="Content">
           {state === "Profile" && <Profile user={user} />}
           {state === "Security" && <Security user={user}/>}
-          {state === "Appearance" && <Appearance />}
+          {state === "Appearance" && <Appearance onChageTheme={onChageThemeHandler} />}
         </div>
       </div>
       <Footer />

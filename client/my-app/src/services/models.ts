@@ -15,7 +15,7 @@ export interface CheckIn {
     answer4: string;
     comments: string | undefined;
     checkInStatus: CheckInStatus;
-    createdAt: Date;
+    createdAt: string;
 }
 
 export interface Task {
@@ -23,8 +23,8 @@ export interface Task {
     taskName: string;
     taskDescription: string;
     completed: boolean;
-    completedAt: Date | undefined;
-    createdAt: Date;
+    completedAt: string | undefined;
+    createdAt: string;
 }
 
 export interface Category {
