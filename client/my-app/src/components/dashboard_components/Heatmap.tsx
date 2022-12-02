@@ -13,8 +13,7 @@ const Heatmap = (props: any) => {
     return array.filter((v: any) => v === value).length;
   }
 
-  // edit to only push completed ones
-  Object.keys(allTasks).map((i: any) => countDate.push(allTasks[i].createdAt.split("T")[0]));
+  Object.keys(allTasks).map((i: any) => allTasks[i].completed && countDate.push(allTasks[i].createdAt.split("T")[0]));
   console.log("date", countDate);
 
   Object.keys(allTasks).map((i: any) =>
@@ -29,6 +28,10 @@ const Heatmap = (props: any) => {
   var oneYearBeforeNow = new Date();
   oneYearBeforeNow.setFullYear(oneYearBeforeNow.getFullYear() - 1);
 
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
   return (
     <div className="heatmap">
       <div className="heatmapTitleDiv">
@@ -36,11 +39,11 @@ const Heatmap = (props: any) => {
       </div>
       <ReactTooltip />
       <CalendarHeatmap
-        startDate={new Date(oneYearBeforeNow)}
-        endDate={new Date(Date.now())}
+        startDate={oneYearBeforeNow}
+        endDate={Date.now()}
         showWeekdayLabels={true}
         showOutOfRangeDays={false}
-        values={[props.tasks]}
+        values={value}
         classForValue={(value) => {
           if (!value) {
             return "color-empty";
