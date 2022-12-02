@@ -178,7 +178,7 @@ export const Timer = () => {
             Timer Sound:
             <div className="dropdown-box">
                 <div className="dropdown">
-                  <span><strong>{ring} </strong></span>
+                  <span ><strong>{ring} </strong></span>
                   <div className="dropdown-content">
                     <button onClick={clickBell}><b>Bells</b></button>
                     <button onClick={clickBirds}><b>Birds</b></button>
@@ -187,8 +187,9 @@ export const Timer = () => {
                 </div>
               </div>
 
+              
             <div className="slider">
-              Volume:
+            
               <Box sx={{ width: 300, color: 'white' }}>
                 <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
                   <VolumeDown />
