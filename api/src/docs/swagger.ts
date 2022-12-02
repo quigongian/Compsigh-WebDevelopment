@@ -105,10 +105,10 @@ export const swaggerSpec = swaggerJSDoc({
             },
             XpLevel: {
                 type: "object",
-                required: ["xpLevelId", "xpLevelname"],
+                required: ["xpLevelId", "xpLevelName"],
                 properties: {
                     xpLevelId: { type: "integer", format: "int64" },
-                    xpLevelname: { type: "string" },
+                    xpLevelName: { type: "string" },
                 },
             },
             SignInRequest: {
