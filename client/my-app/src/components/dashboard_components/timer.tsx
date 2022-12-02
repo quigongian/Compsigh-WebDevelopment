@@ -30,40 +30,33 @@ export const Timer = () => {
   const [time, setTime] = useState(1500);
   const [isActive, setIsActive] = useState(false);
   const [mode, setMode] = useState("pomodoro");
-  const [ring,setRing] = useState("bell");
- 
+  const [ring, setRing] = useState("bell");
+
 
   const pop = new Audio(popsrc);
-  const melody = new Audio(melodySrc)
-  const bell = new Audio(bellSrc)
-  const birds = new Audio(birdsSrc)
-
-
+  const sound = new Audio(bellSrc);
 
   const clickMelody = () => {
     setRing("melody");
-    melody.play();
+    sound.src = melodySrc;
+    sound.play();
   };
   const clickBell = () => {
     setRing("bell");
-    bell.play();
+    sound.src = bellSrc;
+    sound.play();
   };
   const clickBirds = () => {
     setRing("birds");
-    birds.play();
+    sound.src = birdsSrc;
+    sound.play();
   };
 
-  
+
 
   useEffect(() => {
-    if (time ==0){
-      if (ring == "bell"){
-        bell.play();
-      }else if (ring=="melody"){
-        melody.play();
-      }else{
-        birds.play();
-      }
+    if (time == 0) {
+      sound.play();
     }
 
     if (isActive && time > 0) {
@@ -167,28 +160,41 @@ export const Timer = () => {
             </button>
           </div>
           <div className="rectangle">
-              <div className="dropdown-box">
+
+Alarm Sound
+            {/* <label htmlFor="Sound">Alarm Sound:</label> */}
+            <br>
+            </br>
+
+            <select className="Sounds" >
+              <option value="volvo">Bell</option>
+              <option value="saab">Birds</option>
+              <option value="mercedes">Medlody</option>
+            </select>
+
+            {/* <div className="dropdown-box">
                 Timer Sound:
                 <div className="dropdown">
                   <span><strong>{ring=="bell" ? "Bell" : "Not Bell" } </strong></span>
                   <div className="dropdown-content">
                     <button onClick={clickBell}><b>Bells</b></button>
                     <button onClick={clickBirds}><b>Birds</b></button>
-                    <button onClick={clickBirds}><b>Melody</b></button>
+                    <button onClick={clickMelody}><b>Melody</b></button>
                   </div>
                 </div>
-              </div>
-              <div className="slider">
-                Volume:
-                <Box sx={{ width: 300, color: 'white' }}>
-                  <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-                    <VolumeDown />
-                    <Slider sx={{color: '#81B29A'}}aria-label="Volume" value={value} onChange={handleChange} />
-                    <VolumeUp />
-                  </Stack>
-                </Box>
-              </div>
+              </div> */}
+
+            <div className="slider">
+              Volume:
+              <Box sx={{ width: 300, color: 'white' }}>
+                <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
+                  <VolumeDown />
+                  <Slider sx={{ color: '#81B29A' }} aria-label="Volume" value={value} onChange={handleChange} />
+                  <VolumeUp />
+                </Stack>
+              </Box>
             </div>
+          </div>
         </main>
       </body>
     </>
