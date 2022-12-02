@@ -104,6 +104,7 @@ body {
   top: 65%;
   left: 50%;
   margin-right: -50%;
+  margin-top: 2%;
 
   transform: translate(-50%, -50%);
   text-align: center;
@@ -126,8 +127,9 @@ body {
 }
 
 .dropdown-box {
-  font-size: 22px;
   
+  padding-left: 58px;
+  align-self:center;
 }
 .dropdown {
   /* display: inline-block; */
@@ -138,7 +140,7 @@ body {
   color: white;
   width: 250px;
   padding: 5px 10px;
- border-radius: 15px;
+  border-radius: 15px;
 }
 
 .dropdown-content button {

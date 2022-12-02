@@ -27,38 +27,42 @@ export const Timer = () => {
   const bellSrc = require("./../../sound_content/bell.wav")
   const birdsSrc = require("./../../sound_content/birds.wav")
 
+  const melody = new Audio(melodySrc)
+  const bell = new Audio(bellSrc)
+  const birds = new Audio(birdsSrc)
+
   const [time, setTime] = useState(1500);
   const [isActive, setIsActive] = useState(false);
   const [mode, setMode] = useState("pomodoro");
-  const [ring, setRing] = useState("bell");
+  const [ring, setRing] = useState("Bell");
 
 
   const pop = new Audio(popsrc);
-  const sound = new Audio(bellSrc);
+  const sound = new Audio(melodySrc);
 
   const clickMelody = () => {
-    setRing("melody");
-    sound.src = melodySrc;
-    sound.play();
+    setRing("Melody");
+    melody.play();
   };
   const clickBell = () => {
-    setRing("bell");
-    sound.src = bellSrc;
-    sound.play();
+    setRing("Bell");
+    bell.play();
   };
   const clickBirds = () => {
-    setRing("birds");
-    sound.src = birdsSrc;
-    sound.play();
+    setRing("Birds");
+    birds.play();
   };
 
-
-
   useEffect(() => {
-    if (time == 0) {
-      sound.play();
+    if (time ==0){
+      if (ring == "Bell"){
+        bell.play();
+      }else if (ring=="Melody"){
+        melody.play();
+      }else{
+        birds.play();
+      }
     }
-
     if (isActive && time > 0) {
       const interval = setInterval(() => {
         setTime((time) => time - 1);
@@ -161,28 +165,27 @@ export const Timer = () => {
           </div>
           <div className="rectangle">
 
-Alarm Sound
-            {/* <label htmlFor="Sound">Alarm Sound:</label> */}
+{/* Alarm Sound
+            <label htmlFor="Sound">Alarm Sound:</label>
             <br>
             </br>
 
-            <select className="Sounds" >
+            <select className="Sounds" onChange={setRinger(this.value)}>
               <option value="bell">Bell</option>
               <option value="birds">Birds</option>
               <option value="melody">Medlody</option>
-            </select>
-
-            {/* <div className="dropdown-box">
-                Timer Sound:
+            </select> */}
+            Timer Sound:
+            <div className="dropdown-box">
                 <div className="dropdown">
-                  <span><strong>{ring=="bell" ? "Bell" : "Not Bell" } </strong></span>
+                  <span><strong>{ring} </strong></span>
                   <div className="dropdown-content">
                     <button onClick={clickBell}><b>Bells</b></button>
                     <button onClick={clickBirds}><b>Birds</b></button>
                     <button onClick={clickMelody}><b>Melody</b></button>
                   </div>
                 </div>
-              </div> */}
+              </div>
 
             <div className="slider">
               Volume:
