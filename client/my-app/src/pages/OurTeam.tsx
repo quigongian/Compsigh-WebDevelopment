@@ -98,10 +98,10 @@ export const OurTeam = () => {
           link="https://www.linkedin.com/in/dominickadiaz/"
         />
         <Card
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU"
+          image="https://media-exp1.licdn.com/dms/image/C4E03AQFMcUhBSWwY6g/profile-displayphoto-shrink_200_200/0/1650611554077?e=1675296000&v=beta&t=OA-ryCmcM-8drKemTOdyY6LUCw0k1MD6HxDmuLkEJKc"
           name="Daniel Ruiz"
           role="Front End Developer"
-          link=""
+          link="https://www.linkedin.com/in/danielruizfiu/"
         />
       </div>
       <img className="wave one" src={bottomWave} alt="" width={"100%"} />
