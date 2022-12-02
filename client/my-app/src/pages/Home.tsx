@@ -27,7 +27,7 @@ export const Home = () => {
 
           </div>
 
-          <div className="Sect2">
+          <div className="Sect2" style={{paddingTop:"5%"}}>
             <h2>One less thing to worry about</h2>
             <div className="row">
 
