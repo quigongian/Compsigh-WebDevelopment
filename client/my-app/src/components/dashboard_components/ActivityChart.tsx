@@ -7,7 +7,7 @@ import orangeLegend from "../../image_content/orangeLegend.png";
 const COLORS = ["#3E4059", "#F4F1DE", "#E07A5F"];
 
 const ActivityChart = (props: any) => {
-  const allChecks: any = props.checkins;
+  const allChecks: any = props.checkIns;
   const goodPile: any[] = [];
   const neutralPile: any[] = [];
   const badPile: any[] = [];

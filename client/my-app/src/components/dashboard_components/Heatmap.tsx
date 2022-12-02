@@ -277,16 +277,16 @@ const Heatmap = (props: any) => {
           }
         }}
         tooltipDataAttrs={(value: any) => {
-          if (value.date === null) {
+          if (value?.date === null) {
             return {
               "data-tip": "No Tasks Completed",
             };
           }
           return {
-            "data-tip": `${value.date} has count: ${value.count}`,
+            "data-tip": `${value?.date} has count: ${value?.count}`,
           };
         }}
-        onClick={(value) => alert(`Clicked on value with count: ${value.count}`)}
+        onClick={(value) => alert(`Clicked on value with count: ${value ? value.count : 0}`)}
       />
 
       <div style={{ display: "flex", width: "100px", height: "30px" }}>

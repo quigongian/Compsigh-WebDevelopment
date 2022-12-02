@@ -16,7 +16,6 @@ const CalendarTracker = (props: { onPickDate: (date: Date) => void }) => {
     const [date, setDate] = useState(new Date());
 
     const onChangeHandler = (pickedDate: Date) => {
-        console.log("PickedDate", pickedDate);
         setDate(pickedDate);
         props.onPickDate(pickedDate);
     };

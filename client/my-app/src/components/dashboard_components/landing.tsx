@@ -7,55 +7,57 @@ import ActivityChart from "./ActivityChart";
 import ProgressChart from "./ProgressChart";
 import { useEffect, useState } from "react";
 import CalendarDashboard from "./CalendarDashboard";
-import axios from "axios";
+import { CheckIn, Task } from "../../services/models";
+import {
+    getPaginatedCheckIns,
+    getTasksByStatus,
+} from "../../services/requests";
 
 export const Landing = () => {
-  //data fetch
-  //use state hook that contains all the data
-  //pass the state variable as props to the nested components
-  //
-  const [tasks, setTasks] = useState({});
-  const [checkins, setCheckins] = useState({});
+    const [tasks, setTasks] = useState<Task[]>([]);
+    const [checkIns, setCheckIns] = useState<CheckIn[]>([]);
 
-  useEffect(() => {
-    const config = {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
-      },
-    };
-    const getData = async () => {
-      const { data } = await axios.get("http://localhost:8080/api/v1/task", config);
-      const checkinData = await axios.get("http://localhost:8080/api/v1/checkin", config);
-      setTasks(data);
-      setCheckins(checkinData.data);
-    };
-    getData();
-  }, []);
+    useEffect(() => {
+        const getData = async () => {
+            setTasks((await getTasksByStatus()).data);
+            setCheckIns((await getPaginatedCheckIns()).data);
+        };
+        getData();
+    }, []);
 
-  return (
-    <div>
-      <Quotes />
-      {/* We would be passing something like tasks = {tasks.dates} */}
-      <Heatmap tasks={tasks} />
-      <div className="charts" style={{ display: "flex", marginTop: "-15px" }}>
-        <ActivityChart checkins={checkins} />
-        <ProgressChart tasks={tasks} />
-        <CalendarDashboard />
-      </div>
-    </div>
-  );
+    return (
+        <div>
+            <Quotes />
+            {/* We would be passing something like tasks = {tasks.dates} */}
+            <Heatmap tasks={tasks} />
+            <div
+                className="charts"
+                style={{ display: "flex", marginTop: "-15px" }}
+            >
+                <ActivityChart checkIns={checkIns} />
+                <ProgressChart tasks={tasks} />
+                <CalendarDashboard />
+            </div>
+        </div>
+    );
 };
 
 export const Quotes = () => {
-  const num = Math.floor(Math.random() * quotesJSON.quotes.length);
-  return (
-    <>
-      <img className="quotationMarks" src={quotationMarks} alt="quotationMarks" />
-      <img className="quotesBG" src={quotesBG} alt="quotationMarks" />
-      <div className="rndQuotes">{quotesJSON.quotes[num].quote}</div>
-      <div className="creditsContainer">
-        <div className="quotesCredits">- {quotesJSON.quotes[num].author}</div>
-      </div>
-    </>
-  );
+    const num = Math.floor(Math.random() * quotesJSON.quotes.length);
+    return (
+        <div className="quotes">
+            <img
+                className="quotationMarks"
+                src={quotationMarks}
+                alt="quotationMarks"
+            />
+            <img className="quotesBG" src={quotesBG} alt="quotationMarks" />
+            <div className="rndQuotes">{quotesJSON.quotes[num].quote}</div>
+            <div className="creditsContainer">
+                <div className="quotesCredits">
+                    - {quotesJSON.quotes[num].author}
+                </div>
+            </div>
+        </div>
+    );
 };

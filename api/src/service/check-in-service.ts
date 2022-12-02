@@ -13,20 +13,20 @@ async function getPaginatedCheckInDTOs(
     req: GetPaginatedCheckInRequest
 ): Promise<CheckInDTO[]> {
     let checkIns;
-    const defaultPageSize = 31;
-    let pageNumber = Math.max(Number(req.page), 1);
-    let pageSize = req.size ? Math.max(Number(req.size), 1) : defaultPageSize;
-    if (isNaN(pageNumber)) {
-        pageNumber = 1;
+    let pageNumber = Number(req.page);
+    let pageSize = Number(req.page);
+    if (isNaN(pageNumber) || isNaN(pageSize)) {
+        checkIns = await checkInRepository.getAllByUserId(userId);
+    } else {
+        const defaultPageSize = 31;
+        pageNumber = isNaN(pageNumber) ? 1 : Math.max(pageNumber, 1);
+        pageSize = isNaN(pageSize) ? defaultPageSize : Math.max(pageSize, 1);
+        checkIns = await checkInRepository.getPaginatedCheckIns(
+            userId,
+            pageNumber,
+            pageSize
+        );
     }
-    if (isNaN(pageSize)) {
-        pageSize = defaultPageSize;
-    }
-    checkIns = await checkInRepository.getPaginatedCheckIns(
-        userId,
-        pageNumber,
-        pageSize
-    );
     return checkIns.map((checkIn) => createCheckinDTO(checkIn));
 }
 
