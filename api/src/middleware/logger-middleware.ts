@@ -8,14 +8,12 @@ export function loggerMiddleware(
     const date = new Date();
     console.log(
         date.toLocaleString(),
-        req.method,
         req.method.padEnd(7, " "),
         req.originalUrl
     );
     res.on("finish", () => {
         console.log(
             new Date().toLocaleString(),
-            req.method,
             req.method.padEnd(7, " "),
             req.originalUrl,
             "->",

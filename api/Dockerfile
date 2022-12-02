@@ -10,4 +10,6 @@ RUN npm install
 
 RUN npx prisma generate
 
-CMD npm run dev:migrate
+CMD npm run docker:dev
+# RUN npm run build
+# CMD  npm run docker:start
