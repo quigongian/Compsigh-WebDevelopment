@@ -66,24 +66,16 @@ const ActivityChart = (props: any) => {
         </div>
       </div>
       <PieChart width={180} height={170}>
-<<<<<<< HEAD
-        <Pie data={data} cx={85} cy={80} innerRadius={40} outerRadius={60} fill="#8884d8" paddingAngle={10} dataKey="value">
-=======
         <Pie
           data={data}
           cx={85}
           cy={80}
-          innerRadius={60}
-          outerRadius={80}
+          innerRadius={40}
+          outerRadius={60}
           fill="#8884d8"
-          paddingAngle={
-            data[0].value === TOTALCHECKINS || data[1].value === TOTALCHECKINS || data[2].value === TOTALCHECKINS
-              ? 0
-              : 10
-          }
+          paddingAngle={data[0].value === TOTALCHECKINS || data[1].value === TOTALCHECKINS || data[2].value === TOTALCHECKINS ? 0 : 10}
           dataKey="value"
         >
->>>>>>> 335b95bb906aad2baf9606054712f0845cd649c5
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}

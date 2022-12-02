@@ -37,16 +37,10 @@ export const Landing = () => {
       <Quotes />
       {/* We would be passing something like tasks = {tasks.dates} */}
       <Heatmap tasks={tasks} />
-<<<<<<< HEAD
       <div className="charts" style={{ display: "flex", marginTop: "-15px" }}>
-        <ActivityChart />
-        <ProgressChart />
-        <CalendarDashboard />
-=======
-      <div className="charts" style={{ display: "flex" }}>
         <ActivityChart checkins={checkins} />
         <ProgressChart tasks={tasks} />
->>>>>>> 335b95bb906aad2baf9606054712f0845cd649c5
+        <CalendarDashboard />
       </div>
     </div>
   );

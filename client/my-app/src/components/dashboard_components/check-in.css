@@ -11,16 +11,15 @@
 .checkin-header {
   position: fixed;
   margin-top: 3rem;
-  width: 900px;
-  height: 60px;
-  margin-left: 20px;
-  color: #3e4059;
+  width: 795px;
+  height: 100px;
+  margin-left: 40px;
 }
 
 .questions-container {
   /* position: relative; */
   position: fixed;
-  width: 500px;
+  width: 550px;
   height: 520px;
   border-radius: 23px;
   background-color: #3e4059;
@@ -98,13 +97,15 @@
 
 .previous {
   position: fixed;
-  width: 500px;
+  width: 487px;
   height: 223px;
   /* margin-left: 8%; */
 
   margin-top: 430px;
 
-  margin-left: 800px;
+  /* margin-left: 800px; */
+  right: 70px;
+
   border-radius: 23px;
   background-color: #3e4059;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
