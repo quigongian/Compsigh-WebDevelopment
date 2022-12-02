@@ -23,8 +23,8 @@ export const Login = () => {
     const lastNameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
-    const xpLevelRef = useRef<HTMLSelectElement>(null);
-    const categoryRef = useRef<HTMLSelectElement>(null);
+    const xpLevelIdRef = useRef<HTMLSelectElement>(null);
+    const categoryIdRef = useRef<HTMLSelectElement>(null);
 
     useEffect(() => {
         getCategories()
@@ -46,8 +46,6 @@ export const Login = () => {
                 console.log(error);
             });
     }, []);
-
-    console.log(xpLevels);
 
     const submitSignIn = (e: FormEvent) => {
         e.preventDefault();
@@ -76,14 +74,23 @@ export const Login = () => {
         const lastName = lastNameRef.current?.value;
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;
-        if (firstName && lastName && email && password) {
+        const xpLevelId = Number(xpLevelIdRef.current?.value);
+        const categoryId = Number(categoryIdRef.current?.value);
+        if (
+            firstName &&
+            lastName &&
+            email &&
+            password &&
+            xpLevelId &&
+            categoryId
+        ) {
             signUp({
                 firstName,
                 lastName,
                 email,
                 password,
-                categoryId: 1,
-                xpLevelId: 1,
+                categoryId,
+                xpLevelId,
             })
                 .then((res) => {
                     if (res.status === HttpStatusCode.Ok) {
@@ -229,19 +236,17 @@ export const Login = () => {
                             <br />
                             <select
                                 className="dropDown"
-                                name="experienceLevel"
+                                name="expLevel"
                                 id="expLevel"
+                                ref={xpLevelIdRef}
                             >
-                                <option
-                                    value="experienceLevel"
-                                    disabled
-                                    selected
-                                >
-                                    Experience Level
-                                </option>
+                                <option value="0">Experience Level</option>
                                 {xpLevels.map((xpLevel) => (
-                                    <option value={xpLevel.xpLevelId}>
-                                        {xpLevel.xpLevelname}
+                                    <option
+                                        key={xpLevel.xpLevelId}
+                                        value={xpLevel.xpLevelId}
+                                    >
+                                        {xpLevel.xpLevelName}
                                     </option>
                                 ))}
                             </select>
@@ -250,12 +255,14 @@ export const Login = () => {
                                 className="dropDown"
                                 name="careerPath"
                                 id="careerPath"
+                                ref={categoryIdRef}
                             >
-                                <option value="careerPath" disabled selected>
-                                    Select a Career Path
-                                </option>
+                                <option value="0">Select a Career Path</option>
                                 {categories.map((category) => (
-                                    <option value={category.categoryId}>
+                                    <option
+                                        key={category.categoryId}
+                                        value={category.categoryId}
+                                    >
                                         {category.categoryName}
                                     </option>
                                 ))}

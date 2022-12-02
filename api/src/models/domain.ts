@@ -82,12 +82,12 @@ export function createCategoryDTO(category: Category): CategoryDTO {
 
 export interface XPLevelDTO {
     xpLevelId: number;
-    xpLevelname: string;
+    xpLevelName: string;
 }
 
 export function createXPLevelDTO(xpLevel: XpLevel): XPLevelDTO {
     return {
         xpLevelId: xpLevel.xpLevelId,
-        xpLevelname: xpLevel.xpLevelName,
+        xpLevelName: xpLevel.xpLevelName,
     };
 }

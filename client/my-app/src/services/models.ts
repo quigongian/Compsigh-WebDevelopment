@@ -35,7 +35,7 @@ export interface Category {
 
 export interface XPLevel {
     xpLevelId: number;
-    xpLevelname: string;
+    xpLevelName: string;
 }
 
 export interface SignInRequest {
