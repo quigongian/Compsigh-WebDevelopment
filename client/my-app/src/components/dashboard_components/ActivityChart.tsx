@@ -4,17 +4,30 @@ import blueLegend from "../../image_content/blueLegend.png";
 import beigeLegend from "../../image_content/beigeLegend.png";
 import orangeLegend from "../../image_content/orangeLegend.png";
 
-const data = [
-  { name: "Good", value: 40 },
-  { name: "Neutral", value: 20 },
-  { name: "Bad", value: 10 },
-];
-
-const TOTALCHECKINS = data[0].value + data[1].value + data[2].value;
-
 const COLORS = ["#3E4059", "#F4F1DE", "#E07A5F"];
 
-const ActivityChart = () => {
+const ActivityChart = (props: any) => {
+  const allChecks: any = props.checkins;
+  const goodPile: any[] = [];
+  const neutralPile: any[] = [];
+  const badPile: any[] = [];
+
+  Object.keys(allChecks).map((i: any) =>
+    allChecks[i].checkInStatus === "GOOD"
+      ? goodPile.push(allChecks[i])
+      : allChecks[i].checkInStatus === "NEUTRAL"
+      ? neutralPile.push(allChecks[i])
+      : allChecks[i].checkInStatus === "BAD" && badPile.push(allChecks[i])
+  );
+
+  const data = [
+    { name: "Good", value: goodPile.length },
+    { name: "Neutral", value: neutralPile.length },
+    { name: "Bad", value: badPile.length },
+  ];
+
+  const TOTALCHECKINS = data[0].value + data[1].value + data[2].value;
+
   return (
     <div
       style={{
@@ -53,7 +66,24 @@ const ActivityChart = () => {
         </div>
       </div>
       <PieChart width={180} height={170}>
+<<<<<<< HEAD
         <Pie data={data} cx={85} cy={80} innerRadius={40} outerRadius={60} fill="#8884d8" paddingAngle={10} dataKey="value">
+=======
+        <Pie
+          data={data}
+          cx={85}
+          cy={80}
+          innerRadius={60}
+          outerRadius={80}
+          fill="#8884d8"
+          paddingAngle={
+            data[0].value === TOTALCHECKINS || data[1].value === TOTALCHECKINS || data[2].value === TOTALCHECKINS
+              ? 0
+              : 10
+          }
+          dataKey="value"
+        >
+>>>>>>> 335b95bb906aad2baf9606054712f0845cd649c5
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}

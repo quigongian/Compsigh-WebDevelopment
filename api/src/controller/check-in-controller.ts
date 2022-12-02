@@ -17,14 +17,12 @@ import { HttpStatus } from "../util/HttpStatus";
  *          name: page
  *          type: integer
  *          required: false
- *          description: Page number (starting at 1), if not specified, ALL checkIns will be returned
- *          default: 1
+ *          description: Page number defaults to 1
  *        - in: query
  *          name: size
  *          type: integer
  *          required: false
  *          description: Page size, defaults to 31
- *          default: 31
  *      responses:
  *        200:
  *          description: Ok - Returns CheckInDTO[]

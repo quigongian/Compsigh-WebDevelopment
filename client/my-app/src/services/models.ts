@@ -1,4 +1,3 @@
-// import { CheckInStatus, Theme } from ".prisma/client";
 export interface User {
     userId: number;
     firstName: string;
@@ -16,7 +15,7 @@ export interface CheckIn {
     answer4: string;
     comments: string | undefined;
     checkInStatus: CheckInStatus;
-    createdAt: Date;
+    createdAt: string;
 }
 
 export interface Task {
@@ -24,8 +23,8 @@ export interface Task {
     taskName: string;
     taskDescription: string;
     completed: boolean;
-    completedAt: Date | undefined;
-    createdAt: Date;
+    completedAt: string | undefined;
+    createdAt: string;
 }
 
 export interface Category {
@@ -35,7 +34,7 @@ export interface Category {
 
 export interface XPLevel {
     xpLevelId: number;
-    xpLevelname: string;
+    xpLevelName: string;
 }
 
 export interface SignInRequest {
@@ -92,12 +91,10 @@ export interface ChangeThemeRequest {
     theme: Theme;
 }
 
-export type Theme = typeof theme[keyof typeof theme];
-
-export const theme = {
-    LIGHT: "LIGHT",
-    DARK: "DARK",
-};
+export enum Theme {
+    LIGHT = "LIGHT",
+    DARK = "DARK",
+}
 
 export interface GetPaginatedCheckInRequest {
     page: string | undefined;
@@ -112,13 +109,11 @@ export interface CreateCheckInRequest {
     checkInStatus: CheckInStatus;
 }
 
-export type CheckInStatus = typeof checkInStatus[keyof typeof checkInStatus];
-
-export const checkInStatus = {
-    GOOD: "GOOD",
-    NEUTRAL: "NEUTRAL",
-    BAD: "BAD",
-};
+export enum CheckInStatus {
+    GOOD = "GOOD",
+    NEUTRAL = "NEUTRAL",
+    BAD = "BAD",
+}
 
 export interface CreateTaskRequest {
     taskName: string;

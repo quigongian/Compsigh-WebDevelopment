@@ -15,6 +15,7 @@ export const Landing = () => {
   //pass the state variable as props to the nested components
   //
   const [tasks, setTasks] = useState({});
+  const [checkins, setCheckins] = useState({});
 
   useEffect(() => {
     const config = {
@@ -24,7 +25,9 @@ export const Landing = () => {
     };
     const getData = async () => {
       const { data } = await axios.get("http://localhost:8080/api/v1/task", config);
+      const checkinData = await axios.get("http://localhost:8080/api/v1/checkin", config);
       setTasks(data);
+      setCheckins(checkinData.data);
     };
     getData();
   }, []);
@@ -34,10 +37,16 @@ export const Landing = () => {
       <Quotes />
       {/* We would be passing something like tasks = {tasks.dates} */}
       <Heatmap tasks={tasks} />
+<<<<<<< HEAD
       <div className="charts" style={{ display: "flex", marginTop: "-15px" }}>
         <ActivityChart />
         <ProgressChart />
         <CalendarDashboard />
+=======
+      <div className="charts" style={{ display: "flex" }}>
+        <ActivityChart checkins={checkins} />
+        <ProgressChart tasks={tasks} />
+>>>>>>> 335b95bb906aad2baf9606054712f0845cd649c5
       </div>
     </div>
   );
