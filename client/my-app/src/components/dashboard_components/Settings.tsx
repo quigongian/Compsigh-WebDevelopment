@@ -29,9 +29,11 @@ import { useState } from "react";
 import { createTheme } from "@mui/material/styles";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
-import { getCategories, getUser } from "../../services/requests";
-import { Category, User } from "../../services/models";
+import { changeTheme, deleteUser, getCategories, getUser, resetPassword, updatePassword } from "../../services/requests";
+import { Category, Theme, User } from "../../services/models";
 import { HttpStatusCode } from "../../services/http-client";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const theme = createTheme({
@@ -255,8 +257,8 @@ const ProfileEdit = (props:{user:User}) => {
 export function SwitchEmail() {
   return (
     <FormGroup>
-      <FormControlLabel control={<Switch defaultChecked />} label="Label" />
-      <FormControlLabel disabled control={<Switch />} label="Disabled" />
+      <FormControlLabel control={<Switch defaultChecked />} label="News and Updates" />
+      <FormControlLabel control={<Switch />} label="Activity" />
     </FormGroup>
   );
 }
@@ -264,16 +266,62 @@ export function SwitchEmail() {
 export function SwitchNotifaction() {
   return (
     <FormGroup>
-      <FormControlLabel control={<Switch defaultChecked />} label="Label" />
-      <FormControlLabel disabled control={<Switch />} label="Disabled" />
+      <FormControlLabel control={<Switch defaultChecked />} label="Browser Notifications" />
     </FormGroup>
   );
 }
 
-const Security = () => {
+const Security = (props:{user:User}) => {
   const [passOpen, setPassOpen] = React.useState(false);
 
   const [delOpen, setDelOpen] = React.useState(false);
+
+  const [email, setEmail] = useState("");
+
+  const [changePassword, setChangePassword] = useState({email: props.user.email, oldPassword: "test", 
+    newPassword: "test", repeatPassword: "test"});
+
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [changePasswordConfirm, setChangePasswordConfirm] = useState("");
+
+  const navigate = useNavigate();
+
+  const submit = () => {
+    setChangePassword({email: props.user.email, oldPassword: oldPassword, newPassword: newPassword, repeatPassword: changePasswordConfirm});
+    console.log(changePassword);
+    updtePassword();
+  }
+
+  const deleteAccount = () => {
+    deleteUser(email)
+        .then((response) => {
+            if (response.status === HttpStatusCode.NoContent) {
+                console.log("Account deleted");
+                navigate("/login");
+            } else {
+                console.log("Error", response.statusText);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
+
+  const updtePassword = () => {
+    updatePassword(changePassword)
+        .then((response) => {
+            if (response.status === HttpStatusCode.NoContent) {
+                console.log("Password changed");
+                navigate("/login");
+            } else {
+                console.log("Error", response.statusText);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+  };
 
   const passwordOpen = () => {
     setPassOpen(true);
@@ -285,6 +333,7 @@ const Security = () => {
 
   const deleteOpen = () => {
     setDelOpen(true);
+    
   };
 
   const deleteClose = () => {
@@ -313,6 +362,7 @@ const Security = () => {
             type="password"
             fullWidth
             variant="standard"
+            onChange={(e) => setOldPassword(e.target.value)}
           />
           <TextField
             autoFocus
@@ -322,6 +372,7 @@ const Security = () => {
             type="password"
             fullWidth
             variant="standard"
+            onChange={(e) => setNewPassword(e.target.value)}
           />
           <TextField
             autoFocus
@@ -331,11 +382,12 @@ const Security = () => {
             type="password"
             fullWidth
             variant="standard"
+            onChange={(e) => setChangePasswordConfirm(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={passwordClose}>Cancel</Button>
-          <Button onClick={passwordClose}>Submit</Button>
+          <Button onClick={submit}>Submit</Button>
         </DialogActions>
       </Dialog>
       <hr className="Hr" />
@@ -360,33 +412,40 @@ const Security = () => {
             type="email"
             fullWidth
             variant="standard"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={deleteClose}>Cancel</Button>
-          <Button onClick={deleteClose}>Delete</Button>
+          <Button onClick={deleteAccount}>Delete</Button>
         </DialogActions>
       </Dialog>
     </>
   );
 };
 
-const Appearance = () => {
-  return (
-    <>
-      <h1>Appearance</h1>
-      <p>Display Mode</p>
-      <div className="ButtonGroup">
-        <button className="LightButton">
-          <strong>comsigh light</strong>
-        </button>
-        <button className="DarkButton">
-          <strong>comsigh dark</strong>
-        </button>
-      </div>
-      <p>Accessibility</p>
-    </>
-  );
+const Appearance = (props: { onChageTheme: (newTheme: Theme) => void }) => {
+    const lightThemeHandler = () => {
+        props.onChageTheme(Theme.LIGHT);
+    };
+    const darkThemeHandler = () => {
+        props.onChageTheme(Theme.DARK);
+    };
+
+    return (
+        <>
+            <h1>Appearance</h1>
+            <p>Display Mode</p>
+            <div className="ButtonGroup">
+                <button onClick={lightThemeHandler} className="LightButton">
+                    <strong>compsigh light</strong>
+                </button>
+                <button onClick={darkThemeHandler} className="DarkButton">
+                    <strong>compsigh dark</strong>
+                </button>
+            </div>
+        </>
+    );
 };
 
 const Sidebar = () => {
@@ -397,24 +456,42 @@ const Sidebar = () => {
 export const SettingsPage = () => {
   const [state, setState] = React.useState("Profile"); //default state is profile
   const [user, setUser] = React.useState<User>({}as User);
-  const [Open, setOpen] = React.useState(false);
+	// const [Open, setOpen] = React.useState(false);
+	const [theme, setTheme] = useState<Theme>(Theme.LIGHT);
+
+	const onChageThemeHandler = (newTheme: Theme) => {
+        changeTheme({ theme: newTheme })
+            .then((response) => {
+                if (response.status === HttpStatusCode.NoContent) {
+                    console.log("Theme changed");
+                    setTheme(newTheme);
+                } else {
+                    console.log("Error", response.statusText);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
   useEffect(() => {
-    getUser()
-      .then((response) => {
-        if (response.status === 200) {
-          setUser(response.data);
-        } else {
-          console.log("Error");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      getUser()
+          .then((response) => {
+              if (response.status === 200) {
+				  setUser(response.data);
+				  setTheme(response.data.theme);
+              } else {
+                  console.log("Error");
+              }
+          })
+          .catch((error) => {
+              console.log(error);
+          });
   }, []);
 
   return (
     <>
+
       <Header />
       <div className="Settings">
         <div className="Sidebar">
@@ -443,8 +520,8 @@ export const SettingsPage = () => {
         </div>
         <div className="Content">
           {state === "Profile" && <Profile user={user} />}
-          {state === "Security" && <Security />}
-          {state === "Appearance" && <Appearance />}
+          {state === "Security" && <Security user={user}/>}
+          {state === "Appearance" && <Appearance onChageTheme={onChageThemeHandler} />}
         </div>
       </div>
       <Footer />
