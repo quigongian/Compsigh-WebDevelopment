@@ -15,6 +15,7 @@ export const Landing = () => {
   //
 
   const [tasks, setTasks] = useState({});
+  const [checkins, setCheckins] = useState({});
 
   useEffect(() => {
     const config = {
@@ -24,7 +25,9 @@ export const Landing = () => {
     };
     const getData = async () => {
       const { data } = await axios.get("http://localhost:8080/api/v1/task", config);
+      const checkinData = await axios.get("http://localhost:8080/api/v1/checkin", config);
       setTasks(data);
+      setCheckins(checkinData.data);
     };
     getData();
   }, []);
@@ -35,8 +38,8 @@ export const Landing = () => {
       {/* We would be passing something like tasks = {tasks.dates} */}
       <Heatmap tasks={tasks} />
       <div className="charts" style={{ display: "flex" }}>
-        <ActivityChart />
-        <ProgressChart />
+        <ActivityChart checkins={checkins} />
+        <ProgressChart tasks={tasks} />
       </div>
     </div>
   );

@@ -1,18 +1,23 @@
 import React from "react";
 import { PieChart, Pie, Cell } from "recharts";
 
-const TOTALTASKSDONE = 13;
-const TOTALTASKS = 48;
-const PERCENT = (TOTALTASKSDONE / TOTALTASKS) * 100;
-
-const data = [
-  { name: "Done", value: TOTALTASKSDONE },
-  { name: "Total", value: TOTALTASKS },
-];
-
 const COLORS = ["#3E4059", "#E07A5F"];
 
-const ProgressChart = () => {
+const ProgressChart = (props: any) => {
+  const allTasks: any = props.tasks;
+  const countCompleted = [];
+
+  Object.keys(allTasks).map((i: any) => allTasks[i].completed && countCompleted.push(allTasks[i]));
+
+  const TOTALTASKSDONE = countCompleted.length;
+  const TOTALTASKS = allTasks.length;
+  const PERCENT = (TOTALTASKSDONE / TOTALTASKS) * 100;
+
+  const data = [
+    { name: "Done", value: TOTALTASKSDONE },
+    { name: "Total", value: TOTALTASKS },
+  ];
+
   return (
     <div
       style={{
