@@ -170,11 +170,11 @@ export const Timer = () => {
               <div className="dropdown-box">
                 Timer Sound:
                 <div className="dropdown">
-                  <span><strong>Select</strong></span>
+                  <span><strong>{ring=="bell" ? "Bell" : "Not Bell" } </strong></span>
                   <div className="dropdown-content">
-                    <button><b>Bells</b></button>
-                    <button><b>Birds</b></button>
-                    <button><b>Melody</b></button>
+                    <button onClick={clickBell}><b>Bells</b></button>
+                    <button onClick={clickBirds}><b>Birds</b></button>
+                    <button onClick={clickBirds}><b>Melody</b></button>
                   </div>
                 </div>
               </div>

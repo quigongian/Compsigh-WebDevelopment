@@ -4,16 +4,33 @@ import "./Heatmap.css";
 import ReactTooltip from "react-tooltip";
 
 const Heatmap = (props: any) => {
+  const countDate: any[] = [];
   const value: any = [];
 
   const allTasks: any = props.tasks;
 
-  Object.keys(allTasks).map((i: any) => value.push({ date: allTasks[i].createdAt.split("T")[0], count: 2 }));
+  function getOccurrence(array: any[], value: any) {
+    return array.filter((v: any) => v === value).length;
+  }
+
+  Object.keys(allTasks).map((i: any) => allTasks[i].completed && countDate.push(allTasks[i].createdAt.split("T")[0]));
+  console.log("date", countDate);
+
+  Object.keys(allTasks).map((i: any) =>
+    value.push({
+      date: allTasks[i].createdAt.split("T")[0],
+      count: getOccurrence(countDate, allTasks[i].createdAt.split("T")[0]),
+    })
+  );
 
   console.log("value", value);
 
   var oneYearBeforeNow = new Date();
   oneYearBeforeNow.setFullYear(oneYearBeforeNow.getFullYear() - 1);
+
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   return (
     <>
@@ -22,11 +39,11 @@ const Heatmap = (props: any) => {
       </div>
       <ReactTooltip />
       <CalendarHeatmap
-        startDate={new Date(oneYearBeforeNow)}
-        endDate={new Date(Date.now())}
+        startDate={oneYearBeforeNow}
+        endDate={Date.now()}
         showWeekdayLabels={true}
         showOutOfRangeDays={false}
-        values={[props.tasks]}
+        values={value}
         classForValue={(value) => {
           if (!value) {
             return "color-empty";
