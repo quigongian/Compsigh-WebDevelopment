@@ -24,14 +24,14 @@
 }
 
 .one {
-  /* z-index: 3; */
+  z-index: 3;
 }
 .two {
-  /* z-index: 2; */
+  z-index: 2;
   animation: move 3s ease-in-out 0s infinite both;
 }
 .three {
-  /* z-index: 1; */
+  z-index: 1;
   animation: move 4s ease-in-out 0s infinite both;
 }
 .four {

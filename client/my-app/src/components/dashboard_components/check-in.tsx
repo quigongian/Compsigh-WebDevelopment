@@ -82,7 +82,7 @@ export const CheckIn = () => {
               fontWeight: "600",
             }}
           >
-            Hey [name], how was your day?
+            How was your day?
           </h2>
           <p
             style={{
@@ -443,7 +443,7 @@ const Previous5 = (props: { value: string | undefined }) => {
             <TextField
                 sx={{
                     "& .MuiInputBase-root": {
-                        height: 50,
+                        height: 100,
                     },
                 }}
                 id="outlined-multiline-disabled"
