@@ -127,7 +127,7 @@ body {
 }
 
 .dropdown-box {
-  
+  padding-top: 15px;
   padding-left: 58px;
   align-self:center;
 }
