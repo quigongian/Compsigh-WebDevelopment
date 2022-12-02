@@ -167,9 +167,9 @@ Alarm Sound
             </br>
 
             <select className="Sounds" >
-              <option value="volvo">Bell</option>
-              <option value="saab">Birds</option>
-              <option value="mercedes">Medlody</option>
+              <option value="bell">Bell</option>
+              <option value="birds">Birds</option>
+              <option value="melody">Medlody</option>
             </select>
 
             {/* <div className="dropdown-box">
