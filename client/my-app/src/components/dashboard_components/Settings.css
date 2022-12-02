@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #EFECEC;
+  /* overflow: visible; */
 }
 
 code {
@@ -15,15 +16,18 @@ code {
 
 .Settings {
   display: flex;
+  padding-top: 1.17%;
+  /* overflow: visible; */
 }
 /*|------------------------------------------------------------------------Sidebar------------------------------------------------------------------------|*/
 .Sidebar {
   border-right: solid 1px #ccc;
-  height: 80vh;
+  /* height: 8vh; */
   width: 12%;
   float: left;
   display: flex;
   flex-direction: column;
+  overflow: visible;
 }
 
 #sidebar-title {

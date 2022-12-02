@@ -524,7 +524,7 @@ export const SettingsPage = () => {
           {state === "Appearance" && <Appearance onChageTheme={onChageThemeHandler} />}
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

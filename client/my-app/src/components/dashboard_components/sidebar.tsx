@@ -17,7 +17,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <div style={{ position: "fixed", zIndex: "1", overflowX: "hidden" }}>
+      <div style={{ position: "fixed", zIndex: "4", overflowX: "hidden" }}>
         <Drawer
           PaperProps={{
             sx: {
