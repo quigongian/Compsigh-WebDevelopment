@@ -14,7 +14,6 @@ export const Landing = () => {
   //use state hook that contains all the data
   //pass the state variable as props to the nested components
   //
-
   const [tasks, setTasks] = useState({});
 
   useEffect(() => {
@@ -35,7 +34,7 @@ export const Landing = () => {
       <Quotes />
       {/* We would be passing something like tasks = {tasks.dates} */}
       <Heatmap tasks={tasks} />
-      <div className="charts" style={{ display: "flex" }}>
+      <div className="charts" style={{ display: "flex", marginTop: "-15px" }}>
         <ActivityChart />
         <ProgressChart />
         <CalendarDashboard />

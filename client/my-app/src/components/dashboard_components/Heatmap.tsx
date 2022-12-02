@@ -35,7 +35,7 @@ const Heatmap = (props: any) => {
   return (
     <>
       <div className="heatmapTitleDiv">
-        <h5 className="heatmapTitle">Task HeatMap</h5>
+        <h4 className="heatmapTitle">Task HeatMap</h4>
       </div>
       <ReactTooltip />
       <CalendarHeatmap

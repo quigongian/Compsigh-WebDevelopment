@@ -1,108 +1,106 @@
-.taskBg{
-    background-color: #303347;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 10px 10px 10px 30px;
-    width: 95%;
-    text-align: left;
-    font-style: 22px;
-    position: relative;    
+.taskBg {
+  background-color: #303347;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 10px 10px 10px 30px;
+  width: 95%;
+  text-align: left;
+  font-style: 22px;
+  position: relative;
 }
 
-.taskBg div{
-   
-    display: flex;
-    align-items: center;
+.taskBg div {
+  display: flex;
+  align-items: center;
 }
 
-.row{
-    
-    display: flex;
+.row {
+  display: flex;
+  margin: 0;
 }
 
-.taskText{
-    color: #FFFFFF;
+.taskText {
+  color: #ffffff;
 }
 
-.taskNumber{
-    color: #FFFFFF;
-    border: 1px solid #FFFFFF;
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
-    display: flex;
-    text-align: center;
-    font-size: 14px;
-    margin-right: 10px;
-    align-items: center;
-    justify-content: center;
+.taskNumber {
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  text-align: center;
+  font-size: 14px;
+  margin-right: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
-.taskBg .taskText{
-    flex:1;
+.taskBg .taskText {
+  flex: 1;
 }
 
-.taskBg .done .taskText{
-    text-decoration: line-through;
-    opacity: 0.3;
+.taskBg .done .taskText {
+  text-decoration: line-through;
+  opacity: 0.3;
 }
 
 .taskBg .iconWrapper {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 15px;
-    width: auto;
-    display: inline-block;
-  }
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  width: auto;
+  display: inline-block;
+}
 
 .taskBg .iconWrapper span {
-    display: inline-block;
-    margin: 0px 10px 0 10px;
-    cursor: pointer;
-    color: #E07A5F;
-  }
+  display: inline-block;
+  margin: 0px 10px 0 10px;
+  cursor: pointer;
+  color: #e07a5f;
+}
 
-  .taskBg .iconWrapper span:hover {
-    color: #ffa48b;
-  }
+.taskBg .iconWrapper span:hover {
+  color: #ffa48b;
+}
 
-  .form-control {
-    border: none;
-    width: 300px;
-    padding: 10px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    
-  }
-  .btn{
-    background: #81B29A;
-    border: none;
-    margin-left: 5px;
-    padding: 10px 24px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px #eee;
-    font-weight: normal;
-  }
+.form-control {
+  border: none;
+  width: 300px;
+  padding: 10px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.btn {
+  background: #81b29a;
+  border: none;
+  margin-left: 5px;
+  padding: 10px 24px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #eee;
+  font-weight: normal;
+}
 
-  .btn:hover{
-    cursor: pointer;
-  }
+.btn:hover {
+  cursor: pointer;
+}
 
-  .btncancel{
-    font-weight: normal;
-    background: #E07A5F;
-    margin-left: 5px;
-    border: none;
-    padding: 10px 24px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px #eee;
-  }
+.btncancel {
+  font-weight: normal;
+  background: #e07a5f;
+  margin-left: 5px;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #eee;
+}
 
-  .btncancel:hover{
-    cursor: pointer;
-  }
+.btncancel:hover {
+  cursor: pointer;
+}
 
-  .body {
-    overflow: hidden;
-  }
+.body {
+  overflow: hidden;
+}

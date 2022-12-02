@@ -17,7 +17,7 @@ const CalendarDashboard = () => {
 
   return (
     <>
-      <Calendar onChange={onChange} value={value} tileClassName="DashCalendar" />
+      <Calendar onChange={onChange} value={value} />
     </>
   );
 };
