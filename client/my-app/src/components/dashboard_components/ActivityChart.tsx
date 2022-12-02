@@ -31,7 +31,7 @@ const ActivityChart = (props: any) => {
   return (
     <div
       style={{
-        height: 236,
+        height: 196,
         width: 413,
         marginLeft: "185px",
         backgroundColor: "#8BB19C",
@@ -42,7 +42,7 @@ const ActivityChart = (props: any) => {
         position: "relative",
       }}
     >
-      <h3 style={{ position: "absolute", top: -8, left: 30, color: "#F4F1DE" }}>Activity</h3>
+      <h3 style={{ position: "absolute", top: -3, left: 30, color: "#F4F1DE" }}>Activity</h3>
       <div className="legend">
         <div
           className="legend-item"
@@ -53,28 +53,16 @@ const ActivityChart = (props: any) => {
             alignItems: "center",
           }}
         >
-          <img src={blueLegend} alt="good legend" style={{ marginRight: "8px" }} />
-          <h4 style={{ width: "180px", color: "#F4F1DE" }}>{`${Math.round(
-            (data[0].value / TOTALCHECKINS) * 100
-          )}% Good`}</h4>
+          <img src={blueLegend} alt="good legend" style={{ marginRight: "8px", marginTop: "20px" }} />
+          <h4 style={{ width: "180px", color: "#F4F1DE", marginTop: "40px" }}>{`${Math.round((data[0].value / TOTALCHECKINS) * 100)}% Good`}</h4>
         </div>
-        <div
-          className="legend-item"
-          style={{ width: "180px", marginLeft: "20px", display: "flex", alignItems: "center" }}
-        >
-          <img src={beigeLegend} alt="neutral legend" style={{ marginRight: "8px" }} />
-          <h4 style={{ width: "180px", color: "#F4F1DE" }}>{`${Math.round(
-            (data[1].value / TOTALCHECKINS) * 100
-          )}% Neutral`}</h4>
+        <div className="legend-item" style={{ width: "180px", marginLeft: "20px", display: "flex", alignItems: "center" }}>
+          <img src={beigeLegend} alt="neutral legend" style={{ marginRight: "8px", marginTop: "-14px" }} />
+          <h4 style={{ width: "180px", color: "#F4F1DE", marginTop: "5px" }}>{`${Math.round((data[1].value / TOTALCHECKINS) * 100)}% Neutral`}</h4>
         </div>
-        <div
-          className="legend-item"
-          style={{ width: "180px", marginLeft: "20px", display: "flex", alignItems: "center" }}
-        >
-          <img src={orangeLegend} alt="bad legend" style={{ marginRight: "8px" }} />
-          <h4 style={{ width: "180px", color: "#F4F1DE" }}>{`${Math.round(
-            (data[2].value / TOTALCHECKINS) * 100
-          )}% Bad`}</h4>
+        <div className="legend-item" style={{ width: "180px", marginLeft: "20px", display: "flex", alignItems: "center" }}>
+          <img src={orangeLegend} alt="bad legend" style={{ marginRight: "8px", marginTop: "-15px" }} />
+          <h4 style={{ width: "180px", color: "#F4F1DE", marginTop: "5px" }}>{`${Math.round((data[2].value / TOTALCHECKINS) * 100)}% Bad`}</h4>
         </div>
       </div>
       <PieChart width={180} height={170}>
@@ -82,14 +70,10 @@ const ActivityChart = (props: any) => {
           data={data}
           cx={85}
           cy={80}
-          innerRadius={60}
-          outerRadius={80}
+          innerRadius={40}
+          outerRadius={60}
           fill="#8884d8"
-          paddingAngle={
-            data[0].value === TOTALCHECKINS || data[1].value === TOTALCHECKINS || data[2].value === TOTALCHECKINS
-              ? 0
-              : 10
-          }
+          paddingAngle={data[0].value === TOTALCHECKINS || data[1].value === TOTALCHECKINS || data[2].value === TOTALCHECKINS ? 0 : 10}
           dataKey="value"
         >
           {data.map((entry, index) => (

@@ -6,6 +6,7 @@ import Heatmap from "./Heatmap";
 import ActivityChart from "./ActivityChart";
 import ProgressChart from "./ProgressChart";
 import { useEffect, useState } from "react";
+import CalendarDashboard from "./CalendarDashboard";
 import axios from "axios";
 
 export const Landing = () => {
@@ -13,7 +14,6 @@ export const Landing = () => {
   //use state hook that contains all the data
   //pass the state variable as props to the nested components
   //
-
   const [tasks, setTasks] = useState({});
   const [checkins, setCheckins] = useState({});
 
@@ -37,9 +37,10 @@ export const Landing = () => {
       <Quotes />
       {/* We would be passing something like tasks = {tasks.dates} */}
       <Heatmap tasks={tasks} />
-      <div className="charts" style={{ display: "flex" }}>
+      <div className="charts" style={{ display: "flex", marginTop: "-15px" }}>
         <ActivityChart checkins={checkins} />
         <ProgressChart tasks={tasks} />
+        <CalendarDashboard />
       </div>
     </div>
   );
@@ -48,13 +49,13 @@ export const Landing = () => {
 export const Quotes = () => {
   const num = Math.floor(Math.random() * quotesJSON.quotes.length);
   return (
-    <div className="quotes">
+    <>
       <img className="quotationMarks" src={quotationMarks} alt="quotationMarks" />
       <img className="quotesBG" src={quotesBG} alt="quotationMarks" />
       <div className="rndQuotes">{quotesJSON.quotes[num].quote}</div>
       <div className="creditsContainer">
         <div className="quotesCredits">- {quotesJSON.quotes[num].author}</div>
       </div>
-    </div>
+    </>
   );
 };

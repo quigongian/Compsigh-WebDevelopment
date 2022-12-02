@@ -251,9 +251,9 @@ const Heatmap = (props: any) => {
   yesterday.setDate(yesterday.getDate() - 1);
 
   return (
-    <div className="heatmap">
+    <>
       <div className="heatmapTitleDiv">
-        <h5 className="heatmapTitle">Task HeatMap</h5>
+        <h4 className="heatmapTitle">Task HeatMap</h4>
       </div>
       <ReactTooltip />
       <CalendarHeatmap
@@ -320,7 +320,7 @@ const Heatmap = (props: any) => {
           <div style={{ color: "#f4f1de", fontWeight: "400", fontSize: "14px" }}>More</div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

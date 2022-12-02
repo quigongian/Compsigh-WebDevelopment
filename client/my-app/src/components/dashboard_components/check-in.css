@@ -1,68 +1,82 @@
-.checkin-container {
-    background-color: #232323;
-    height: 100vh;
-    width: 100vw;
-    display: grid !important;
-    grid-template-columns: 1fr, 60px;
-    grid-template-rows: 120px 299px;
-    gap: 1.5rem;
+/* .checkin-container {
+  background-color: #232323;
+  height: 100vh;
+  width: 100vw;
+  display: grid !important;
+  grid-template-columns: 1fr, 60px;
+  grid-template-rows: 120px 299px;
+  gap: 1.5rem;
+} */
+
+.checkin-header {
+  position: fixed;
+  margin-top: 3rem;
+  width: 795px;
+  height: 100px;
+  margin-left: 40px;
 }
 
 .questions-container {
-    position: relative;
-    width: 700px;
-    height: 550px;
-    border-radius: 23px;
-    background-color: #3e4059;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-left: 20%;
-    padding-left: 2%;
-    padding-top: 1%;
-    grid-column: 1;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    z-index: 4;
+  /* position: relative; */
+  position: fixed;
+  width: 550px;
+  height: 520px;
+  border-radius: 23px;
+  background-color: #3e4059;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  /* margin-left: 20%; */
+
+  margin-top: 150px;
+
+  margin-left: 190px;
+  padding-left: 2%;
+  padding-top: 1%;
+  /* grid-column: 1; */
+  /* grid-row-start: 2; */
+  /* grid-row-end: 3; */
+  z-index: 4;
 }
 
 .textfield {
-    width: 95%;
-    border: none;
-    background-color: #DDDBDB;
-    font-size: 15px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    padding: 0;
-    margin: 0;
-    resize: none;
-    border-radius: 0.5rem;
+  width: 95%;
+  border: none;
+  background-color: #dddbdb;
+  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  resize: none;
+  border-radius: 0.5rem;
 }
 
 .questions {
-    margin-right: auto;
-    font-family: "Inter", sans-serif;
-    font-weight: 400;
-    font-style: medium;
-    font-size: 15px;
-    color: #EFF4FE;
-    line-height: 30px;
-    padding: 0;
+  margin-right: auto;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: medium;
+  font-size: 15px;
+  color: #eff4fe;
+  line-height: 30px;
+  padding: 0;
 }
 
 .button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
 }
 
 .button {
-    background-color: #D27F65;
-    color: #DDDBDB;
-    width: 155px;
-    height: 30px;
-    border: none;
-    border-radius: 0.3rem;
-    cursor: pointer;
+  background-color: #d27f65;
+  color: #dddbdb;
+  width: 155px;
+  height: 30px;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
 }
 
 /* .calendar {
@@ -82,46 +96,52 @@
 } */
 
 .previous {
-    position: relative;
-    width: 500px;
-    height: 223px;
-    margin-left: 8%;
-    border-radius: 23px;
-    background-color: #3e4059;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding-left: 2%;
-    padding-top: 2%;
-    grid-column: 2;
-    grid-row-start: 3;
-    z-index: 4;
-    overflow: hidden;
-    overflow-y: scroll;
+  position: fixed;
+  width: 487px;
+  height: 223px;
+  /* margin-left: 8%; */
+
+  margin-top: 430px;
+
+  /* margin-left: 800px; */
+  right: 70px;
+
+  border-radius: 23px;
+  background-color: #3e4059;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding-left: 2%;
+  padding-top: 2%;
+  grid-column: 2;
+  grid-row-start: 3;
+  z-index: 4;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .previous::-webkit-scrollbar {
-    width: .30em;
-  }
-  
-  .previous::-webkit-scrollbar-track {
-    background-color: #D9D9D9;
-    border-radius: 100vh;
-    margin-block: 1.5em;
-  }
-  
-  .previous::-webkit-scrollbar-thumb {
-    background-color: #a8a6a6;
-    border: .25 solid #D9D9D9;
-    border-radius: 100vh;
-  }
+  width: 0.3em;
+}
+
+.previous::-webkit-scrollbar-track {
+  background-color: #d9d9d9;
+  border-radius: 100vh;
+  margin-block: 1.5em;
+}
+
+.previous::-webkit-scrollbar-thumb {
+  background-color: #a8a6a6;
+  border: 0.25 solid #d9d9d9;
+  border-radius: 100vh;
+}
 
 .previous-questions {
-    margin-left: auto;
-    margin-top: 2%;
-    font-family: "Inter", sans-serif;
-    font-weight: 400;
-    font-style: medium;
-    font-size: 13px;
-    color: #EFF4FE;
-    line-height: 25px;
-    padding: 0;
+  margin-left: auto;
+  margin-top: 2%;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: medium;
+  font-size: 13px;
+  color: #eff4fe;
+  line-height: 25px;
+  padding: 0;
 }

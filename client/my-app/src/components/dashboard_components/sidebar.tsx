@@ -11,20 +11,24 @@ import { Todo } from "../dashboard_components/to-do";
 import { Landing } from "../dashboard_components/landing";
 import { Timer } from "../dashboard_components/timer";
 import { Quotes } from "../dashboard_components/landing";
-import { Header } from "../header";
 
 export default function Sidebar() {
   const [state, setState] = useState("landing");
 
   return (
     <>
-      <Box>
+      <div style={{ position: "fixed", zIndex: "1", overflowX: "hidden" }}>
         <Drawer
           PaperProps={{
             sx: {
               backgroundColor: "#81B29A",
-              height:"100vh",
-              marginTop: "49px"
+              height: "100vh",
+              // marginTop: "49px",
+              // position: "fixed",
+              // top: "0",
+              // position: "fixed",
+              // zIndex: "1",
+              // overflowX: "hidden",
             },
           }}
           sx={{
@@ -32,6 +36,8 @@ export default function Sidebar() {
             "& .MuiDrawer-paper": {
               width: 140,
               boxSizing: "border-box",
+              position: "fixed",
+              top: "0",
             },
           }}
           variant="permanent"
@@ -45,15 +51,16 @@ export default function Sidebar() {
               flexDirection: "column",
               justifyContent: "space-evenly",
               alignItems: "center",
+              marginTop: "3rem",
             }}
           >
-            <img onClick={() => setState("landing")} className="home" src={homeIcon} alt="home icon" />
-            <img onClick={() => setState("todo")} className="toDo" src={toDoIcon} alt="to-do list icon" />
-            <img onClick={() => setState("timer")} className="watch" src={watchIcon} alt="watch icon" />
-            <img onClick={() => setState("checkin")} className="checkIn" src={checkInIcon} alt="check-in icon" />
+            <img className="home" onClick={() => setState("landing")} src={homeIcon} alt="home icon" />
+            <img className="toDo" onClick={() => setState("todo")} src={toDoIcon} alt="to-do list icon" />
+            <img className="watch" onClick={() => setState("timer")} src={watchIcon} alt="watch icon" />
+            <img className="checkIn" onClick={() => setState("checkin")} src={checkInIcon} alt="check-in icon" />
           </Box>
         </Drawer>
-      </Box>
+      </div>
       {state === "landing" && <Landing />}
       {state === "todo" && <Todo />}
       {state === "timer" && <Timer />}
