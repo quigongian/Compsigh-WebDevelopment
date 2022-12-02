@@ -504,7 +504,7 @@ export const SettingsPage = () => {
   return (
     <>
       <LogHeader/>
-      <div className={theme === Theme.LIGHT ? 'Settings' : 'darkSettings'}>
+      <div className="Settings">
         <div className="Sidebar">
           <h3 id="sidebar-title">Settings</h3>
           <div className="Sidebar-List">
