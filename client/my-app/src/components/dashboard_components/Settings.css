@@ -12,6 +12,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+.darkSettings {
+  background-color: #1E1E1E;
+  color: white;
+}
+.lightSettings {
+  background-color: #EFECEC;
+  color: 232323;
+}
+
 .Settings {
   display: flex;
   padding-top: 1.17%;
