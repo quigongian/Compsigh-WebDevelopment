@@ -426,7 +426,6 @@ const Security = (props:{user:User}) => {
 };
 
 
-
 const Appearance = (props: { onChageTheme: (newTheme: Theme) => void }) => {
     const [mode, setMode] = useState("light");
 
@@ -437,15 +436,17 @@ const Appearance = (props: { onChageTheme: (newTheme: Theme) => void }) => {
         props.onChageTheme(Theme.DARK);
     };
 
+  
+
     return (
         <>
             <h1>Appearance</h1>
             <p>Display Mode</p>
             <div className="ButtonGroup">
-                <button onClick={lightThemeHandler} className="LightButton">
+                <button className="LightButton">
                     <strong>compsigh light</strong>
                 </button>
-                <button onClick={darkThemeHandler} className="DarkButton">
+                <button className="DarkButton">
                     <strong>compsigh dark</strong>
                 </button>
             </div>
