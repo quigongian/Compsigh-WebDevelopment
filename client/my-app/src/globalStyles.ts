@@ -44,7 +44,7 @@ export const Paragraph = styled.p((props: textProps) => ({
   color: props.color ? props.color : "black",
   "font-family": props.fontFamily ? props.fontFamily : "Inter",
   "font-size": props.size ? `${props.size}px` : "16px",
-  "font-weight": props.fontWeight ? weights[props.fontWeight] : "100",
+  "font-weight": props.fontWeight ? weights[props.fontWeight] : "300",
   "text-align": props.textAlign ? props.textAlign : "left",
   margin: 0,
 }));
@@ -60,3 +60,5 @@ export const Button = styled.button((props: btnProps) => ({
   cursor: "pointer",
   textAlign: "center",
 }));
+
+

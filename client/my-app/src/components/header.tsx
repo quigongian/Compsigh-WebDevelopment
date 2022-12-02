@@ -6,7 +6,7 @@ import compSighLogo from '../image_content/compsighLogo_white.png'
 const container ={
     height: '100%',
     backgroundColor: '#3D405B',
-    
+    zIndex: '3'
 }
 
 

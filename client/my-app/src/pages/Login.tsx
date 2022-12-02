@@ -1,54 +1,97 @@
-import { CenterFocusStrong } from "@mui/icons-material";
 import { HttpStatusCode } from "../services/http-client";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 import SignOut from "../image_content/signOut.png";
-import { signIn, signUp } from "../services/requests";
-import "./Login.css";
+import { getCategories, getXpLevels, signIn, signUp } from "../services/requests";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
+import { Category, XPLevel } from "../services/models";
 
 export const Login = () => {
   const navigate = useNavigate();
   const [display, setDisplay] = useState("signIn");
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [xpLevels, setXpLevels] = useState<XPLevel[]>([]);
 
-  const submitSignIn = (e: FormEvent) => {
-    e.preventDefault();
-    signIn({ email: "dummy@example.com", password: "Dummy123!" })
-      .then((res) => {
-        if (res.status === HttpStatusCode.Ok) {
-          console.log("User signed in successfully");
-          navigate("/dashboard");
-        } else {
-          console.log("User sign in failed", res.statusText);
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const xpLevelRef = useRef<HTMLSelectElement>(null);
+  const categoryRef = useRef<HTMLSelectElement>(null);
+
+  useEffect(() => {
+    getCategories()
+      .then((response) => {
+        if (response.status === HttpStatusCode.Ok) {
+          setCategories(response.data);
         }
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
+    getXpLevels()
+      .then((response) => {
+        if (response.status === HttpStatusCode.Ok) {
+          setXpLevels(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(xpLevels);
+
+  const submitSignIn = (e: FormEvent) => {
+    e.preventDefault();
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
+    if (email && password) {
+      signIn({ email: "dummy@example.com", password: "Dummy123!" })
+        // signIn({ email, password })
+        .then((res) => {
+          if (res.status === HttpStatusCode.Ok) {
+            console.log("User signed in successfully");
+            navigate("/dashboard");
+          } else {
+            console.log("User sign in failed", res.statusText);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   const submitSignUp = (e: FormEvent) => {
     e.preventDefault();
-    signUp({
-      firstName: "John",
-      lastName: "Doe",
-      email: "jdoe@example.com",
-      password: "Password-123",
-      categoryId: 1,
-      xpLevelId: 1,
-    })
-      .then((res) => {
-        if (res.status === HttpStatusCode.Created) {
-          console.log("User created successfully");
-          // redirect to "sign in" page and display "a link to verify your email has been sent to your email address"
-        } else {
-          console.log("User creation failed", res.statusText);
-        }
+    const firstName = firstNameRef.current?.value;
+    const lastName = lastNameRef.current?.value;
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
+    if (firstName && lastName && email && password) {
+      signUp({
+        firstName,
+        lastName,
+        email,
+        password,
+        categoryId: 1,
+        xpLevelId: 1,
       })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then((res) => {
+          if (res.status === HttpStatusCode.Ok) {
+            console.log("User created successfully");
+            navigate("/dashboard");
+          } else {
+            console.log("User creation failed", res.statusText);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   return (
@@ -66,11 +109,11 @@ export const Login = () => {
             <h1>Welcome Back!</h1>
             <form onSubmit={submitSignIn}>
               <div>
-                <input className="input" type="email" name="email" placeholder="E-Mail *" required id="email" />
+                <input className="input" type="email" name="email" placeholder="E-Mail *" required id="email" ref={emailRef} />
               </div>
 
               <div>
-                <input className="input" type="password" name="password" placeholder="Password *" required id="password" />
+                <input className="input" type="password" name="password" placeholder="Password *" required id="password" ref={passwordRef} />
               </div>
 
               <span>
@@ -111,36 +154,30 @@ export const Login = () => {
           <section className="section" id="section2">
             <h1 id="welcome">Welcome!</h1>
             <form onSubmit={submitSignUp}>
-              <input className="input" id="input" type="text" name="firstname" placeholder="First Name *" required />
+              <input className="input" id="input" type="text" name="firstname" placeholder="First Name *" required ref={firstNameRef} />
               <br />
-              <input className="input" id="input" type="text" name="lastname" placeholder="Last Name *" required />
+              <input className="input" id="input" type="text" name="lastname" placeholder="Last Name *" required ref={lastNameRef} />
               <br />
-              <input className="input" id="input" type="email" name="email" placeholder="E-Mail *" required />
+              <input className="input" id="input" type="email" name="email" placeholder="E-Mail *" required ref={emailRef} />
               <br />
-              <input className="input" id="input" type="password" name="password" placeholder="Password *" required />
+              <input className="input" id="input" type="password" name="password" placeholder="Password *" required ref={passwordRef} />
               <br />
-
               <select className="dropDown" name="experienceLevel" id="expLevel">
                 <option value="experienceLevel" disabled selected>
                   Experience Level
                 </option>
-                <option value="beginner">Beginner</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="advanced">Advanced</option>
+                {xpLevels.map((xpLevel) => (
+                  <option value={xpLevel.xpLevelId}>{xpLevel.xpLevelname}</option>
+                ))}
               </select>
               <br />
-
               <select className="dropDown" name="careerPath" id="careerPath">
                 <option value="careerPath" disabled selected>
                   Select a Career Path
                 </option>
-                <option value="cs">Computer Science</option>
-                <option value="ch">Computer Hardware</option>
-                <option value="cyber">Cyber Security</option>
-                <option value="webDev">Web Development</option>
-                <option value="it">Information Technology</option>
-                <option value="swe">Software Developer</option>
-                <option value="uiux">UI/UX Design</option>
+                {categories.map((category) => (
+                  <option value={category.categoryId}>{category.categoryName}</option>
+                ))}
               </select>
               <br />
 

@@ -53,6 +53,7 @@ export interface TaskDTO {
     taskName: string;
     taskDescription: string;
     completed: boolean;
+    completedAt: Date | null;
     createdAt: Date;
 }
 
@@ -62,6 +63,7 @@ export function createTaskdDTO(task: Task): TaskDTO {
         taskName: task.taskName,
         taskDescription: task.taskDescription,
         completed: task.completed,
+        completedAt: task.completedAt,
         createdAt: task.createdAt,
     };
 }
