@@ -33,10 +33,23 @@ const ProgressChart = (props: any) => {
       }}
     >
       <h3 style={{ position: "absolute", top: -3, left: 30, color: "#F4F1DE" }}>Total Progress</h3>
-      <p style={{ position: "absolute", top: 0, right: 20, color: "#F4F1DE" }}>{`${TOTALTASKSDONE} of ${TOTALTASKS}`}</p>
-      <h3 style={{ position: "absolute", color: "#F4F1DE", marginTop: "30px" }}>{`${PERCENT.toFixed(1)}%`}</h3>
+      <p
+        style={{ position: "absolute", top: 0, right: 20, color: "#F4F1DE" }}
+      >{`${TOTALTASKSDONE} of ${TOTALTASKS}`}</p>
+      <h3 style={{ position: "absolute", color: "#F4F1DE", marginTop: "30px" }}>{`${
+        isNaN(PERCENT) ? "0" : PERCENT.toFixed(1)
+      }%`}</h3>
       <PieChart width={180} height={180} style={{ marginTop: "7px" }}>
-        <Pie data={data} cx={85} cy={90} innerRadius={40} outerRadius={60} fill="#8884d8" paddingAngle={0} dataKey="value">
+        <Pie
+          data={data}
+          cx={85}
+          cy={90}
+          innerRadius={40}
+          outerRadius={60}
+          fill="#8884d8"
+          paddingAngle={0}
+          dataKey="value"
+        >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}

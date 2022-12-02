@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import compSighLogo from "../image_content/compsighLogo_white.png";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SettingsIcon from '@mui/icons-material/Settings'
 
 const container = {
   // height: '100%',
@@ -55,7 +57,6 @@ const wordAbout = {
   fontWeight: "600",
   fontSize: "15px",
   cursor: "pointer",
-  marginLeft: "25px"
 };
 
 const wordOurTeam = {
@@ -87,40 +88,32 @@ const box1 = {
   cursor: "pointer",
 };
 
-export const Header = () => {
-  return (
-    <>
-      <div style={container}>
+export const LogHeader = () => {
+    return (
+        <>
+        <div style={container}>
+
         <div style={wrapper}>
-          <div style={Left}>
-            <Link to="/">
-              <img style={logoImage} src={compSighLogo} />
-            </Link>
-          </div>
 
-          <div style={Center}></div>
-
-          <div style={Right}>
-            <p style={wordAbout}>
-              <Link to="/about" style={{ textDecoration: "none", color: "white" }}>
-                About
-              </Link>
-            </p>
-            <p style={wordOurTeam}>
-              <Link to="/ourTeam" style={{ textDecoration: "none", color: "white" }}>
-                Our Team
-              </Link>
-            </p>
-            
-
-            <button style={box1}>
-              <Link to="/login" style={{ textDecoration: "none", color: "white" }}>
-                Log In
-              </Link>
-            </button>
-          </div>
+        <div style={Left}>
+            <Link to = "/"><img style={logoImage} src={compSighLogo}/></Link>
         </div>
-      </div>
-    </>
-  );
-};
+
+        <div style={Center}></div>
+
+        <div style={Right}>
+            
+            <Link to="/Setting"><SettingsIcon style={{color:"white", marginRight: "50px", marginLeft:"25px"}}/></Link>
+            <Link to="/dashboard"><AccountCircleIcon style={{color:"white", marginRight: "25px"}}/></Link>
+            {/* <button style={box1}>
+                
+                <Link to = "/login" style={{ textDecoration: 'none', color: 'white' }}>Log In</Link >
+            </button> */}
+           
+        </div>
+        </div>
+
+        </div>
+        </>
+    );
+}

@@ -26,7 +26,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
 import { changeTheme, deleteUser, getCategories, getUser, resetPassword, updatePassword } from "../../services/requests";
@@ -34,6 +34,7 @@ import { Category, Theme, User } from "../../services/models";
 import { HttpStatusCode } from "../../services/http-client";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { LogHeader } from "../LogHeader";
 
 
 const theme = createTheme({
@@ -424,7 +425,11 @@ const Security = (props:{user:User}) => {
   );
 };
 
+
+
 const Appearance = (props: { onChageTheme: (newTheme: Theme) => void }) => {
+    const [mode, setMode] = useState("light");
+
     const lightThemeHandler = () => {
         props.onChageTheme(Theme.LIGHT);
     };
@@ -452,12 +457,18 @@ const Sidebar = () => {
   return <></>;
 };
 
+const ThemeContext =  createContext("light");
+
+
 /*|--------------------------------------------------------------------------------Settings Page Render--------------------------------------------------------------------------------|*/
 export const SettingsPage = () => {
   const [state, setState] = React.useState("Profile"); //default state is profile
   const [user, setUser] = React.useState<User>({}as User);
-	// const [Open, setOpen] = React.useState(false);
 	const [theme, setTheme] = useState<Theme>(Theme.LIGHT);
+
+  // const [testTheme, setTestTheme] = useState("light");
+
+
 
 	const onChageThemeHandler = (newTheme: Theme) => {
         changeTheme({ theme: newTheme })
@@ -491,9 +502,8 @@ export const SettingsPage = () => {
 
   return (
     <>
-
-      <Header />
-      <div className="Settings">
+      <LogHeader/>
+      <div className={theme === Theme.LIGHT ? 'Settings' : 'darkSettings'}>
         <div className="Sidebar">
           <h3 id="sidebar-title">Settings</h3>
           <div className="Sidebar-List">
