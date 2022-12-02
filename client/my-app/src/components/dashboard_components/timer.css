@@ -130,9 +130,11 @@ body {
   padding-top: 15px;
   padding-left: 58px;
   align-self:center;
+  text-align: center;
 }
 .dropdown {
   /* display: inline-block; */
+  text-align: center;
   position: absolute;
   font-size: 18px;
   
@@ -144,6 +146,7 @@ body {
 }
 
 .dropdown-content button {
+  text-align: center;
   position: absolute;
   display: none;
   background-color: #81b29b;
