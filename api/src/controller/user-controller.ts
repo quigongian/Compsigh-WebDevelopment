@@ -108,7 +108,7 @@ async function updatePassword(req: Request, res: Response, next: NextFunction) {
         await userService.changePassword(
             req.userId,
             req.body.oldPassword,
-            req.body.password,
+            req.body.newPassword,
             req.body.repeatPassword
         );
         res.sendStatus(HttpStatus.NoContent);
