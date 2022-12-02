@@ -34,6 +34,7 @@ import { Category, Theme, User } from "../../services/models";
 import { HttpStatusCode } from "../../services/http-client";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { LogHeader } from "../LogHeader";
 
 
 const theme = createTheme({
@@ -501,7 +502,7 @@ export const SettingsPage = () => {
 
   return (
     <>
-      <Header />
+      <LogHeader/>
       <div className={theme === Theme.LIGHT ? 'Settings' : 'darkSettings'}>
         <div className="Sidebar">
           <h3 id="sidebar-title">Settings</h3>
